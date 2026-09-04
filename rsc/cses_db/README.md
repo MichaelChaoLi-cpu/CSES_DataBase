@@ -14,7 +14,8 @@ The legacy `MJ02b` publishers are intentionally not copied. They write all objec
 records into `public`, which conflicts with the functional-schema architecture. The v1 migration
 contract, metadata model, deterministic SQL renderer, forced read-only preflight, external backup
 verification, transactional migration, and postflight validation are implemented. New data publication
-and baseline metadata import remain separate reviewed operations.
+remains a separate reviewed operation; the approved baseline metadata import and its read-only
+validation are complete.
 
 Climate acquisition, general Cambodia boundary publication, heat-labor analytical tables, figures, and
 research results remain outside this reusable core.
@@ -81,6 +82,18 @@ After an approved import, validate the exact reviewed plan in a separate forced 
 ```bash
 uv run python rsc/cses_db/validate_cses_baseline_metadata.py --root . --dbname mda
 ```
+
+## Export the lineage graph
+
+Export the authoritative database state through one forced read-only transaction:
+
+```bash
+uv run python rsc/cses_db/export_cses_lineage_graph.py --root . --dbname mda
+```
+
+The deterministic JSON graph and aggregate Mermaid overview are DVC-owned under `data/lineage/`. See the
+[lineage export runbook](../../docs/cses-lineage-export-runbook.md) for its validation, interpretation,
+and versioning contract.
 
 ## Build order
 

@@ -9,6 +9,7 @@ Working documentation is written in English and tracked by Git.
 - [CSES database and lineage topology](cses-topology.md)
 - [CSES functional-schema migration runbook](cses-schema-migration-runbook.md)
 - [CSES baseline metadata import runbook](cses-baseline-metadata-runbook.md)
+- [CSES lineage export runbook](cses-lineage-export-runbook.md)
 
 ## Release evidence
 

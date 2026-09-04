@@ -20,6 +20,7 @@ from cses_baseline_metadata import (  # noqa: E402
     reconcile_states,
     split_source_dataset,
 )
+from cses_lineage_graph import build_lineage_graph, render_lineage_overview  # noqa: E402
 from cses_schema_contract import EXPECTED_FAMILY_COUNTS, default_contract_path, load_contract  # noqa: E402
 from import_cses_baseline_metadata import validate_apply_gate, validate_reviewed_plan  # noqa: E402
 from inventory_cses_archives import normalize_wave  # noqa: E402
@@ -251,3 +252,231 @@ def test_post_import_validation_requires_exact_noop_state() -> None:
     database_preflight["action_counts"]["conflict"] = 1
     checks = build_validation_checks(plan, "plan-sha", import_evidence, database_preflight)
     assert checks["all_reviewed_records_are_noops"] is False
+
+
+def _lineage_snapshot() -> dict[str, object]:
+    return {
+        "database": {"database": "mda", "transaction_read_only": "on"},
+        "schemas": [
+            {"schema_name": name, "comment": f"{name} comment"}
+            for name in ("public", "cses_meta", "cses_data", "cses_analysis", "cses_alignment")
+        ],
+        "surveys": [
+            {
+                "survey_id": 1,
+                "dataset_name": "CSES 2021",
+                "survey_wave": "2021",
+                "nominal_survey_year": 2021,
+                "country_name": "Cambodia",
+                "country_code": "KHM",
+                "release_status": "baseline",
+            }
+        ],
+        "source_archives": [
+            {
+                "source_archive_id": 2,
+                "survey_id": 1,
+                "relative_path": "data/raw/CSES 2021.zip",
+                "sha256": "a" * 64,
+                "size_bytes": 10,
+                "archive_member_count": 1,
+                "inventory_status": "validated",
+            }
+        ],
+        "datasets": [
+            {
+                "dataset_id": 3,
+                "source_archive_id": 2,
+                "survey_id": 1,
+                "archive_relative_path": "data/raw/CSES 2021.zip",
+                "member_path": "household.dta",
+                "nested_member_path": "",
+                "module_code": "HH",
+                "source_grain": "household-wave",
+                "row_count": 2,
+                "column_count": 3,
+                "read_status": "readable",
+            }
+        ],
+        "alignment_releases": [
+            {
+                "alignment_release_id": 4,
+                "mapping_version": "v1",
+                "status": "approved",
+                "description": "Test release",
+                "specification_sha256": "b" * 64,
+            }
+        ],
+        "storage_tables": [
+            {
+                "storage_table_id": 5,
+                "table_schema": "cses_data",
+                "table_name": "final_HH_CSES",
+                "object_family": "final",
+                "module_code": "HH",
+                "analytical_grain": "household-wave",
+                "natural_key": ["survey_wave", "household_id"],
+                "row_count": 2,
+                "column_count": 3,
+                "relation_fingerprint": "c" * 64,
+            },
+            {
+                "storage_table_id": 6,
+                "table_schema": "cses_data",
+                "table_name": "dim_geo_CSES",
+                "object_family": "geography",
+                "module_code": "GEO",
+                "analytical_grain": "PSU-wave",
+                "natural_key": ["survey_wave", "psu"],
+                "row_count": 1,
+                "column_count": 2,
+                "relation_fingerprint": "d" * 64,
+            },
+        ],
+        "dataset_outputs": [
+            {
+                "dataset_id": 3,
+                "storage_table_id": 5,
+                "alignment_release_id": 4,
+                "mapping_version": "v1",
+                "contribution_role": "source",
+                "output_row_count": 2,
+            }
+        ],
+        "load_runs": [
+            {
+                "load_run_id": 7,
+                "survey_id": None,
+                "alignment_release_id": 4,
+                "run_scope": "baseline",
+                "source_manifest_sha256": "e" * 64,
+                "code_git_revision": "code-revision",
+                "dvc_revision": "md5:" + "f" * 32 + ".dir",
+                "status": "loaded",
+                "row_counts": {"surveys": 1},
+                "validation_summary": {"passed": True},
+            }
+        ],
+        "compatibility_views": [
+            {
+                "storage_table_id": storage_id,
+                "view_schema": "public",
+                "view_name": name,
+                "column_count": columns,
+                "physical_dependency_verified": True,
+            }
+            for storage_id, name, columns in ((5, "final_HH_CSES", 3), (6, "dim_geo_CSES", 2))
+        ],
+        "instruments": [],
+        "questions": [],
+        "source_variables": [],
+        "canonical_variables": [],
+        "variable_mappings": [],
+    }
+
+
+def test_lineage_graph_is_deterministic_and_reports_visible_gaps() -> None:
+    snapshot = _lineage_snapshot()
+    graph = build_lineage_graph(snapshot, "exporter-revision")
+    reversed_snapshot = {
+        key: list(reversed(value)) if isinstance(value, list) else value for key, value in snapshot.items()
+    }
+    assert graph == build_lineage_graph(reversed_snapshot, "exporter-revision")
+    assert all(graph["checks"].values())
+    assert graph["source"]["transaction_read_only"] is True
+    assert graph["summary"]["storage_without_dataset_outputs"] == ["cses_data.dim_geo_CSES"]
+    assert graph["summary"]["edge_type_counts"]["dataset_materializes_storage"] == 1
+    assert graph["summary"]["edge_type_counts"]["storage_exposes_compatibility_view"] == 2
+    assert graph["summary"]["node_type_counts"]["dataset"] == 1
+
+
+def test_lineage_overview_uses_graph_counts() -> None:
+    overview = render_lineage_overview(build_lineage_graph(_lineage_snapshot(), "exporter-revision"))
+    assert 'DATASET["1 physical datasets"]' in overview
+    assert 'STORAGE["2 authoritative relations"]' in overview
+    assert 'GAP["1 relations without<br/>registered dataset edges"]' in overview
+
+
+def test_lineage_graph_preserves_question_and_variable_mapping_paths() -> None:
+    snapshot = _lineage_snapshot()
+    snapshot["instruments"] = [
+        {
+            "instrument_id": 8,
+            "survey_id": 1,
+            "survey_wave": "2021",
+            "instrument_type": "HH",
+            "source_file": "questionnaire.pdf",
+            "source_url": None,
+            "source_sha256": "1" * 64,
+            "document_title": "Household questionnaire",
+            "publication_date": "2021-01-01",
+            "language_code": "en",
+            "documentation_status": "verified",
+        }
+    ]
+    snapshot["questions"] = [
+        {
+            "question_id": 9,
+            "instrument_id": 8,
+            "question_code": "Q1",
+            "question_text": "Test question?",
+            "section_name": "Section 1",
+            "sequence_number": 1,
+            "source_page": 1,
+            "question_grain": "household-wave",
+            "is_exact_question_text": True,
+            "documentation_status": "verified",
+        }
+    ]
+    snapshot["source_variables"] = [
+        {
+            "source_variable_id": 10,
+            "dataset_id": 3,
+            "question_id": 9,
+            "variable_name": "q1",
+            "variable_position": 1,
+            "storage_type": "int8",
+            "variable_label": "Test question",
+            "question_link_status": "verified",
+            "question_link_role": "direct_response",
+            "alignment_status": "loaded",
+        }
+    ]
+    snapshot["canonical_variables"] = [
+        {
+            "canonical_variable_id": 11,
+            "target_table": "final_HH_CSES",
+            "canonical_name": "answer",
+            "database_type": "smallint",
+            "measure_type": "category",
+            "canonical_definition": "Reviewed answer",
+            "analytical_grain": "household-wave",
+            "status": "approved",
+        }
+    ]
+    snapshot["variable_mappings"] = [
+        {
+            "variable_mapping_id": 12,
+            "dataset_id": 3,
+            "canonical_variable_id": 11,
+            "alignment_release_id": 4,
+            "mapping_version": "v1",
+            "source_variable_names": ["q1"],
+            "source_kind": "explicit",
+            "transformation_rule": "Identity mapping.",
+            "alignment_status": "loaded",
+            "observed_row_count": 2,
+            "observed_nonnull_count": 2,
+            "observed_distinct_count": 2,
+            "observation_status": "observed",
+            "value_mapping_count": 2,
+        }
+    ]
+    graph = build_lineage_graph(snapshot, "exporter-revision")
+    edge_types = graph["summary"]["edge_type_counts"]
+    assert edge_types["survey_has_instrument"] == 1
+    assert edge_types["instrument_has_question"] == 1
+    assert edge_types["question_links_source_variable"] == 1
+    assert edge_types["source_variable_maps_to_canonical"] == 1
+    assert edge_types["canonical_variable_belongs_to_storage"] == 1
+    assert graph["summary"]["value_mapping_count"] == 2
