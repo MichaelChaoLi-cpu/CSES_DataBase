@@ -18,3 +18,4 @@ Working documentation is written in English and tracked by Git.
 - [Functional-schema migration v1](releases/cses-functional-schema-migration-v1.md)
 - [Baseline metadata preflight v0.3](releases/cses-baseline-metadata-preflight-v0.3.md)
 - [Baseline metadata import v1](releases/cses-baseline-metadata-import-v1.md)
+- [Lineage graph v1](releases/cses-lineage-graph-v1.md)

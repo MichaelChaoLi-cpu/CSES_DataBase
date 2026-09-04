@@ -27,7 +27,9 @@ and local-baseline validation.
 The reviewed baseline metadata release is also imported: `cses_meta` records 10 surveys, 11 source
 archives, 171 physical datasets, 22 storage relations, 62 direct dataset-output edges, one alignment
 release, and one adoption load run. An independent read-only validation reconciles all 278 records to
-no-ops. The next implementation milestone is the deterministic lineage-graph export.
+no-ops. The deterministic lineage graph v1 now projects that database state into 244 nodes and 516
+edges. The next implementation milestone is closing the 15 visible storage-provenance gaps and building
+the variable-level alignment catalog.
 
 ## Start here
 
@@ -36,11 +38,13 @@ no-ops. The next implementation milestone is the deterministic lineage-graph exp
 - [Database and lineage topology](docs/cses-topology.md)
 - [Functional-schema migration runbook](docs/cses-schema-migration-runbook.md)
 - [Baseline metadata import runbook](docs/cses-baseline-metadata-runbook.md)
+- [Lineage export runbook](docs/cses-lineage-export-runbook.md)
 - [Baseline reproduction record](docs/releases/cses-baseline-reproduction-v0.1.md)
 - [Functional-schema preflight record](docs/releases/cses-schema-preflight-v0.2.md)
 - [Functional-schema migration v1](docs/releases/cses-functional-schema-migration-v1.md)
 - [Baseline metadata preflight v0.3](docs/releases/cses-baseline-metadata-preflight-v0.3.md)
 - [Baseline metadata import v1](docs/releases/cses-baseline-metadata-import-v1.md)
+- [Lineage graph v1](docs/releases/cses-lineage-graph-v1.md)
 
 ## Repository ownership
 

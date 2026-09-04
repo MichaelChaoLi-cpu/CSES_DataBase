@@ -151,8 +151,8 @@ The structural migration was explicitly approved and completed with the followin
    Completed.
 9. ~~Validate all invariants and roll back the complete transaction on any mismatch.~~ Postflight,
    physical-identity, compatibility-reader, and local-baseline validation passed.
-10. ~~Publish the baseline metadata import release after database validation.~~ Completed. Export the
-    deterministic lineage graph as the next separate release milestone.
+10. ~~Publish the baseline metadata import release after database validation and export the
+    deterministic lineage graph as a separate release milestone.~~ Completed.
 
 The preflight found no dependent PostgreSQL views and no declared foreign keys on the migrated CSES
 relations. The compatibility layer preserves external SQL using the earlier `public` names.
@@ -166,5 +166,6 @@ approval is still required before:
 - promoting physical-table primary or foreign-key constraints;
 - publishing new data or replacing a prior CSES release.
 
-The next execution milestone is deterministic lineage-graph export from the validated PostgreSQL
-metadata state. The graph remains a read-only DVC projection rather than a second source of truth.
+The next execution milestone is filling the 15 visible storage-provenance gaps and then building the
+variable-level source and canonical catalog through reviewed alignment releases. The graph remains a
+read-only DVC projection rather than a second source of truth.

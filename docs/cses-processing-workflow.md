@@ -132,7 +132,8 @@ replace the reusable CSES database.
 4. Reproduce the current seven core table releases locally from the identical archive set.
 5. Separate hard-coded `public._catalog` writes from the CSES authoritative metadata model.
 6. Add schema creation and migration code with dry-run, idempotence, and rollback tests.
-7. Add a deterministic graph exporter only after the relational model is stable.
+7. ~~Add a deterministic graph exporter only after the relational model is stable.~~ Completed after
+   baseline metadata validation.
 
 ## Release checklist
 
@@ -146,8 +147,8 @@ replace the reusable CSES database.
 - [x] Transactional schema migration and post-migration validation pass.
 - [x] Baseline metadata import plan is deterministic, conflict-free, and forced read-only.
 - [x] Baseline metadata release and transactional import are explicitly approved and validated.
-- [ ] Lineage graph export is deterministic.
-- [x] Git, DVC, database, and baseline release-note identities are cross-recorded.
+- [x] Lineage graph export is deterministic and forced read-only.
+- [x] Git, DVC, database, and release-note identities are cross-recorded.
 
 ## Operations boundary
 

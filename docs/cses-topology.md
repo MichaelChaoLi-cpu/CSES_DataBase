@@ -141,3 +141,48 @@ flowchart LR
 This is the validated state after migration v1. Physical OIDs, rows, columns, indexes, constraints,
 owners, and grants were preserved; `mda_readonly` can query both the functional schemas and compatibility
 views.
+
+## Deterministic database projection v1
+
+The database-backed v1 snapshot is a forced read-only projection of the current authoritative state. It
+contains 244 natural-key nodes and 516 sorted edges. Two consecutive exports were byte-identical.
+
+```mermaid
+flowchart LR
+    SURVEY["10 survey waves"]
+    ARCHIVE["11 source archives"]
+    DATASET["171 physical datasets"]
+    RELEASE["1 alignment release"]
+    STORAGE["22 authoritative relations"]
+    VIEW["22 public compatibility views"]
+    RUN["1 load run"]
+    ALIGN["0 source variables<br/>0 canonical variables"]
+    GAP["15 relations without<br/>registered dataset edges"]
+
+    SURVEY -->|"11"| ARCHIVE
+    ARCHIVE -->|"171"| DATASET
+    DATASET -->|"62"| STORAGE
+    RELEASE -->|"7 targets"| STORAGE
+    RELEASE --> RUN
+    STORAGE -->|"22 verified projections"| VIEW
+    DATASET -.-> ALIGN
+    ALIGN -.-> STORAGE
+    STORAGE -.-> GAP
+```
+
+The full JSON graph is `data/lineage/cses_lineage_graph_v1.json`; the generated aggregate Mermaid source
+is `data/lineage/cses_lineage_overview_v1.mmd`. Both are DVC-owned and are reproducible with the
+[lineage export runbook](cses-lineage-export-runbook.md).
+
+Current direct source coverage is deliberately incomplete rather than inferred:
+
+| Storage family | Registered relations | Relations with dataset-output edges | Visible gaps |
+|---|---:|---:|---:|
+| Final tables | 7 | 7 | 0 |
+| Geography | 1 | 0 | 1 |
+| Source dictionaries | 7 | 0 | 7 |
+| Alignment summaries | 7 | 0 | 7 |
+
+The geography edge and 14 inherited dictionary/summary edges require reviewed evidence. The normalized
+instrument, question, source-variable, canonical-variable, and mapping tables are currently empty; the
+graph will extend those paths automatically as later reviewed releases populate them.
