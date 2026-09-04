@@ -87,10 +87,15 @@ transaction.
 
 ```bash
 uv run python rsc/cses_db/validate_cses_storage_provenance.py --root . --dbname mda
-uv run python rsc/cses_db/export_cses_lineage_graph.py --root . --dbname mda
+uv run python rsc/cses_db/export_cses_lineage_graph.py \
+  --root . \
+  --dbname mda \
+  --output data/lineage/cses_lineage_graph_v2.json \
+  --overview data/lineage/cses_lineage_overview_v2.mmd
 ```
 
 The validator must observe 136 no-ops, zero inserts, zero conflicts, and all database checks true. The
 lineage graph is then regenerated as a read-only database projection. The expected storage coverage is
 22 of 22 relations, while the documented external geography dependencies remain outside the CSES
-dataset registry.
+dataset registry. Do not overwrite graph v1: it is immutable, fingerprinted input evidence for this
+release.

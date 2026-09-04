@@ -142,9 +142,10 @@ This is the validated state after migration v1. Physical OIDs, rows, columns, in
 owners, and grants were preserved; `mda_readonly` can query both the functional schemas and compatibility
 views.
 
-## Deterministic database projection v1
+## Deterministic database projection v1: pre-storage-provenance snapshot
 
-The database-backed v1 snapshot is a forced read-only projection of the current authoritative state. It
+The database-backed v1 snapshot is a forced read-only projection of the accepted baseline state before
+the storage-provenance release. It
 contains 244 natural-key nodes and 516 sorted edges. Two consecutive exports were byte-identical.
 
 ```mermaid
@@ -174,7 +175,7 @@ The full JSON graph is `data/lineage/cses_lineage_graph_v1.json`; the generated 
 is `data/lineage/cses_lineage_overview_v1.mmd`. Both are DVC-owned and are reproducible with the
 [lineage export runbook](cses-lineage-export-runbook.md).
 
-Current direct source coverage is deliberately incomplete rather than inferred:
+The v1 snapshot kept direct source coverage deliberately incomplete rather than inferred:
 
 | Storage family | Registered relations | Relations with dataset-output edges | Visible gaps |
 |---|---:|---:|---:|
@@ -183,12 +184,47 @@ Current direct source coverage is deliberately incomplete rather than inferred:
 | Source dictionaries | 7 | 0 | 7 |
 | Alignment summaries | 7 | 0 | 7 |
 
-The geography edge and 14 inherited dictionary/summary edges require reviewed evidence. The normalized
+The geography edge and 14 inherited dictionary/summary edges required reviewed evidence. The normalized
 instrument, question, source-variable, canonical-variable, and mapping tables are currently empty; the
 graph will extend those paths automatically as later reviewed releases populate them.
 
-The Git-owned `cses-storage-provenance-v1` proposal now formalizes those 15 storage-level gaps as 134
-reviewed dataset-output edges. Until its DVC-owned read-only plan is accepted and transactionally
-imported, the graph above remains the authoritative current database state. The proposal deliberately
-keeps the two non-CSES Cambodia boundary relations as documented external dependencies and leaves all
-variable-level alignment tables unchanged.
+## Deterministic database projection v2: complete storage coverage
+
+The accepted `cses-storage-provenance-v1` release added one alignment release, 134 reviewed
+dataset-output edges, and one load run. The post-import v2 projection contains 246 natural-key nodes and
+678 sorted edges. Two consecutive forced read-only exports were byte-identical.
+
+```mermaid
+flowchart LR
+    SURVEY["10 survey waves"]
+    ARCHIVE["11 source archives"]
+    DATASET["171 physical datasets"]
+    RELEASE["2 alignment releases"]
+    STORAGE["22 authoritative relations"]
+    VIEW["22 public compatibility views"]
+    RUN["2 load runs"]
+    ALIGN["0 source variables<br/>0 canonical variables"]
+    COVERAGE["22 of 22 relations with<br/>registered dataset edges"]
+
+    SURVEY -->|"11"| ARCHIVE
+    ARCHIVE -->|"171"| DATASET
+    DATASET -->|"196"| STORAGE
+    RELEASE -->|"22 targets"| STORAGE
+    RELEASE --> RUN
+    STORAGE -->|"22 verified projections"| VIEW
+    STORAGE --> COVERAGE
+    DATASET -.-> ALIGN
+    ALIGN -.-> STORAGE
+```
+
+| Storage family | Registered relations | Relations with dataset-output edges | Visible gaps |
+|---|---:|---:|---:|
+| Final tables | 7 | 7 | 0 |
+| Geography | 1 | 1 | 0 |
+| Source dictionaries | 7 | 7 | 0 |
+| Alignment summaries | 7 | 7 | 0 |
+
+The post-import files are `data/lineage/cses_lineage_graph_v2.json` and
+`data/lineage/cses_lineage_overview_v2.mmd`. Snapshot v1 remains immutable because it is fingerprinted
+input evidence for the storage-provenance plan. The two non-CSES Cambodia boundary relations remain
+documented external dependencies, and the variable-level alignment tables remain empty by design.

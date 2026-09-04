@@ -8,8 +8,8 @@ The exporter creates a deterministic read-only projection of the authoritative C
 alignment, storage, and compatibility state in PostgreSQL. It never writes to PostgreSQL.
 
 - Git owns the exporter, tests, this runbook, and release notes.
-- DVC owns `data/lineage/cses_lineage_graph_v1.json` and
-  `data/lineage/cses_lineage_overview_v1.mmd`.
+- DVC owns versioned pairs under `data/lineage/`, including the pre-storage-provenance v1 snapshot and
+  the post-import v2 snapshot.
 - PostgreSQL remains the source of truth. The graph is a disposable read model and never writes back.
 
 ## Export
@@ -17,7 +17,11 @@ alignment, storage, and compatibility state in PostgreSQL. It never writes to Po
 Run from the project root with local PostgreSQL authentication:
 
 ```bash
-uv run python rsc/cses_db/export_cses_lineage_graph.py --root . --dbname mda
+uv run python rsc/cses_db/export_cses_lineage_graph.py \
+  --root . \
+  --dbname mda \
+  --output data/lineage/cses_lineage_graph_v2.json \
+  --overview data/lineage/cses_lineage_overview_v2.mmd
 ```
 
 The exporter opens one forced read-only transaction and rejects the export unless:
@@ -34,7 +38,9 @@ identifier; edges are sorted by type, source, target, and canonical JSON propert
 export timestamps, connection users, and other runtime-only state. Both output files are replaced
 atomically.
 
-Run the exporter twice without changing PostgreSQL and compare SHA-256 values. Both graph and overview
+Use a new output version whenever an accepted release changes the database projection; never overwrite
+a snapshot fingerprinted by a reviewed plan or specification. Run the exporter twice without changing
+PostgreSQL and compare SHA-256 values. Both graph and overview
 must be byte-identical. A changed graph checksum therefore represents a changed database projection or
 a reviewed exporter-contract change.
 
