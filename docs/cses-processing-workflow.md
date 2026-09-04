@@ -137,7 +137,7 @@ replace the reusable CSES database.
 ## Release checklist
 
 - [x] Raw archive fingerprints match the approved inventory.
-- [ ] Mapping specification and alignment release are reviewed.
+- [x] Baseline mapping specification and alignment release are reviewed.
 - [x] Local module builds and validators pass.
 - [x] Existing database targets and dependencies are inventoried.
 - [x] A current external backup exists and has been restore-read verified.
@@ -145,9 +145,9 @@ replace the reusable CSES database.
 - [x] Explicit structural-migration database-write approval is recorded.
 - [x] Transactional schema migration and post-migration validation pass.
 - [x] Baseline metadata import plan is deterministic, conflict-free, and forced read-only.
-- [ ] Baseline metadata release and transactional import are explicitly approved.
+- [x] Baseline metadata release and transactional import are explicitly approved and validated.
 - [ ] Lineage graph export is deterministic.
-- [ ] Git, DVC, database, and release-note identities are cross-recorded.
+- [x] Git, DVC, database, and baseline release-note identities are cross-recorded.
 
 ## Operations boundary
 

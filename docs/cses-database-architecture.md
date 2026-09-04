@@ -140,9 +140,8 @@ The structural migration was explicitly approved and completed with the followin
    Completed in the v0.2 preflight evidence.
 4. ~~Create the functional schemas and metadata model inside the backed-up, all-or-nothing migration
    transaction.~~ Completed.
-5. Import a baseline alignment release and deterministic load record without inventing missing history.
-   The deterministic, conflict-free read-only plan is complete; the transactional import remains behind
-   its explicit approval gate.
+5. ~~Import a baseline alignment release and deterministic load record without inventing missing
+   history.~~ Completed after an explicitly approved, deterministic, conflict-free read-only plan.
 6. ~~Create and validate a complete custom-format PostgreSQL backup before structural work.~~ Completed;
    full decompression and SHA-256 verification passed.
 7. ~~Run a read-only migration preflight that records relation identities, dependencies, owners, indexes,
@@ -152,19 +151,20 @@ The structural migration was explicitly approved and completed with the followin
    Completed.
 9. ~~Validate all invariants and roll back the complete transaction on any mismatch.~~ Postflight,
    physical-identity, compatibility-reader, and local-baseline validation passed.
-10. Export the deterministic lineage graph and publish a release note only after database validation.
+10. ~~Publish the baseline metadata import release after database validation.~~ Completed. Export the
+    deterministic lineage graph as the next separate release milestone.
 
 The preflight found no dependent PostgreSQL views and no declared foreign keys on the migrated CSES
 relations. The compatibility layer preserves external SQL using the earlier `public` names.
 
 ## Decision gates
 
-The completed schema creation, relation move, compatibility-view creation, and grant changes were covered
-by the recorded execution approval and verified-backup gate. Human approval is still required before:
+The completed schema creation, relation move, compatibility-view creation, grant changes, and baseline
+metadata import were covered by recorded execution approvals and the verified-backup gate. Human
+approval is still required before:
 
-- accepting the imported baseline alignment release;
 - promoting physical-table primary or foreign-key constraints;
 - publishing new data or replacing a prior CSES release.
 
-The next execution milestone is Git and DVC cross-recording of the reviewed baseline plan, followed by
-explicitly approved metadata import and deterministic lineage-graph export.
+The next execution milestone is deterministic lineage-graph export from the validated PostgreSQL
+metadata state. The graph remains a read-only DVC projection rather than a second source of truth.

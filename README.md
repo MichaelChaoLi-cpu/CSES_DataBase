@@ -24,6 +24,11 @@ The v1 functional-schema migration is complete in `mda`: 22 physical CSES relati
 migration used a verified external backup and passed preflight, postflight, physical-identity, reader,
 and local-baseline validation.
 
+The reviewed baseline metadata release is also imported: `cses_meta` records 10 surveys, 11 source
+archives, 171 physical datasets, 22 storage relations, 62 direct dataset-output edges, one alignment
+release, and one adoption load run. An independent read-only validation reconciles all 278 records to
+no-ops. The next implementation milestone is the deterministic lineage-graph export.
+
 ## Start here
 
 - [Database architecture and schema decision](docs/cses-database-architecture.md)
@@ -35,6 +40,7 @@ and local-baseline validation.
 - [Functional-schema preflight record](docs/releases/cses-schema-preflight-v0.2.md)
 - [Functional-schema migration v1](docs/releases/cses-functional-schema-migration-v1.md)
 - [Baseline metadata preflight v0.3](docs/releases/cses-baseline-metadata-preflight-v0.3.md)
+- [Baseline metadata import v1](docs/releases/cses-baseline-metadata-import-v1.md)
 
 ## Repository ownership
 

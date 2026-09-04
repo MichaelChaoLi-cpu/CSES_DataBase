@@ -16,3 +16,4 @@ Working documentation is written in English and tracked by Git.
 - [Functional-schema preflight v0.2](releases/cses-schema-preflight-v0.2.md)
 - [Functional-schema migration v1](releases/cses-functional-schema-migration-v1.md)
 - [Baseline metadata preflight v0.3](releases/cses-baseline-metadata-preflight-v0.3.md)
+- [Baseline metadata import v1](releases/cses-baseline-metadata-import-v1.md)
