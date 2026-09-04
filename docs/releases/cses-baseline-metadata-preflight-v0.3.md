@@ -26,8 +26,8 @@ the functional-schema migration evidence, confirmed the v1 metadata table column
 
 Two consecutive exports of `data/processing/cses/baseline_metadata_plan_v1.json` were byte-identical.
 The final cross-recorded plan SHA-256 was
-`49c1b36512b973b1cd02af864006ae71de93bd5dee935bc4d935994629780450`; it identifies Git revision
-`bdb1af5b344ae0d16746cddd208eeb767e903832` and source DVC revision
+`5d3bad6f959c051eaff4c1b7ecfb73cbb59f387a1b296723ac1d8d8b93e5def2`; it identifies Git revision
+`e0fec7e629c467229178fab35aa7f70e46b32cd4` and source DVC revision
 `md5:5527d5015fff181a75a2dd6184f4e3db.dir`.
 
 ## Interpretation
