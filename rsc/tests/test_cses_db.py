@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -20,7 +21,7 @@ from cses_baseline_metadata import (  # noqa: E402
     split_source_dataset,
 )
 from cses_schema_contract import EXPECTED_FAMILY_COUNTS, default_contract_path, load_contract  # noqa: E402
-from import_cses_baseline_metadata import validate_apply_gate  # noqa: E402
+from import_cses_baseline_metadata import validate_apply_gate, validate_reviewed_plan  # noqa: E402
 from inventory_cses_archives import normalize_wave  # noqa: E402
 from render_cses_migration_sql import render_migration_sql  # noqa: E402
 
@@ -177,3 +178,48 @@ def test_baseline_reconciliation_distinguishes_noop_insert_and_conflict() -> Non
     operations, conflicts = reconcile_states(desired, existing)
     assert [item["action"] for item in operations] == ["conflict", "insert"]
     assert len(conflicts) == 1
+
+
+def test_importer_consumes_exact_reviewed_plan_state(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    planned = {
+        "load_runs": [
+            {
+                "baseline_import_id": "baseline-v1",
+                "code_git_revision": "reviewed-commit",
+                "dvc_revision": "md5:input.dir",
+            }
+        ]
+    }
+    current = json.loads(json.dumps(planned))
+    current["load_runs"][0]["code_git_revision"] = "later-data-pointer-commit"
+    plan_path = tmp_path / "plan.json"
+    plan_path.write_text(
+        json.dumps(
+            {
+                "baseline_id": "baseline-v1",
+                "database_mutated": False,
+                "preflight_ready": True,
+                "approval_phrase": "APPROVE",
+                "desired_state": planned,
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr("import_cses_baseline_metadata.subprocess.run", lambda *args, **kwargs: None)
+    selected, evidence = validate_reviewed_plan(
+        tmp_path,
+        plan_path,
+        {"baseline_id": "baseline-v1", "approval_phrase": "APPROVE"},
+        current,
+    )
+    assert selected == planned
+    assert evidence["code_git_revision"] == "reviewed-commit"
+
+    current["load_runs"][0]["dvc_revision"] = "md5:different.dir"
+    with pytest.raises(ValueError, match="differs from the current local evidence"):
+        validate_reviewed_plan(
+            tmp_path,
+            plan_path,
+            {"baseline_id": "baseline-v1", "approval_phrase": "APPROVE"},
+            current,
+        )

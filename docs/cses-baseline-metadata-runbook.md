@@ -72,10 +72,12 @@ uv run python rsc/cses_db/import_cses_baseline_metadata.py \
   --confirm ACCEPT-CSES-BASELINE-V1
 ```
 
-The importer refuses to connect without both write flags. It takes a transaction-scoped advisory lock,
-inserts only missing rows, treats byte-for-byte-equivalent desired records as no-ops, rejects same-key
-differences as conflicts, verifies the reconciled state, and commits once. Any failure rolls back the
-complete transaction.
+The importer refuses to connect without both write flags. It consumes the exact `desired_state` from the
+DVC-owned reviewed plan, verifies that current local evidence still agrees and that the implementation
+files have not changed since the plan's Git revision, and only then connects. It takes a
+transaction-scoped advisory lock, inserts only missing rows, treats byte-for-byte-equivalent desired
+records as no-ops, rejects same-key differences as conflicts, verifies the reconciled state, and commits
+once. Any failure rolls back the complete transaction.
 
 ## Post-import verification
 
