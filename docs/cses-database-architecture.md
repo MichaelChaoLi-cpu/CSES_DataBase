@@ -141,6 +141,8 @@ The structural migration was explicitly approved and completed with the followin
 4. ~~Create the functional schemas and metadata model inside the backed-up, all-or-nothing migration
    transaction.~~ Completed.
 5. Import a baseline alignment release and deterministic load record without inventing missing history.
+   The deterministic, conflict-free read-only plan is complete; the transactional import remains behind
+   its explicit approval gate.
 6. ~~Create and validate a complete custom-format PostgreSQL backup before structural work.~~ Completed;
    full decompression and SHA-256 verification passed.
 7. ~~Run a read-only migration preflight that records relation identities, dependencies, owners, indexes,
@@ -164,5 +166,5 @@ by the recorded execution approval and verified-backup gate. Human approval is s
 - promoting physical-table primary or foreign-key constraints;
 - publishing new data or replacing a prior CSES release.
 
-The next implementation milestone is the reviewed baseline metadata import and deterministic lineage
-graph, followed by Git and DVC cross-recording.
+The next execution milestone is Git and DVC cross-recording of the reviewed baseline plan, followed by
+explicitly approved metadata import and deterministic lineage-graph export.

@@ -4,13 +4,23 @@ import re
 import sys
 from pathlib import Path
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[2]
 MODULE_ROOT = ROOT / "rsc" / "cses_db"
 sys.path.insert(0, str(MODULE_ROOT))
 
 from audit_mda_baseline import TABLE_FILES  # noqa: E402
 from build_local_release import BUILD_OUTPUTS, BUILD_SCRIPTS, VALIDATION_SCRIPTS  # noqa: E402
+from cses_baseline_metadata import (  # noqa: E402
+    build_desired_state,
+    default_baseline_spec_path,
+    load_baseline_spec,
+    reconcile_states,
+    split_source_dataset,
+)
 from cses_schema_contract import EXPECTED_FAMILY_COUNTS, default_contract_path, load_contract  # noqa: E402
+from import_cses_baseline_metadata import validate_apply_gate  # noqa: E402
 from inventory_cses_archives import normalize_wave  # noqa: E402
 from render_cses_migration_sql import render_migration_sql  # noqa: E402
 
@@ -89,3 +99,81 @@ def test_schema_ddl_defines_functional_model_without_public_tables() -> None:
     assert ddl.count("CREATE TABLE IF NOT EXISTS cses_meta.") == 7
     assert ddl.count("CREATE TABLE IF NOT EXISTS cses_alignment.") == 6
     assert "CREATE TABLE IF NOT EXISTS public." not in ddl
+
+
+def test_baseline_metadata_contract_has_reviewed_scope_and_write_gate() -> None:
+    spec = load_baseline_spec(default_baseline_spec_path(ROOT))
+    assert len(spec["surveys"]) == 10
+    assert len(spec["source_archives"]) == 11
+    assert len(spec["storage_relations"]) == 22
+    assert len(spec["direct_outputs"]) == 7
+    assert spec["alignment_release"]["requires_explicit_approval"] is True
+    with pytest.raises(ValueError, match="without --apply"):
+        validate_apply_gate(False, None, spec)
+    with pytest.raises(ValueError, match="without --confirm"):
+        validate_apply_gate(True, "wrong", spec)
+    validate_apply_gate(True, spec["approval_phrase"], spec)
+
+
+def test_nested_source_dataset_identity_is_stable() -> None:
+    source = "data/raw/CSES2013.zip::CSES2013/CSES2013/CSES 2013.zip::HHMembers.dta"
+    assert split_source_dataset(source) == (
+        "data/raw/CSES2013.zip",
+        "CSES2013/CSES2013/CSES 2013.zip",
+        "HHMembers.dta",
+    )
+
+
+def test_baseline_metadata_desired_state_is_complete_and_locally_valid() -> None:
+    desired, diagnostics = build_desired_state(ROOT)
+    assert diagnostics["record_counts"] == {
+        "surveys": 10,
+        "source_archives": 11,
+        "datasets": 171,
+        "alignment_releases": 1,
+        "storage_tables": 22,
+        "dataset_outputs": 62,
+        "load_runs": 1,
+    }
+    assert all(diagnostics["local_checks"].values())
+    assert {item["table_name"] for item in desired["dataset_outputs"]} == {
+        "final_EC_CSES",
+        "final_ED_CSES",
+        "final_HH_CSES",
+        "final_HL_CSES",
+        "final_HO_CSES",
+        "final_SURVEY_DATE_CSES",
+        "final_VL_CSES",
+    }
+    assert not any(item["table_name"] == "dim_geo_CSES" for item in desired["dataset_outputs"])
+
+
+def test_baseline_reconciliation_distinguishes_noop_insert_and_conflict() -> None:
+    desired = {
+        "surveys": [
+            {
+                "survey_wave": "2004",
+                "dataset_name": "CSES 2004",
+            },
+            {
+                "survey_wave": "2007",
+                "dataset_name": "CSES 2007",
+            },
+        ]
+    }
+    existing = {
+        "surveys": [
+            {
+                "survey_wave": "2004",
+                "dataset_name": "CSES 2004",
+            }
+        ]
+    }
+    operations, conflicts = reconcile_states(desired, existing)
+    assert [item["action"] for item in operations] == ["noop", "insert"]
+    assert conflicts == []
+
+    existing["surveys"][0]["dataset_name"] = "conflicting name"
+    operations, conflicts = reconcile_states(desired, existing)
+    assert [item["action"] for item in operations] == ["conflict", "insert"]
+    assert len(conflicts) == 1

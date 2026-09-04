@@ -1,0 +1,383 @@
+{
+  "alignment_release": {
+    "description": "Reviewed adoption baseline for the existing CSES functional-schema state; it does not reconstruct load history before this repository.",
+    "mapping_version": "cses-baseline-v1",
+    "requires_explicit_approval": true,
+    "status": "approved"
+  },
+  "approval_phrase": "ACCEPT-CSES-BASELINE-V1",
+  "baseline_id": "cses-baseline-metadata-v1",
+  "database": "mda",
+  "dataset_inventory": {
+    "manifest_path": "data/processing/cses/cses_core_module_manifest.csv",
+    "source_grain_by_module": {
+      "agriculture_crop_costs": "household_crop_cost_record",
+      "agriculture_crop_production": "household_crop_record",
+      "agriculture_crop_sales": "household_crop_sale_record",
+      "agriculture_land": "household_land_record",
+      "education": "person",
+      "employment_current": "person_employment_record",
+      "employment_usual": "person_employment_record",
+      "food_consumption": "household_food_item",
+      "food_security": "household",
+      "household_core": "household",
+      "household_members": "household_member",
+      "household_weights": "household",
+      "housing": "household",
+      "migration": "person",
+      "nonfood_consumption": "household_nonfood_item",
+      "person_weights": "household_member",
+      "vulnerability": "household"
+    },
+    "zero_row_count_means_unknown": true
+  },
+  "direct_outputs": [
+    {
+      "artifact_path": "data/processing/cses/final_EC_CSES.parquet",
+      "fallback_module_code": "employment_current",
+      "fallback_source_grain": "person_employment_record",
+      "relation": "final_EC_CSES",
+      "source_archive_column": "Source Archive",
+      "source_submodule_column": "Source Submodule",
+      "survey_wave_column": "Survey Wave"
+    },
+    {
+      "artifact_path": "data/processing/cses/final_ED_CSES.parquet",
+      "fallback_module_code": "education",
+      "fallback_source_grain": "person",
+      "relation": "final_ED_CSES",
+      "source_archive_column": "Source Archive",
+      "source_submodule_column": "Source Submodule",
+      "survey_wave_column": "Survey Wave"
+    },
+    {
+      "artifact_path": "data/processing/cses/final_HH_CSES.parquet",
+      "fallback_module_code": "household_members",
+      "fallback_source_grain": "household_member",
+      "relation": "final_HH_CSES",
+      "source_archive_column": "Source Archive",
+      "source_submodule_column": "Source Submodule",
+      "survey_wave_column": "Survey Wave"
+    },
+    {
+      "artifact_path": "data/processing/cses/final_HL_CSES.parquet",
+      "fallback_module_code": "household_members",
+      "fallback_source_grain": "household_member",
+      "relation": "final_HL_CSES",
+      "source_archive_column": "Source Archive",
+      "source_submodule_column": "Source Submodule",
+      "survey_wave_column": "Survey Wave"
+    },
+    {
+      "artifact_path": "data/processing/cses/final_HO_CSES.parquet",
+      "fallback_module_code": "housing",
+      "fallback_source_grain": "household",
+      "relation": "final_HO_CSES",
+      "source_archive_column": "Source Archive",
+      "source_submodule_column": "Source Submodule",
+      "survey_wave_column": "Survey Wave"
+    },
+    {
+      "artifact_path": "data/processing/cses/final_SURVEY_DATE_CSES.parquet",
+      "fallback_module_code": "survey_date",
+      "fallback_source_grain": "household",
+      "relation": "final_SURVEY_DATE_CSES",
+      "source_archive_column": "Exact Date Source Archive",
+      "source_submodule_column": "Exact Date Source Submodule",
+      "survey_wave_column": "Survey Wave"
+    },
+    {
+      "artifact_path": "data/processing/cses/final_VL_CSES.parquet",
+      "fallback_module_code": "village",
+      "fallback_source_grain": "village_psu",
+      "relation": "final_VL_CSES",
+      "source_archive_column": "Source Archive",
+      "source_submodule_column": "Source Submodule",
+      "survey_wave_column": "Survey Wave"
+    }
+  ],
+  "evidence": {
+    "local_release_manifest": "data/processing/cses/local_release_manifest.json",
+    "migration_postflight": "data/processing/cses/migration_postflight_v1.json",
+    "migration_validation": "data/processing/cses/migration_validation_v1.json",
+    "schema_contract": "rsc/specs/cses_schema_v1.json"
+  },
+  "lineage_gaps": [
+    {
+      "reason": "The inherited geography relation has no repository-owned source-to-output record yet; the baseline registers the physical table without inventing an archive edge.",
+      "relation": "dim_geo_CSES"
+    },
+    {
+      "reason": "Legacy source dictionaries and alignment summaries are registered as storage objects, but their physical dataset edges await reviewed variable-level import.",
+      "relation_family": "source_dictionary_and_alignment_summary"
+    }
+  ],
+  "load_run": {
+    "run_scope": "baseline_adoption_existing_cses_state",
+    "status": "loaded"
+  },
+  "pipeline_dependencies": [
+    {
+      "source": "final_HL_CSES",
+      "target": "final_ED_CSES"
+    },
+    {
+      "source": "final_ED_CSES",
+      "target": "final_HH_CSES"
+    },
+    {
+      "source": "final_HH_CSES",
+      "target": "final_HO_CSES"
+    },
+    {
+      "source": "final_HL_CSES",
+      "target": "final_EC_CSES"
+    },
+    {
+      "source": "final_HH_CSES",
+      "target": "final_VL_CSES"
+    },
+    {
+      "source": "final_HL_CSES",
+      "target": "final_VL_CSES"
+    },
+    {
+      "source": "final_HH_CSES",
+      "target": "final_SURVEY_DATE_CSES"
+    }
+  ],
+  "schema_version": 1,
+  "source_data_dvc_revision": "md5:5527d5015fff181a75a2dd6184f4e3db.dir",
+  "source_archives": [
+    {
+      "path": "data/raw/CSES 2004.zip",
+      "sha256": "5c33fa2b5883fc42929771ed16bd06c98f5bf7917229f9a671bb546e073b2cec",
+      "size": 48605714,
+      "survey_wave": "2004"
+    },
+    {
+      "path": "data/raw/CSES 2007.zip",
+      "sha256": "6584718cf62153bff8f549345a0a1fd7608bf47c3ebd1ee927b14d61c7223480",
+      "size": 4102016,
+      "survey_wave": "2007"
+    },
+    {
+      "path": "data/raw/CSES 2009.zip",
+      "sha256": "5659a04299b3531960d783db5869897e0f083197de3e4223e7b6902d0c867bdc",
+      "size": 73870787,
+      "survey_wave": "2009"
+    },
+    {
+      "path": "data/raw/CSES 2011-12.zip",
+      "sha256": "aa02f52a5f38aab290ac891b0cfc2dd35ce819d6297b0516c5da976206646cc5",
+      "size": 12684035,
+      "survey_wave": "2011-12"
+    },
+    {
+      "path": "data/raw/CSES2013.zip",
+      "sha256": "e67c3558ba11671b0bd5036fe8bdd035045a062a8073f7267b5c6ac8f4f19b98",
+      "size": 6121282,
+      "survey_wave": "2013"
+    },
+    {
+      "path": "data/raw/CSES 2014.zip",
+      "sha256": "beabf933940639e8d9eba51d466cc4b5da3b98f8555a682eecf58de2d6d0cf9a",
+      "size": 32618449,
+      "survey_wave": "2014"
+    },
+    {
+      "path": "data/raw/CSES2016.zip",
+      "sha256": "1e63f4f13484c64b7f4f487092b9fb4977c86e69df2d3548d3b285c19416bd35",
+      "size": 5489614,
+      "survey_wave": "2016"
+    },
+    {
+      "path": "data/raw/CSES2017.zip",
+      "sha256": "b607fa43b23c9924d9ecc624e0b4ebaa4fde89176666add7a2d69975420f56da",
+      "size": 3605536,
+      "survey_wave": "2017"
+    },
+    {
+      "path": "data/raw/CSES2019.zip",
+      "sha256": "5975ef4474ab387e8f967fa62b5d34d7e341cfaa440f68a8085953e798e84102",
+      "size": 204402920,
+      "survey_wave": "2019"
+    },
+    {
+      "path": "data/raw/CSES2021-Village_data.zip",
+      "sha256": "098899d9e23384efba41a43b5922bd7f681eea5ebf4555bb350f845809447f60",
+      "size": 890902,
+      "survey_wave": "2021"
+    },
+    {
+      "path": "data/raw/Data of CSES2021.zip",
+      "sha256": "99d631255933d8f13eef19ce15de5075f2db21d862745496d86edbae9c1face2",
+      "size": 29026184,
+      "survey_wave": "2021"
+    }
+  ],
+  "storage_relations": [
+    {
+      "analytical_grain": "household_wave",
+      "module_code": "HH",
+      "name": "final_HH_CSES"
+    },
+    {
+      "analytical_grain": "household_member_wave",
+      "module_code": "HL",
+      "name": "final_HL_CSES"
+    },
+    {
+      "analytical_grain": "education_record_wave",
+      "module_code": "ED",
+      "name": "final_ED_CSES"
+    },
+    {
+      "analytical_grain": "housing_record_wave",
+      "module_code": "HO",
+      "name": "final_HO_CSES"
+    },
+    {
+      "analytical_grain": "employment_record_wave",
+      "module_code": "EC",
+      "name": "final_EC_CSES"
+    },
+    {
+      "analytical_grain": "village_psu_wave",
+      "module_code": "VL",
+      "name": "final_VL_CSES"
+    },
+    {
+      "analytical_grain": "household_wave",
+      "module_code": "SURVEY_DATE",
+      "name": "final_SURVEY_DATE_CSES"
+    },
+    {
+      "analytical_grain": "psu_wave",
+      "module_code": "GEO",
+      "name": "dim_geo_CSES"
+    },
+    {
+      "analytical_grain": "mapping_record",
+      "module_code": "HH",
+      "name": "ind_que_HH_CSES"
+    },
+    {
+      "analytical_grain": "mapping_record",
+      "module_code": "HL",
+      "name": "ind_que_HL_CSES"
+    },
+    {
+      "analytical_grain": "mapping_record",
+      "module_code": "ED",
+      "name": "ind_que_ED_CSES"
+    },
+    {
+      "analytical_grain": "mapping_record",
+      "module_code": "HO",
+      "name": "ind_que_HO_CSES"
+    },
+    {
+      "analytical_grain": "mapping_record",
+      "module_code": "EC",
+      "name": "ind_que_EC_CSES"
+    },
+    {
+      "analytical_grain": "mapping_record",
+      "module_code": "VL",
+      "name": "ind_que_VL_CSES"
+    },
+    {
+      "analytical_grain": "mapping_record",
+      "module_code": "SURVEY_DATE",
+      "name": "ind_que_SURVEY_DATE_CSES"
+    },
+    {
+      "analytical_grain": "alignment_summary_record",
+      "module_code": "HH",
+      "name": "align_summary_HH_CSES"
+    },
+    {
+      "analytical_grain": "alignment_summary_record",
+      "module_code": "HL",
+      "name": "align_summary_HL_CSES"
+    },
+    {
+      "analytical_grain": "alignment_summary_record",
+      "module_code": "ED",
+      "name": "align_summary_ED_CSES"
+    },
+    {
+      "analytical_grain": "alignment_summary_record",
+      "module_code": "HO",
+      "name": "align_summary_HO_CSES"
+    },
+    {
+      "analytical_grain": "alignment_summary_record",
+      "module_code": "EC",
+      "name": "align_summary_EC_CSES"
+    },
+    {
+      "analytical_grain": "alignment_summary_record",
+      "module_code": "VL",
+      "name": "align_summary_VL_CSES"
+    },
+    {
+      "analytical_grain": "alignment_summary_record",
+      "module_code": "SURVEY_DATE",
+      "name": "align_summary_SURVEY_DATE_CSES"
+    }
+  ],
+  "surveys": [
+    {
+      "dataset_name": "CSES 2004",
+      "nominal_survey_year": 2004,
+      "survey_wave": "2004"
+    },
+    {
+      "dataset_name": "CSES 2007",
+      "nominal_survey_year": 2007,
+      "survey_wave": "2007"
+    },
+    {
+      "dataset_name": "CSES 2009",
+      "nominal_survey_year": 2009,
+      "survey_wave": "2009"
+    },
+    {
+      "dataset_name": "CSES 2011-12",
+      "nominal_survey_year": 2011,
+      "survey_wave": "2011-12"
+    },
+    {
+      "dataset_name": "CSES 2013",
+      "nominal_survey_year": 2013,
+      "survey_wave": "2013"
+    },
+    {
+      "dataset_name": "CSES 2014",
+      "nominal_survey_year": 2014,
+      "survey_wave": "2014"
+    },
+    {
+      "dataset_name": "CSES 2016",
+      "nominal_survey_year": 2016,
+      "survey_wave": "2016"
+    },
+    {
+      "dataset_name": "CSES 2017",
+      "nominal_survey_year": 2017,
+      "survey_wave": "2017"
+    },
+    {
+      "dataset_name": "CSES 2019",
+      "nominal_survey_year": 2019,
+      "survey_wave": "2019"
+    },
+    {
+      "dataset_name": "CSES 2021",
+      "nominal_survey_year": 2021,
+      "survey_wave": "2021"
+    }
+  ]
+}

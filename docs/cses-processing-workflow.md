@@ -144,6 +144,8 @@ replace the reusable CSES database.
 - [x] Database dry-run passes with a protected inventory of unrelated relations.
 - [x] Explicit structural-migration database-write approval is recorded.
 - [x] Transactional schema migration and post-migration validation pass.
+- [x] Baseline metadata import plan is deterministic, conflict-free, and forced read-only.
+- [ ] Baseline metadata release and transactional import are explicitly approved.
 - [ ] Lineage graph export is deterministic.
 - [ ] Git, DVC, database, and release-note identities are cross-recorded.
 

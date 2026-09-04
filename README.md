@@ -30,9 +30,11 @@ and local-baseline validation.
 - [Processing and publication workflow](docs/cses-processing-workflow.md)
 - [Database and lineage topology](docs/cses-topology.md)
 - [Functional-schema migration runbook](docs/cses-schema-migration-runbook.md)
+- [Baseline metadata import runbook](docs/cses-baseline-metadata-runbook.md)
 - [Baseline reproduction record](docs/releases/cses-baseline-reproduction-v0.1.md)
 - [Functional-schema preflight record](docs/releases/cses-schema-preflight-v0.2.md)
 - [Functional-schema migration v1](docs/releases/cses-functional-schema-migration-v1.md)
+- [Baseline metadata preflight v0.3](docs/releases/cses-baseline-metadata-preflight-v0.3.md)
 
 ## Repository ownership
 

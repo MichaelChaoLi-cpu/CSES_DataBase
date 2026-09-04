@@ -62,6 +62,20 @@ The preflight writes `data/processing/cses/migration_dry_run_v1.json` and exits 
 source/target layout, roles, grants, dependencies, ownership, or declared natural keys violate the v1
 contract. See the project migration runbook before any write operation.
 
+## Plan the baseline metadata import
+
+Run the forced read-only registry preflight:
+
+```bash
+uv run python rsc/cses_db/plan_cses_baseline_metadata.py --root . --dbname mda
+```
+
+This writes `data/processing/cses/baseline_metadata_plan_v1.json`. It verifies the Git-owned baseline
+specification, DVC evidence, source archives, physical relations, metadata-table layout, and existing
+records. The separate importer requires `--apply` and the exact approval phrase documented in the
+[baseline metadata runbook](../../docs/cses-baseline-metadata-runbook.md); do not use it without a
+reviewed plan and explicit database-write approval.
+
 ## Build order
 
 ```text
