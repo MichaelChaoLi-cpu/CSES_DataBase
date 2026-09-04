@@ -22,7 +22,23 @@ from cses_baseline_metadata import (  # noqa: E402
 )
 from cses_lineage_graph import build_lineage_graph, render_lineage_overview  # noqa: E402
 from cses_schema_contract import EXPECTED_FAMILY_COUNTS, default_contract_path, load_contract  # noqa: E402
+from cses_storage_provenance import (  # noqa: E402
+    build_desired_state as build_storage_provenance_state,
+)
+from cses_storage_provenance import (  # noqa: E402
+    default_storage_provenance_spec_path,
+    load_storage_provenance_spec,
+)
+from cses_storage_provenance import (  # noqa: E402
+    reconcile_states as reconcile_storage_provenance,
+)
 from import_cses_baseline_metadata import validate_apply_gate, validate_reviewed_plan  # noqa: E402
+from import_cses_storage_provenance import (  # noqa: E402
+    validate_apply_gate as validate_storage_provenance_apply_gate,
+)
+from import_cses_storage_provenance import (  # noqa: E402
+    validate_reviewed_plan as validate_storage_provenance_plan,
+)
 from inventory_cses_archives import normalize_wave  # noqa: E402
 from render_cses_migration_sql import render_migration_sql  # noqa: E402
 from validate_cses_baseline_metadata import build_validation_checks  # noqa: E402
@@ -252,6 +268,132 @@ def test_post_import_validation_requires_exact_noop_state() -> None:
     database_preflight["action_counts"]["conflict"] = 1
     checks = build_validation_checks(plan, "plan-sha", import_evidence, database_preflight)
     assert checks["all_reviewed_records_are_noops"] is False
+
+
+def test_storage_provenance_contract_has_exact_scope_and_write_gate() -> None:
+    spec = load_storage_provenance_spec(default_storage_provenance_spec_path(ROOT))
+    assert len(spec["module_rules"]) == 7
+    assert spec["source_alignment_release"] == "cses-baseline-v1"
+    assert spec["alignment_release"]["mapping_version"] == "cses-storage-provenance-v1"
+    assert spec["alignment_release"]["requires_explicit_approval"] is True
+    assert {item["relation"] for item in spec["geography_rule"]["external_dependencies"]} == {
+        "public.dim_admin2_cambodia",
+        "public.dim_admin3_cambodia",
+    }
+    with pytest.raises(ValueError, match="without --apply"):
+        validate_storage_provenance_apply_gate(False, None, spec)
+    with pytest.raises(ValueError, match="without --confirm"):
+        validate_storage_provenance_apply_gate(True, "wrong", spec)
+    validate_storage_provenance_apply_gate(True, spec["approval_phrase"], spec)
+
+
+def test_storage_provenance_closes_exact_15_storage_gaps() -> None:
+    desired, diagnostics = build_storage_provenance_state(ROOT)
+    assert diagnostics["record_counts"] == {
+        "alignment_releases": 1,
+        "dataset_outputs": 134,
+        "load_runs": 1,
+    }
+    assert all(diagnostics["local_checks"].values())
+    assert len(diagnostics["target_relations"]) == 15
+    outputs = desired["dataset_outputs"]
+    assert sum(record["table_name"].startswith("ind_que_") for record in outputs) == 62
+    assert sum(record["table_name"].startswith("align_summary_") for record in outputs) == 62
+    assert sum(record["table_name"] == "dim_geo_CSES" for record in outputs) == 10
+    assert {
+        record["contribution_role"]
+        for record in outputs
+        if record["table_name"].startswith("ind_que_")
+    } == {"source"}
+    assert {
+        record["contribution_role"]
+        for record in outputs
+        if record["table_name"].startswith("align_summary_")
+    } == {"validation"}
+    assert desired["load_runs"][0]["validation_summary"]["variable_level_mapping_created"] is False
+
+
+def test_storage_provenance_reconciliation_is_conflict_sensitive() -> None:
+    desired = {
+        "alignment_releases": [
+            {
+                "mapping_version": "storage-v1",
+                "status": "approved",
+            }
+        ],
+        "dataset_outputs": [],
+        "load_runs": [],
+    }
+    existing = {
+        "alignment_releases": [],
+        "dataset_outputs": [],
+        "load_runs": [],
+    }
+    operations, conflicts = reconcile_storage_provenance(desired, existing)
+    assert operations[0]["action"] == "insert"
+    assert conflicts == []
+    existing["alignment_releases"] = [
+        {
+            "mapping_version": "storage-v1",
+            "status": "draft",
+        }
+    ]
+    operations, conflicts = reconcile_storage_provenance(desired, existing)
+    assert operations[0]["action"] == "conflict"
+    assert len(conflicts) == 1
+
+
+def test_storage_provenance_importer_binds_exact_reviewed_plan(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    planned = {
+        "alignment_releases": [{}],
+        "dataset_outputs": [{} for _ in range(134)],
+        "load_runs": [
+            {
+                "storage_provenance_import_id": "storage-v1",
+                "code_git_revision": "reviewed-commit",
+                "dvc_revision": "md5:input.dir",
+            }
+        ],
+    }
+    current = json.loads(json.dumps(planned))
+    current["load_runs"][0]["code_git_revision"] = "later-pointer-commit"
+    plan_path = tmp_path / "plan.json"
+    plan_path.write_text(
+        json.dumps(
+            {
+                "provenance_release_id": "storage-v1",
+                "database_mutated": False,
+                "preflight_ready": True,
+                "approval_phrase": "APPROVE",
+                "desired_record_counts": {
+                    "alignment_releases": 1,
+                    "dataset_outputs": 134,
+                    "load_runs": 1,
+                },
+                "desired_state": planned,
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr("import_cses_storage_provenance.subprocess.run", lambda *args, **kwargs: None)
+    selected, evidence = validate_storage_provenance_plan(
+        tmp_path,
+        plan_path,
+        {"provenance_release_id": "storage-v1", "approval_phrase": "APPROVE"},
+        current,
+    )
+    assert selected == planned
+    assert evidence["code_git_revision"] == "reviewed-commit"
+    current["load_runs"][0]["dvc_revision"] = "md5:different.dir"
+    with pytest.raises(ValueError, match="differs from the current local evidence"):
+        validate_storage_provenance_plan(
+            tmp_path,
+            plan_path,
+            {"provenance_release_id": "storage-v1", "approval_phrase": "APPROVE"},
+            current,
+        )
 
 
 def _lineage_snapshot() -> dict[str, object]:

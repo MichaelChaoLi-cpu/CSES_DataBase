@@ -186,3 +186,9 @@ Current direct source coverage is deliberately incomplete rather than inferred:
 The geography edge and 14 inherited dictionary/summary edges require reviewed evidence. The normalized
 instrument, question, source-variable, canonical-variable, and mapping tables are currently empty; the
 graph will extend those paths automatically as later reviewed releases populate them.
+
+The Git-owned `cses-storage-provenance-v1` proposal now formalizes those 15 storage-level gaps as 134
+reviewed dataset-output edges. Until its DVC-owned read-only plan is accepted and transactionally
+imported, the graph above remains the authoritative current database state. The proposal deliberately
+keeps the two non-CSES Cambodia boundary relations as documented external dependencies and leaves all
+variable-level alignment tables unchanged.

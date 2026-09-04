@@ -1,0 +1,107 @@
+{
+  "alignment_release": {
+    "description": "Reviewed storage-level provenance for the inherited CSES source dictionaries, alignment summaries, and geography dimension. This release does not create variable-level mappings and does not register external Cambodia boundary tables as CSES datasets.",
+    "mapping_version": "cses-storage-provenance-v1",
+    "requires_explicit_approval": true,
+    "status": "approved"
+  },
+  "approval_phrase": "ACCEPT-CSES-STORAGE-PROVENANCE-V1",
+  "database": "mda",
+  "evidence": {
+    "baseline_plan": {
+      "path": "data/processing/cses/baseline_metadata_plan_v1.json",
+      "sha256": "5d3bad6f959c051eaff4c1b7ecfb73cbb59f387a1b296723ac1d8d8b93e5def2"
+    },
+    "lineage_graph": {
+      "path": "data/lineage/cses_lineage_graph_v1.json",
+      "sha256": "30601a0c051bae843921442bcfbad401662b7cdee94aaa8b525a364c54d0c71e"
+    },
+    "local_release_manifest": {
+      "path": "data/processing/cses/local_release_manifest.json",
+      "sha256": "9b728c7883ec63b76782ba97c5b64bb60536756fd8a20f2ea71fdae738de0707"
+    }
+  },
+  "geography_rule": {
+    "contribution_role": "source",
+    "cses_source_relation": "final_HH_CSES",
+    "external_dependencies": [
+      {
+        "relation": "public.dim_admin2_cambodia",
+        "status": "documented_not_registered_as_cses_dataset"
+      },
+      {
+        "relation": "public.dim_admin3_cambodia",
+        "status": "documented_not_registered_as_cses_dataset"
+      }
+    ],
+    "legacy_source_path": "../../Research/MJ02b/src/database/publish_cses_geography.py",
+    "legacy_source_sha256": "dbc6e6667e5392fd7ffdb3967274d6bb3e23777bf6b3577e18338d920c3960d8",
+    "target_relation": "dim_geo_CSES"
+  },
+  "load_run": {
+    "run_scope": "storage_provenance_gap_closure_v1",
+    "status": "loaded"
+  },
+  "module_rules": [
+    {
+      "builder_path": "rsc/cses_db/cses_employment.py",
+      "builder_sha256": "4ba6fb4377cfc636528e918cd35a6ae01221f24d9330f36e850896837c604d7a",
+      "dictionary_relation": "ind_que_EC_CSES",
+      "final_relation": "final_EC_CSES",
+      "module_code": "EC",
+      "summary_relation": "align_summary_EC_CSES"
+    },
+    {
+      "builder_path": "rsc/cses_db/cses_education.py",
+      "builder_sha256": "8ce595114053b8b12dee1b8f371920538f86318788e543eb690f00707a29c592",
+      "dictionary_relation": "ind_que_ED_CSES",
+      "final_relation": "final_ED_CSES",
+      "module_code": "ED",
+      "summary_relation": "align_summary_ED_CSES"
+    },
+    {
+      "builder_path": "rsc/cses_db/cses_hh_hl_common.py",
+      "builder_sha256": "e3c7ff6ee357dc0c613e3a88f2598d904cf84862187e45dd846069a999000594",
+      "dictionary_relation": "ind_que_HH_CSES",
+      "final_relation": "final_HH_CSES",
+      "module_code": "HH",
+      "summary_relation": "align_summary_HH_CSES"
+    },
+    {
+      "builder_path": "rsc/cses_db/cses_hh_hl_common.py",
+      "builder_sha256": "e3c7ff6ee357dc0c613e3a88f2598d904cf84862187e45dd846069a999000594",
+      "dictionary_relation": "ind_que_HL_CSES",
+      "final_relation": "final_HL_CSES",
+      "module_code": "HL",
+      "summary_relation": "align_summary_HL_CSES"
+    },
+    {
+      "builder_path": "rsc/cses_db/cses_housing.py",
+      "builder_sha256": "83373cf687684c12d36a87fe5855bafba973fd164f68769b8d47887e7cd8b6bf",
+      "dictionary_relation": "ind_que_HO_CSES",
+      "final_relation": "final_HO_CSES",
+      "module_code": "HO",
+      "summary_relation": "align_summary_HO_CSES"
+    },
+    {
+      "builder_path": "rsc/cses_db/build_cses_survey_dates.py",
+      "builder_sha256": "69d72112722c47181163d24dda047f87464c2b77967b9bdd3f6831807102746d",
+      "dictionary_relation": "ind_que_SURVEY_DATE_CSES",
+      "final_relation": "final_SURVEY_DATE_CSES",
+      "module_code": "SURVEY_DATE",
+      "summary_relation": "align_summary_SURVEY_DATE_CSES"
+    },
+    {
+      "builder_path": "rsc/cses_db/cses_village.py",
+      "builder_sha256": "f5cfee06085246736f1b84b791ff1582fe3ec6e049cb9d5b0144d1220c367323",
+      "dictionary_relation": "ind_que_VL_CSES",
+      "final_relation": "final_VL_CSES",
+      "module_code": "VL",
+      "summary_relation": "align_summary_VL_CSES"
+    }
+  ],
+  "provenance_release_id": "cses-storage-provenance-v1",
+  "schema_version": 1,
+  "source_alignment_release": "cses-baseline-v1",
+  "source_data_dvc_revision": "md5:d453ebafc501a3a33b6f2a95368760f4.dir"
+}
