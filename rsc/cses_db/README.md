@@ -66,7 +66,7 @@ contract. See the project migration runbook before any write operation.
 
 ```text
 HL -> ED -> HH -> HO
- |          |     
+ |          |
  +-> EC     +-> VL
             +-> SURVEY_DATE
 ```
