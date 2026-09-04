@@ -25,7 +25,10 @@ the functional-schema migration evidence, confirmed the v1 metadata table column
 `transaction_read_only=on`. Every preflight check passed.
 
 Two consecutive exports of `data/processing/cses/baseline_metadata_plan_v1.json` were byte-identical.
-The plan SHA-256 was `050f77b040d6020b98e2e05e2435e55cbeef40e1ecfa4bc54131d489d730b559`.
+The final cross-recorded plan SHA-256 was
+`49c1b36512b973b1cd02af864006ae71de93bd5dee935bc4d935994629780450`; it identifies Git revision
+`bdb1af5b344ae0d16746cddd208eeb767e903832` and source DVC revision
+`md5:5527d5015fff181a75a2dd6184f4e3db.dir`.
 
 ## Interpretation
 
