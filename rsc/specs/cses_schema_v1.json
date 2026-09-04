@@ -1,0 +1,174 @@
+{
+  "compatibility_schema": "public",
+  "database": "mda",
+  "functional_schemas": {
+    "alignment": "cses_alignment",
+    "analysis": "cses_analysis",
+    "data": "cses_data",
+    "metadata": "cses_meta"
+  },
+  "migration_name": "cses_public_to_functional_v1",
+  "reader_roles": [
+    "mda_readonly"
+  ],
+  "relations": [
+    {
+      "family": "final",
+      "name": "final_HH_CSES",
+      "natural_key": [
+        "survey_wave",
+        "household_id"
+      ],
+      "target_schema": "cses_data"
+    },
+    {
+      "family": "final",
+      "name": "final_HL_CSES",
+      "natural_key": [
+        "survey_wave",
+        "person_id"
+      ],
+      "target_schema": "cses_data"
+    },
+    {
+      "family": "final",
+      "name": "final_ED_CSES",
+      "natural_key": [
+        "survey_wave",
+        "person_id"
+      ],
+      "target_schema": "cses_data"
+    },
+    {
+      "family": "final",
+      "name": "final_HO_CSES",
+      "natural_key": [
+        "survey_wave",
+        "household_id"
+      ],
+      "target_schema": "cses_data"
+    },
+    {
+      "family": "final",
+      "name": "final_EC_CSES",
+      "natural_key": [
+        "survey_wave",
+        "person_id"
+      ],
+      "target_schema": "cses_data"
+    },
+    {
+      "family": "final",
+      "name": "final_VL_CSES",
+      "natural_key": [
+        "survey_wave",
+        "psu"
+      ],
+      "target_schema": "cses_data"
+    },
+    {
+      "family": "final",
+      "name": "final_SURVEY_DATE_CSES",
+      "natural_key": [
+        "survey_wave",
+        "household_id"
+      ],
+      "target_schema": "cses_data"
+    },
+    {
+      "family": "geography",
+      "name": "dim_geo_CSES",
+      "natural_key": [
+        "survey_wave",
+        "psu"
+      ],
+      "target_schema": "cses_data"
+    },
+    {
+      "family": "source_dictionary",
+      "name": "ind_que_HH_CSES",
+      "natural_key": [],
+      "target_schema": "cses_alignment"
+    },
+    {
+      "family": "source_dictionary",
+      "name": "ind_que_HL_CSES",
+      "natural_key": [],
+      "target_schema": "cses_alignment"
+    },
+    {
+      "family": "source_dictionary",
+      "name": "ind_que_ED_CSES",
+      "natural_key": [],
+      "target_schema": "cses_alignment"
+    },
+    {
+      "family": "source_dictionary",
+      "name": "ind_que_HO_CSES",
+      "natural_key": [],
+      "target_schema": "cses_alignment"
+    },
+    {
+      "family": "source_dictionary",
+      "name": "ind_que_EC_CSES",
+      "natural_key": [],
+      "target_schema": "cses_alignment"
+    },
+    {
+      "family": "source_dictionary",
+      "name": "ind_que_VL_CSES",
+      "natural_key": [],
+      "target_schema": "cses_alignment"
+    },
+    {
+      "family": "source_dictionary",
+      "name": "ind_que_SURVEY_DATE_CSES",
+      "natural_key": [],
+      "target_schema": "cses_alignment"
+    },
+    {
+      "family": "alignment_summary",
+      "name": "align_summary_HH_CSES",
+      "natural_key": [],
+      "target_schema": "cses_analysis"
+    },
+    {
+      "family": "alignment_summary",
+      "name": "align_summary_HL_CSES",
+      "natural_key": [],
+      "target_schema": "cses_analysis"
+    },
+    {
+      "family": "alignment_summary",
+      "name": "align_summary_ED_CSES",
+      "natural_key": [],
+      "target_schema": "cses_analysis"
+    },
+    {
+      "family": "alignment_summary",
+      "name": "align_summary_HO_CSES",
+      "natural_key": [],
+      "target_schema": "cses_analysis"
+    },
+    {
+      "family": "alignment_summary",
+      "name": "align_summary_EC_CSES",
+      "natural_key": [],
+      "target_schema": "cses_analysis"
+    },
+    {
+      "family": "alignment_summary",
+      "name": "align_summary_VL_CSES",
+      "natural_key": [],
+      "target_schema": "cses_analysis"
+    },
+    {
+      "family": "alignment_summary",
+      "name": "align_summary_SURVEY_DATE_CSES",
+      "natural_key": [],
+      "target_schema": "cses_analysis"
+    }
+  ],
+  "schema_version": 1,
+  "source_schema": "public"
+}
