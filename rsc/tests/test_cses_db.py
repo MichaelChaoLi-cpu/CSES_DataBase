@@ -24,6 +24,7 @@ from cses_schema_contract import EXPECTED_FAMILY_COUNTS, default_contract_path, 
 from import_cses_baseline_metadata import validate_apply_gate, validate_reviewed_plan  # noqa: E402
 from inventory_cses_archives import normalize_wave  # noqa: E402
 from render_cses_migration_sql import render_migration_sql  # noqa: E402
+from validate_cses_baseline_metadata import build_validation_checks  # noqa: E402
 
 EXPECTED_ARCHIVES = {
     "CSES 2004.zip",
@@ -223,3 +224,30 @@ def test_importer_consumes_exact_reviewed_plan_state(tmp_path: Path, monkeypatch
             {"baseline_id": "baseline-v1", "approval_phrase": "APPROVE"},
             current,
         )
+
+
+def test_post_import_validation_requires_exact_noop_state() -> None:
+    plan = {
+        "preflight_ready": True,
+        "database_mutated": False,
+        "desired_record_counts": {"surveys": 1},
+        "desired_state": {"load_runs": [{"code_git_revision": "reviewed-commit"}]},
+    }
+    import_evidence = {
+        "reviewed_plan": {
+            "sha256": "plan-sha",
+            "code_git_revision": "reviewed-commit",
+        },
+        "inserted_record_counts": {"surveys": 1},
+        "database_mutated": True,
+        "post_write_action_counts": {"conflict": 0, "insert": 0, "noop": 1},
+    }
+    database_preflight = {
+        "checks": {"transaction_is_read_only": True, "no_existing_metadata_conflicts": True},
+        "action_counts": {"conflict": 0, "insert": 0, "noop": 1},
+        "existing_record_counts": {"surveys": 1},
+    }
+    assert all(build_validation_checks(plan, "plan-sha", import_evidence, database_preflight).values())
+    database_preflight["action_counts"]["conflict"] = 1
+    checks = build_validation_checks(plan, "plan-sha", import_evidence, database_preflight)
+    assert checks["all_reviewed_records_are_noops"] is False

@@ -76,6 +76,12 @@ records. The separate importer requires `--apply` and the exact approval phrase 
 [baseline metadata runbook](../../docs/cses-baseline-metadata-runbook.md); do not use it without a
 reviewed plan and explicit database-write approval.
 
+After an approved import, validate the exact reviewed plan in a separate forced read-only transaction:
+
+```bash
+uv run python rsc/cses_db/validate_cses_baseline_metadata.py --root . --dbname mda
+```
+
 ## Build order
 
 ```text

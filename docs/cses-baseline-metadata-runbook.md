@@ -81,6 +81,12 @@ once. Any failure rolls back the complete transaction.
 
 ## Post-import verification
 
-Regenerate the read-only plan. All 278 reviewed records must be `noop`, with zero `insert` and zero
-`conflict` operations. Then export the deterministic lineage graph from PostgreSQL; the graph remains a
-read-only DVC projection rather than a second source of truth.
+Run the independent forced read-only validator without overwriting the reviewed plan:
+
+```bash
+uv run python rsc/cses_db/validate_cses_baseline_metadata.py --root . --dbname mda
+```
+
+All 278 reviewed records must be `noop`, with zero `insert` and zero `conflict` operations. Then export
+the deterministic lineage graph from PostgreSQL; the graph remains a read-only DVC projection rather
+than a second source of truth.
