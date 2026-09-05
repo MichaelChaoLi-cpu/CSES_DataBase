@@ -26,3 +26,4 @@ Working documentation is written in English and tracked by Git.
 - [Storage provenance import v1](releases/cses-storage-provenance-import-v1.md)
 - [Variable catalog preflight v0.5](releases/cses-variable-catalog-preflight-v0.5.md)
 - [Variable catalog import v1](releases/cses-variable-catalog-import-v1.md)
+- [Questionnaire provenance preflight v0.6](releases/cses-questionnaire-provenance-preflight-v0.6.md)
