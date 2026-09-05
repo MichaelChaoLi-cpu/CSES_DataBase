@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "preflight_id": "cses-value-audit-v1",
+  "database": "mda",
+  "target_table": "final_HO_CSES",
+  "source_data_dvc_revision": "md5:d427da93fcdec9b304ec73362803c420.dir",
+  "status": "proposed",
+  "database_write_allowed": false,
+  "scope_note": "Three housing classification variables across ten waves. Five waves have cataloged household questionnaires. This is evidence review, not an approved value mapping.",
+  "evidence": {
+    "baseline_plan": {
+      "path": "data/processing/cses/baseline_metadata_plan_v1.json",
+      "sha256": "5d3bad6f959c051eaff4c1b7ecfb73cbb59f387a1b296723ac1d8d8b93e5def2"
+    },
+    "variable_plan": {
+      "path": "data/processing/cses/variable_catalog_plan_v1.json",
+      "sha256": "0d9563ff820073baa420b98e1c722b32cfdad77d2c27ce6df7fbdb307a4fa8c1"
+    },
+    "questionnaire_plan": {
+      "path": "data/processing/cses/questionnaire_provenance_plan_v1.json",
+      "sha256": "0c07aca1a4a882cf97f584fb5a58fb8129e8a278a2f4545cfbab7935dc17e95c"
+    },
+    "questionnaire_validation": {
+      "path": "data/processing/cses/questionnaire_provenance_validation_v1.json",
+      "sha256": "e9207e1375d7541fffc8ab686b504a60af11a5906d03768a44dccc85c586790c"
+    },
+    "questionnaire_cells": {
+      "path": "data/processing/cses/response_option_cells_v1.json",
+      "sha256": "a6e2d004b4dd59b142f37eb27fda96c21b12bd8af01ceb98f11e6372b413d6f2"
+    },
+    "local_housing": {
+      "path": "data/processing/cses/final_HO_CSES.parquet",
+      "sha256": "0c9922a6366737348d09721b985c8f3f402a38ab80ef8101558135b770cc35c8"
+    },
+    "housing_builder": {
+      "path": "rsc/cses_db/cses_housing.py",
+      "sha256": "83373cf687684c12d36a87fe5855bafba973fd164f68769b8d47887e7cd8b6bf"
+    }
+  },
+  "variables": [
+    {
+      "canonical_name": "main_lighting_source_code",
+      "local_column": "Main Lighting Source Code",
+      "title": "Main lighting source"
+    },
+    {
+      "canonical_name": "main_cooking_fuel_source_code",
+      "local_column": "Main Cooking Fuel Source Code",
+      "title": "Main cooking fuel"
+    },
+    {
+      "canonical_name": "dwelling_tenure_source_code",
+      "local_column": "Dwelling Tenure Source Code",
+      "title": "Dwelling tenure"
+    }
+  ],
+  "option_blocks": [
+    {
+      "survey_wave": "2004",
+      "canonical_name": "main_lighting_source_code",
+      "question_code": "q03_08",
+      "option_cells": [
+        "C40",
+        "N40",
+        "U40"
+      ],
+      "expected_option_count": 6
+    },
+    {
+      "survey_wave": "2004",
+      "canonical_name": "main_cooking_fuel_source_code",
+      "question_code": "q03_23",
+      "option_cells": [
+        "D95",
+        "P95"
+      ],
+      "expected_option_count": 10
+    },
+    {
+      "survey_wave": "2004",
+      "canonical_name": "dwelling_tenure_source_code",
+      "question_code": "q03_27",
+      "option_cells": [
+        "D125"
+      ],
+      "expected_option_count": 4
+    },
+    {
+      "survey_wave": "2009",
+      "canonical_name": "main_lighting_source_code",
+      "question_code": "q04_07",
+      "option_cells": [
+        "C35",
+        "N35",
+        "U35",
+        "AC35"
+      ],
+      "expected_option_count": 7
+    },
+    {
+      "survey_wave": "2009",
+      "canonical_name": "main_cooking_fuel_source_code",
+      "question_code": "q04_22",
+      "option_cells": [
+        "B123",
+        "O123"
+      ],
+      "expected_option_count": 8
+    },
+    {
+      "survey_wave": "2009",
+      "canonical_name": "dwelling_tenure_source_code",
+      "question_code": "q04_24",
+      "option_cells": [
+        "D158"
+      ],
+      "expected_option_count": 4
+    },
+    {
+      "survey_wave": "2011-12",
+      "canonical_name": "main_lighting_source_code",
+      "question_code": "q04_07",
+      "option_cells": [
+        "C35",
+        "N35",
+        "U35",
+        "AC35"
+      ],
+      "expected_option_count": 8
+    },
+    {
+      "survey_wave": "2011-12",
+      "canonical_name": "main_cooking_fuel_source_code",
+      "question_code": "q04_22",
+      "option_cells": [
+        "B124",
+        "O124"
+      ],
+      "expected_option_count": 8
+    },
+    {
+      "survey_wave": "2011-12",
+      "canonical_name": "dwelling_tenure_source_code",
+      "question_code": "q04_24",
+      "option_cells": [
+        "D160"
+      ],
+      "expected_option_count": 4
+    },
+    {
+      "survey_wave": "2014",
+      "canonical_name": "main_lighting_source_code",
+      "question_code": "q04_07",
+      "option_cells": [
+        "C35",
+        "N35",
+        "U35",
+        "AC35"
+      ],
+      "expected_option_count": 8
+    },
+    {
+      "survey_wave": "2014",
+      "canonical_name": "main_cooking_fuel_source_code",
+      "question_code": "q04_26",
+      "option_cells": [
+        "B150",
+        "O150"
+      ],
+      "expected_option_count": 8
+    },
+    {
+      "survey_wave": "2014",
+      "canonical_name": "dwelling_tenure_source_code",
+      "question_code": "q04_28",
+      "option_cells": [
+        "D186"
+      ],
+      "expected_option_count": 4
+    },
+    {
+      "survey_wave": "2016",
+      "canonical_name": "main_lighting_source_code",
+      "question_code": "q04_07",
+      "option_cells": [
+        "C35",
+        "N35",
+        "U35",
+        "Z35",
+        "AD35"
+      ],
+      "expected_option_count": 9
+    },
+    {
+      "survey_wave": "2016",
+      "canonical_name": "main_cooking_fuel_source_code",
+      "question_code": "q04_26",
+      "option_cells": [
+        "B87",
+        "O87"
+      ],
+      "expected_option_count": 8
+    },
+    {
+      "survey_wave": "2016",
+      "canonical_name": "dwelling_tenure_source_code",
+      "question_code": "q04_28",
+      "option_cells": [
+        "D113"
+      ],
+      "expected_option_count": 4
+    }
+  ],
+  "category_aliases": {
+    "grid_electricity": [
+      "publicly-provided electricity",
+      "publicly-provided electricity/city power"
+    ],
+    "generator_electricity": [
+      "privately-generated electricity",
+      "privately-generated electricity/generator",
+      "generator",
+      "household generator"
+    ],
+    "battery": [
+      "battery"
+    ],
+    "kerosene_lamp": [
+      "kerosene lamp"
+    ],
+    "candle": [
+      "candle"
+    ],
+    "none": [
+      "none"
+    ],
+    "solar": [
+      "solar"
+    ],
+    "biogas": [
+      "biogas"
+    ],
+    "other": [
+      "other",
+      "other (specify)"
+    ],
+    "firewood": [
+      "firewood"
+    ],
+    "charcoal": [
+      "charcoal"
+    ],
+    "firewood_and_charcoal": [
+      "firewood and charcoal"
+    ],
+    "lpg": [
+      "liquefied petroleum gas",
+      "liquefied petroleum gas lpg"
+    ],
+    "kerosene": [
+      "kerosene"
+    ],
+    "kerosene_or_diesel": [
+      "kerosene/diesel"
+    ],
+    "gas_and_electricity": [
+      "gas and electricity"
+    ],
+    "no_cooking": [
+      "none/don't cook",
+      "none/don?t cook"
+    ],
+    "owned": [
+      "owned by the household",
+      "owned by the households"
+    ],
+    "rent_free": [
+      "not owned but no rent is paid"
+    ],
+    "rented": [
+      "rented"
+    ]
+  },
+  "missing_label_aliases": {
+    "unspecified_missing": [
+      "missing"
+    ],
+    "refused": [
+      "refused",
+      "refusal"
+    ],
+    "dont_know": [
+      "don't know",
+      "dont know"
+    ],
+    "not_applicable": [
+      "not applicable",
+      "n/a"
+    ]
+  },
+  "policies": [
+    "Never infer meanings from coincident codes across waves.",
+    "Preserve Stata system and extended missing codes separately; their causes remain unknown.",
+    "Do not translate unmatched non-English labels automatically.",
+    "Other and compound categories require comparability review even when a candidate name is assigned.",
+    "2014 questionnaire evidence remains provisional.",
+    "No database importer or executable recode specification is produced."
+  ]
+}

@@ -114,6 +114,22 @@ to authoritative question text. Any later database write still requires `--apply
 phrase documented in the
 [questionnaire provenance runbook](../../docs/cses-questionnaire-provenance-runbook.md).
 
+## Audit housing codes and missingness
+
+Compare the three selected housing classification fields across ten waves without writing PostgreSQL:
+
+```bash
+uv run python rsc/cses_db/plan_cses_value_audit.py --root . --dbname mda
+```
+
+The pilot checks archive and evidence hashes, profiles complete raw columns with Stata missing codes
+preserved, reads 100 explicitly located questionnaire options, and verifies the current database's
+code frequencies against the pinned local release. It writes a JSON preflight, code comparison,
+conflict report, and Mermaid review overview under `data/processing/cses/value_audit_v1/`.
+See the [value audit runbook](../../docs/cses-value-audit-runbook.md) for the separate questionnaire
+cell-extraction command, confidence boundaries, and deterministic reproduction procedure. Candidate
+categories remain proposed; this command has no database-write mode.
+
 ## Export the lineage graph
 
 Export the authoritative database state through one forced read-only transaction:

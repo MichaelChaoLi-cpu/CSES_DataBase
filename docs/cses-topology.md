@@ -321,3 +321,41 @@ reviewed question subset overlaps the source-variable catalog.
 The DVC-owned files are `data/lineage/cses_lineage_graph_v4.json` and
 `data/lineage/cses_lineage_overview_v4.mmd`. Both were reproduced byte-for-byte in consecutive exports.
 Graphs v1 through v3 remain immutable historical projections.
+
+## Housing value audit v1: proposed review evidence
+
+The next layer compares response options and observed source codes before any canonical value
+mapping is published. This is a local review projection; graph v4 still represents the current
+authoritative database state, with zero canonical value mappings.
+
+```mermaid
+flowchart LR
+    RAW["10 raw housing datasets<br/>full code frequencies"]
+    QUEST["5 questionnaire files<br/>100 located options"]
+    CATALOG["Approved variable and question catalog"]
+    DB["mda and pinned local release<br/>30 frequency profiles"]
+    AUDIT["Read-only value audit<br/>208 code rows"]
+    REVIEW["Proposed category comparison<br/>10 field/code conflicts"]
+    FUTURE["Future reviewed value-mapping release<br/>currently 0 database value mappings"]
+    RAW --> AUDIT
+    QUEST --> AUDIT
+    CATALOG --> AUDIT
+    DB -.->|"validation"| AUDIT
+    AUDIT --> REVIEW
+    REVIEW -.->|"semantic review required"| FUTURE
+```
+
+The three pilot fields are lighting source, main cooking fuel, and dwelling tenure. Fifteen of the
+30 wave/field profiles have questionnaire options; three of those profiles use the provisional 2014
+draft. Nine profiles have Stata value labels. Sources without either form of evidence remain
+unresolved, and untranslated labels are not assigned an invented category.
+
+The review exposes a concrete missingness issue: one 2004 lighting record has source code 9 labeled
+`missing`, and that code remains in the current published source-code column. The same number means
+`Biogas` in the 2016 questionnaire and `Other` in the 2021 source labels. A global code-9-to-NULL rule
+would therefore be invalid. The current tables remain unchanged during this audit.
+
+The complete code comparison, conflict report, machine-readable preflight, and standalone Mermaid
+overview are DVC-owned under `data/processing/cses/value_audit_v1/`. See the
+[value audit runbook](cses-value-audit-runbook.md) and
+[preflight record](releases/cses-value-audit-preflight-v0.7.md).

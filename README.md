@@ -24,12 +24,22 @@ The v1 functional-schema migration is complete in `mda`: 22 physical CSES relati
 migration used a verified external backup and passed preflight, postflight, physical-identity, reader,
 and local-baseline validation.
 
-The reviewed baseline metadata release is also imported: `cses_meta` records 10 surveys, 11 source
-archives, 171 physical datasets, 22 storage relations, 62 direct dataset-output edges, one alignment
-release, and one adoption load run. An independent read-only validation reconciles all 278 records to
-no-ops. The deterministic lineage graph v1 now projects that database state into 244 nodes and 516
-edges. The next implementation milestone is closing the 15 visible storage-provenance gaps and building
-the variable-level alignment catalog.
+The baseline, storage-provenance, variable-catalog, and questionnaire-provenance releases are imported
+and independently validated. All 22 registered storage relations have source provenance. The catalog
+covers 10 survey waves, 11 archives, 171 physical datasets, 4,092 source variables, 280 canonical
+variables, and 1,714 source-to-canonical mapping records. It also records 14 instruments, 164 questions,
+and 291 question links, including 51 provisional links to the 2014 draft.
+
+The current deterministic database lineage projection is graph v4: 4,800 nodes and 7,489 edges.
+Canonical value mappings remain empty. Seven questionnaire gaps and all question-text confidence
+boundaries remain explicit.
+
+The read-only housing value audit now compares lighting, cooking fuel, and tenure across all ten
+waves: 30 source profiles, 100 located questionnaire options, and 208 code rows. It identifies 10
+field/code groups with different meanings across waves and a documented 2004 lighting missing code
+retained in the published source-code field. The report contains proposed categories and unresolved
+codes; no new mappings or data corrections have been published. The next milestone is reviewing these
+findings and preparing a precisely scoped value-mapping or correction release.
 
 ## Start here
 
@@ -39,6 +49,11 @@ the variable-level alignment catalog.
 - [Functional-schema migration runbook](docs/cses-schema-migration-runbook.md)
 - [Baseline metadata import runbook](docs/cses-baseline-metadata-runbook.md)
 - [Lineage export runbook](docs/cses-lineage-export-runbook.md)
+- [Housing value audit runbook](docs/cses-value-audit-runbook.md)
+- [Housing code comparison](data/processing/cses/value_audit_v1/code_review.md) (DVC artifact)
+- [Housing code conflicts](data/processing/cses/value_audit_v1/conflicts.md) (DVC artifact)
+- [Questionnaire provenance import v1](docs/releases/cses-questionnaire-provenance-import-v1.md)
+- [Housing value audit preflight v0.7](docs/releases/cses-value-audit-preflight-v0.7.md)
 - [Baseline reproduction record](docs/releases/cses-baseline-reproduction-v0.1.md)
 - [Functional-schema preflight record](docs/releases/cses-schema-preflight-v0.2.md)
 - [Functional-schema migration v1](docs/releases/cses-functional-schema-migration-v1.md)

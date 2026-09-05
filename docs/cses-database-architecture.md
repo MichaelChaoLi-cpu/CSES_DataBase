@@ -176,5 +176,7 @@ The 15 storage-provenance gaps are closed and `cses-variable-catalog-v1` is now 
 It catalogs all 171 registered source datasets and 4,092 physical variables, registers the exact 280
 physical final-table columns as canonicals, and materializes 1,714 builder-supported mappings. The
 existing `cses_alignment` schema expresses this model, so no additional schema was required.
-Questionnaire links and canonical value mappings remain independent later releases. The graph remains
+Questionnaire links were subsequently imported in `cses-questionnaire-provenance-v1`. Canonical value
+mappings remain empty. The read-only housing value audit is now available for three classification
+fields across ten waves; its proposed categories are not approved database mappings. The graph remains
 a read-only DVC projection rather than a second source of truth.
