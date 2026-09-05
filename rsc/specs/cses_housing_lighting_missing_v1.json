@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "release_id": "cses-housing-lighting-missing-v1",
+  "database": "mda",
+  "table_schema": "cses_data",
+  "table": "final_HO_CSES",
+  "column": "main_lighting_source_code",
+  "local_column": "Main Lighting Source Code",
+  "survey_wave": "2004",
+  "household_id": "1501320",
+  "source_row_id": "2004:2004hh_s03_housing.dta:11580",
+  "source_variable": "q03_08",
+  "old_value": 9,
+  "new_value": null,
+  "expected_changed_cells": 1,
+  "source_archive": "data/raw/CSES 2004.zip",
+  "source_member": "CSES 2004/Stata 2004/2004hh_s03_housing.dta",
+  "archive_sha256": "5c33fa2b5883fc42929771ed16bd06c98f5bf7917229f9a671bb546e073b2cec",
+  "source_label": "missing",
+  "baseline_git_revision": "e8ced0a",
+  "baseline_data_dvc_revision": "md5:a24546010057cb38153543cfdf0d7490.dir",
+  "before_housing_sha256": "0c9922a6366737348d09721b985c8f3f402a38ab80ef8101558135b770cc35c8",
+  "audit_evidence": {
+    "path": "data/processing/cses/value_audit_v1/preflight.json",
+    "sha256": "e46fbd6d78322afdce885bd326253ebad9f4bc1e7940dc6f9943098ac87c24ca"
+  },
+  "baseline_mapping_version": "cses-variable-catalog-v1",
+  "transformation_rule": "For survey_wave=2004 only, preserve the existing lighting source-code rule except map q03_08=9 (Stata label: missing) to SQL NULL. Other waves and other source codes are unchanged. Supersedes the 2004 final_HO_CSES.main_lighting_source_code rule in cses-variable-catalog-v1.",
+  "metadata_changes": {
+    "alignment_releases": 1,
+    "variable_mappings": 1,
+    "load_runs": 1,
+    "value_mappings": 0
+  },
+  "authorization": "User approved the proposed archive, source-rule correction, local rebuild/diff verification, mda synchronization, and release/topology evidence workflow on 2026-09-05.",
+  "release_directory": "data/releases/cses-housing-lighting-missing-v1"
+}

@@ -92,6 +92,10 @@ def main() -> None:
     require(ho["Floor Area Square Meters"].dropna().between(0.0001, 10_000).all(), "Floor area is out of range")
     require(ho["Rooms Used"].dropna().between(1, 50).all(), "Rooms used is out of range")
     require(
+        not ho.loc[ho["Survey Wave"].eq("2004"), "Main Lighting Source Code"].eq(9).any(),
+        "2004 lighting retains the explicitly labeled missing code 9",
+    )
+    require(
         ho["Drinking Water Treatment Frequency Source Code"].dropna().isin([1, 2, 3]).all(),
         "Water treatment frequency code is invalid",
     )

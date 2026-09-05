@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -83,6 +84,43 @@ EXPECTED_ARCHIVES = {
     "CSES2021-Village_data.zip",
     "Data of CSES2021.zip",
 }
+
+
+@pytest.fixture(scope="module")
+def historical_catalog_root(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    """Rebuild immutable v1 evidence using its pinned code and pre-correction artifact.
+
+    Live builders deliberately evolve. Historical catalog tests must still test the
+    original hashes rather than weaken their integrity gates to accept new code.
+    """
+    stage = tmp_path_factory.mktemp("cses-v1") / "workspace" / "Dataset" / "CSES"
+    stage.mkdir(parents=True)
+    for path in (ROOT / "rsc").rglob("*"):
+        if not path.is_file() or "__pycache__" in path.parts:
+            continue
+        target = stage / path.relative_to(ROOT)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if path == ROOT / "rsc/cses_db/cses_housing.py":
+            content = subprocess.run(
+                ["git", "show", "e8ced0a:rsc/cses_db/cses_housing.py"], cwd=ROOT,
+                check=True, capture_output=True,
+            ).stdout
+            target.write_bytes(content)
+        else:
+            target.symlink_to(path)
+    (stage / ".git").symlink_to(ROOT / ".git", target_is_directory=True)
+    (stage / "data").mkdir()
+    (stage / "data/raw").symlink_to(ROOT / "data/raw", target_is_directory=True)
+    (stage / "data/lineage").symlink_to(ROOT / "data/lineage", target_is_directory=True)
+    processing = stage / "data/processing/cses"
+    processing.mkdir(parents=True)
+    original = ROOT / "data/releases/cses-housing-lighting-missing-v1/before"
+    for path in (ROOT / "data/processing/cses").iterdir():
+        replacement = original / path.name
+        (processing / path.name).symlink_to(replacement if replacement.is_file() else path,
+                                            target_is_directory=path.is_dir())
+    (stage.parents[1] / "Research").symlink_to(ROOT.parents[1] / "Research", target_is_directory=True)
+    return stage
 
 
 def test_wave_normalization() -> None:
@@ -170,8 +208,8 @@ def test_nested_source_dataset_identity_is_stable() -> None:
     )
 
 
-def test_baseline_metadata_desired_state_is_complete_and_locally_valid() -> None:
-    desired, diagnostics = build_desired_state(ROOT)
+def test_baseline_metadata_desired_state_is_complete_and_locally_valid(historical_catalog_root: Path) -> None:
+    desired, diagnostics = build_desired_state(historical_catalog_root)
     assert diagnostics["record_counts"] == {
         "surveys": 10,
         "source_archives": 11,
@@ -314,8 +352,8 @@ def test_storage_provenance_contract_has_exact_scope_and_write_gate() -> None:
     validate_storage_provenance_apply_gate(True, spec["approval_phrase"], spec)
 
 
-def test_storage_provenance_closes_exact_15_storage_gaps() -> None:
-    desired, diagnostics = build_storage_provenance_state(ROOT)
+def test_storage_provenance_closes_exact_15_storage_gaps(historical_catalog_root: Path) -> None:
+    desired, diagnostics = build_storage_provenance_state(historical_catalog_root)
     assert diagnostics["record_counts"] == {
         "alignment_releases": 1,
         "dataset_outputs": 134,
@@ -355,8 +393,8 @@ def test_variable_catalog_contract_is_conservative_and_write_gated() -> None:
     validate_variable_catalog_apply_gate(True, spec["approval_phrase"], spec)
 
 
-def test_variable_catalog_covers_all_sources_and_physical_canonicals() -> None:
-    desired, diagnostics = build_variable_catalog_state(ROOT)
+def test_variable_catalog_covers_all_sources_and_physical_canonicals(historical_catalog_root: Path) -> None:
+    desired, diagnostics = build_variable_catalog_state(historical_catalog_root)
     assert diagnostics["record_counts"] == {
         "alignment_releases": 1,
         "source_variables": 4092,

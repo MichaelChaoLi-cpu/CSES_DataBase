@@ -437,6 +437,14 @@ def clean_source_code(
     return numeric.where(valid).astype("Int16")
 
 
+def lighting_source_codes(wave: str) -> set[int]:
+    """Code 9 is explicitly labeled missing only in the 2004 lighting source."""
+    codes = set(range(1, 11))
+    if wave == "2004":
+        codes.remove(9)
+    return codes
+
+
 def clean_money(
     context: AlignmentContext,
     raw: pd.DataFrame,
@@ -562,7 +570,7 @@ def build_wave(
         "Wall Material Source Code": set(range(1, 9 if wave == "2004" else 10)),
         "Roof Material Source Code": set(range(1, 11)),
         "Floor Material Source Code": set(range(1, 9 if wave == "2004" else 10)),
-        "Main Lighting Source Code": set(range(1, 11)),
+        "Main Lighting Source Code": lighting_source_codes(wave),
         "Main Drinking Water Source Code": set(range(1, 21)),
         "Drinking Water Treatment Frequency Source Code": {1, 2, 3},
         "Toilet Facility Source Code": set(range(1, 10 if wave == "2004" else 9)),
