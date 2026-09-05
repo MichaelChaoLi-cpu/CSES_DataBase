@@ -17,7 +17,8 @@ The project separates four kinds of state:
 The raw archive set matches the eleven CSES archives used by the earlier `MJ02b` database work. This
 repository reproduces and validates the seven core local table artifacts. The original baseline
 matched the earlier Parquet release value for value after normalizing the intentional raw-path change.
-The current release adds one reviewed 2004 housing lighting missing-code correction to that baseline.
+The current physical data adds one reviewed 2004 housing lighting missing-code correction to that
+baseline. A subsequent metadata-only release publishes the approved housing value dictionary.
 
 The v1 functional-schema migration is complete in `mda`: 22 physical CSES relations now reside in
 `cses_data`, `cses_alignment`, or `cses_analysis`; seven normalized management tables reside in
@@ -28,13 +29,14 @@ and local-baseline validation.
 The baseline, storage-provenance, variable-catalog, and questionnaire-provenance releases are imported
 and independently validated. All 22 registered storage relations have source provenance. The catalog
 covers 10 survey waves, 11 archives, 171 physical datasets, 4,092 source variables, 280 canonical
-variables, and 1,715 source-to-canonical mapping records (1,714 baseline rules plus one correction).
+variables, and 1,736 source-to-canonical mapping records (1,714 baseline rules, one correction,
+and 21 dictionary-release rules).
 It also records 14 instruments, 164 questions, and 291 question links, including 51 provisional links
 to the 2014 draft.
 
-The current deterministic database lineage projection is graph v5: 4,802 nodes and 7,495 edges.
-Canonical value mappings remain empty. Seven questionnaire gaps and all question-text confidence
-boundaries remain explicit.
+The current deterministic database lineage projection is graph v6: 4,804 nodes and 7,522 edges.
+It records 140 approved value mappings across 21 source rules; the catalog has six alignment releases
+and six load runs. Seven questionnaire gaps and all question-text confidence boundaries remain explicit.
 
 The preserved pre-correction housing value audit compares lighting, cooking fuel, and tenure across
 all ten waves: 30 source profiles, 100 located questionnaire options, and 208 code rows. It identifies 10
@@ -43,18 +45,21 @@ retained in the baseline source-code field. The approved `cses-housing-lighting-
 has now changed that one cell from 9 to NULL in both the local housing artifact and `mda`, preserving
 all other values, keys, and types across 77,922 rows and 50 columns. One release, one revised variable
 mapping, and one load run retain its provenance without replacing the original mapping. Independent
-read-only validation passed. Cross-wave categories and unresolved codes still require semantic review;
-the historical audit is not an approval of canonical value mappings.
+read-only validation passed. The historical audit alone is not approval of canonical value mappings;
+the later approval and metadata publication are recorded separately below.
 
-A correction-aware local value-mapping review now partitions all 208 code rows into 70 candidate label
+A preserved correction-aware local value-mapping review partitions all 208 code rows into 70 candidate label
 interpretations, 70 manual-review rows, 52 unresolved rows, and 16 missing-evidence rows. Raw-source and
-current database checks passed; every row remains proposed and non-publishable. The review does not
-change `mda` or graph v5 and currently awaits Git/DVC version synchronization.
+then-current database checks passed; every row in that historical file remains proposed and
+non-publishable. The review itself made no database changes and is archived with Git/DVC.
 
 All 140 substantive entries (70 manually qualified rows and 70 candidates) have since received semantic
-approval, with their original evidence limitations retained. Detailed source verification and a
-read-only publication preflight passed for 21 versioned source rules and 140 value mappings. The
-52 blocked and 16 missing-only rows remain excluded. No value mapping has yet been imported.
+approval, with their original evidence limitations retained. The approved
+`cses-housing-value-mapping-v1` release is now published: 140 value mappings representing 24 field-specific
+categories across seven waves, 21 versioned source rules, one release and one load run. Publication
+changes metadata only; source codes and all existing records remain unchanged. The 52 blocked and
+16 missing-only rows remain excluded. Draft, compound/residual, and skip qualifications are retained;
+this dictionary is not a claim that all categories or analytical denominators are comparable.
 
 ## Start here
 
@@ -66,6 +71,8 @@ read-only publication preflight passed for 21 versioned source rules and 140 val
 - [Lineage export runbook](docs/cses-lineage-export-runbook.md)
 - [Housing value audit runbook](docs/cses-value-audit-runbook.md)
 - [Housing value mapping review runbook](docs/cses-value-mapping-review-runbook.md)
+- [Value mapping publication and current validation](docs/cses-value-mapping-publication-runbook.md)
+- [Published value dictionary and graph v6](docs/releases/cses-value-mapping-import-v1.md)
 - [Current housing value review](data/processing/cses/value_mapping_review_v1/review.md) (local DVC-owned artifact)
 - [Value mapping review preflight v0.9](docs/releases/cses-value-mapping-review-preflight-v0.9.md)
 - [Approved housing manual-review decisions v1](docs/releases/cses-value-mapping-manual-decisions-v1.md)

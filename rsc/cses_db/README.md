@@ -26,7 +26,7 @@ The command below reproduces the historical baseline when run with its matching 
 The current housing builder includes the approved one-cell lighting correction, so an exact comparison
 against the unchanged `MJ02b` baseline is expected to find that difference. Do not overwrite the old
 baseline manifest or comparison evidence with the new release. Use the correction workflow below
-for current housing validation.
+for historical housing validation, and the value-publication validator for current database checks.
 
 Historical command, from the project root:
 
@@ -140,6 +140,9 @@ categories remain proposed; this command has no database-write mode.
 
 ## Build the correction-aware value mapping review
 
+The following planners describe the pre-publication catalog. Their database fingerprint gates
+intentionally reject later releases; replay only against matching historical snapshots.
+
 ```bash
 uv run python rsc/cses_db/plan_cses_value_mapping_review.py --root .
 ```
@@ -164,8 +167,7 @@ pinned review hash. It retains provisional/skip/comparability qualifications and
 connection or publication path. See the
 [decision record](../../docs/releases/cses-value-mapping-manual-decisions-v1.md).
 
-Both substantive buckets are now approved (140 entries). To recheck their source evidence and build
-the combined publication preflight without database writes:
+Both substantive buckets were approved (140 entries). The historical combined preflight command is:
 
 ```bash
 uv run python rsc/cses_db/plan_cses_value_mapping_release.py --root .
@@ -175,9 +177,9 @@ This retains the original review and manual-decision bundles. It writes the comb
 and proposed 21 versioned source rules plus 140 value mappings under
 `data/processing/cses/value_mapping_release_v1/`. See the
 [v0.10 preflight](../../docs/releases/cses-value-mapping-preflight-v0.10.md) for detailed checks,
-interpretation boundaries, and remaining version/backup/execution preparation.
+interpretation boundaries, and the execution preparation required at that historical stage.
 
-## Validate the current lighting correction
+## Historical lighting correction validation
 
 The approved `cses-housing-lighting-missing-v1` release excludes source code 9 only from the 2004
 lighting field. Exactly one housing cell changed in the local artifact and `mda`; all other cells,
@@ -190,10 +192,28 @@ uv run python rsc/cses_db/correct_cses_housing_lighting.py validate --root .
 ```
 
 The second command uses a forced read-only database transaction and the immutable correction evidence.
+It is pinned to the correction-only catalog and must not be used as the current validator after
+the value dictionary release. The current validator below retains the full housing checks.
 See the [correction runbook](../../docs/cses-lighting-correction-runbook.md) and
 [release record](../../docs/releases/cses-lighting-correction-v1.md) for source checks, scoped backup,
 before/after comparisons, and version pins. Older catalog and release plans remain historical; their
 fingerprint gates must not be weakened to accept the corrected state.
+
+## Publish and validate the approved value dictionary
+
+The `publish_cses_value_mappings.py` workflow separates external scoped backup, read-only execution
+preparation, an exact-hash-gated transaction, and independent read-only validation. It appends one
+release, 21 versioned source rules, 140 value mappings and one load run without changing physical
+data. See the [publication runbook](../../docs/cses-value-mapping-publication-runbook.md).
+
+Current validation command:
+
+```bash
+uv run python rsc/cses_db/publish_cses_value_mappings.py validate --root .
+```
+
+This checks every published record, all 35 protected CSES tables, and full housing/local equality.
+The original review, decisions, preflight and correction evidence remain immutable.
 
 ## Export the lineage graph
 
@@ -201,8 +221,8 @@ Export the authoritative database state through one forced read-only transaction
 
 ```bash
 uv run python rsc/cses_db/export_cses_lineage_graph.py --root . --dbname mda \
-  --output data/lineage/cses_lineage_graph_v5.json \
-  --overview data/lineage/cses_lineage_overview_v5.mmd
+  --output data/lineage/cses_lineage_graph_v6.json \
+  --overview data/lineage/cses_lineage_overview_v6.mmd
 ```
 
 The deterministic JSON graph and aggregate Mermaid overview are DVC-owned under `data/lineage/`. See the

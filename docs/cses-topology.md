@@ -389,7 +389,7 @@ flowchart LR
     RULE -.-> GRAPH
 ```
 
-The full projection now has five alignment releases, five load runs, and 1,771 source-to-canonical
+The v5 projection has five alignment releases, five load runs, and 1,771 source-to-canonical
 edges representing 1,715 mapping records. A mapping can reference multiple source fields, so edge and
 record counts differ. The release adds two nodes and six edges relative to graph v4. The correction
 mapping's transform rule and release are visible in the graph; its exact superseded mapping identity
@@ -398,7 +398,7 @@ supersedence edge or respondent node.
 
 All 22 registered storage relations retain dataset-output coverage. The 4,092 source variables,
 280 canonical variables, 14 instruments, 164 questions, and 291 question links are unchanged.
-Canonical value mappings remain empty. No new schema is introduced.
+Canonical value mappings were still empty at v5. No new schema was introduced.
 
 The DVC-owned files are `data/lineage/cses_lineage_graph_v5.json` and
 `data/lineage/cses_lineage_overview_v5.mmd`. Two consecutive forced read-only exports were
@@ -408,7 +408,7 @@ backup scope, validation, and version fingerprints.
 
 ## Value mapping review v1: correction-aware local projection
 
-The database remains at graph v5. A separate local review projection uses the pinned original audit,
+At this historical review stage, the database remained at graph v5. A separate local review uses the pinned original audit,
 accepted lighting correction, raw-source replay, and current read-only database checks to triage all
 208 code rows. It does not register a new alignment release or populate value mappings.
 
@@ -428,8 +428,8 @@ include the field rather than treating the same number as a universal meaning. B
 frequencies are separate, and the resolved lighting issue remains linked to its accepted correction.
 The complete JSON also retains questionnaire locations and historical conflict flags.
 
-The proposed files live under `data/processing/cses/value_mapping_review_v1/` and await separate
-version synchronization. No graph v6 was exported because no database state changed. See the
+The proposed files live under `data/processing/cses/value_mapping_review_v1/` and are now archived.
+No graph v6 was exported during the review itself because no database state changed. See the
 [review runbook](cses-value-mapping-review-runbook.md) and
 [preflight record](releases/cses-value-mapping-review-preflight-v0.9.md).
 
@@ -440,6 +440,57 @@ leaves the other 138 rows unchanged, and does not alter graph v5. See the
 
 The remaining 70 candidates subsequently received approval as well. The combined 140-entry publication
 preflight resolves 21 effective source rules and proposes 21 new release-specific mapping records,
-140 attached value entries, one release, and one load run. Current physical tables and database graph
-v5 are unchanged. The [v0.10 record](releases/cses-value-mapping-preflight-v0.10.md) contains the concrete
+140 attached value entries, one release, and one load run. Physical tables and database graph
+v5 were unchanged by that preflight. The [v0.10 record](releases/cses-value-mapping-preflight-v0.10.md) contains the concrete
 approved scope and the planned relationship between source-rule history and the semantic dictionary.
+
+## Deterministic database projection v6: approved housing value dictionary
+
+The `cses-housing-value-mapping-v1` transaction appended exactly 163 metadata records: one release,
+21 versioned source rules, 140 approved values and one load run. No physical source-code column or
+existing record changed. This diagram describes the publication relationships, not additional
+physical tables or category nodes in the exported graph.
+
+```mermaid
+flowchart LR
+    EVIDENCE["Raw labels + questionnaire options<br/>140 approved entries / 7 waves"]
+    PRIOR["21 effective predecessor rules<br/>including lighting correction 1715"]
+    RELEASE["cses-housing-value-mapping-v1<br/>approved metadata release"]
+    RULES["cses_variable_mapping<br/>21 new versioned rules"]
+    VALUES["cses_value_mapping<br/>140 entries / 24 field-specific categories"]
+    RUN["cses_load_run<br/>plan, backup, code, DVC, predecessor IDs"]
+    DATA["Physical housing data<br/>77,922 rows / 50 columns unchanged"]
+    READ["Downstream read-only consumers<br/>select exact dictionary release"]
+    GRAPH["Graph v6<br/>4,804 nodes / 7,522 edges"]
+    EVIDENCE --> VALUES
+    PRIOR -.->|"copy effective source transformation"| RULES
+    RELEASE --> RULES
+    RULES --> VALUES
+    RELEASE --> RUN
+    VALUES -.-> READ
+    DATA -.-> READ
+    RELEASE -.-> GRAPH
+    RULES -.->|"source edges + value counts"| GRAPH
+    RUN -.-> GRAPH
+```
+
+The catalog now contains six releases, six load runs and 1,736 source-mapping records. The full graph
+has 1,792 source-to-canonical edges because some rules reference multiple source variables. Relative
+to v5, it adds two nodes and 27 edges. Its `value_mapping_count` is 140, with per-rule counts on source
+edges; individual values are not graph nodes. The full dictionary remains authoritative in PostgreSQL
+and is detailed in the immutable approved scope. The generated aggregate Mermaid overview does not
+enumerate category labels.
+
+The 52 unresolved and 16 missing-only review rows remain outside the release. Provisional 2014 text,
+skip annotations, compound options and wave-specific residual meanings remain qualified. The graph
+does not assert that identical source numbers imply identical meanings or common denominators.
+
+All 35 CSES tables were protected by before/after content checks excluding only new release records;
+the full housing table and compatibility view remain unchanged. All 22 registered storage relations
+retain source coverage. No new schema or analysis-ready category view was created.
+
+The immutable DVC-owned outputs are `data/lineage/cses_lineage_graph_v6.json` and
+`data/lineage/cses_lineage_overview_v6.mmd`. Repeated read-only exports were byte-identical; v1–v5 and
+all earlier review evidence remain preserved. See the
+[publication record](releases/cses-value-mapping-import-v1.md) and
+[current validation runbook](cses-value-mapping-publication-runbook.md).

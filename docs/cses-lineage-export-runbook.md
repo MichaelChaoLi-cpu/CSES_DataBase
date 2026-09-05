@@ -10,7 +10,8 @@ alignment, storage, and compatibility state in PostgreSQL. It never writes to Po
 - Git owns the exporter, tests, this runbook, and release notes.
 - DVC owns versioned pairs under `data/lineage/`, including the pre-storage-provenance v1 snapshot,
   post-storage-provenance v2 snapshot, post-variable-catalog v3 snapshot,
-  post-questionnaire-provenance v4 snapshot, and post-lighting-correction v5 snapshot.
+  post-questionnaire-provenance v4 snapshot, post-lighting-correction v5 snapshot,
+  and post-value-dictionary v6 snapshot.
 - PostgreSQL remains the source of truth. The graph is a disposable read model and never writes back.
 
 ## Export
@@ -21,11 +22,11 @@ Run from the project root with local PostgreSQL authentication:
 uv run python rsc/cses_db/export_cses_lineage_graph.py \
   --root . \
   --dbname mda \
-  --output data/lineage/cses_lineage_graph_v5.json \
-  --overview data/lineage/cses_lineage_overview_v5.mmd
+  --output data/lineage/cses_lineage_graph_v6.json \
+  --overview data/lineage/cses_lineage_overview_v6.mmd
 ```
 
-This reproduces the v5 state only while the database projection is unchanged. Choose new output names
+This reproduces the v6 state only while the database projection is unchanged. Choose new output names
 after any later accepted release; always provide both paths because the legacy CLI default names v1.
 
 The exporter opens one forced read-only transaction and rejects the export unless:
@@ -62,6 +63,11 @@ The v1 projection includes:
 The summary explicitly lists storage relations without registered dataset-output edges. These are
 visible lineage gaps, not invented mappings and not automatic database errors. Fill them only through a
 reviewed metadata release.
+
+The v6 snapshot contains 4,804 nodes, 7,522 edges, six releases, six load runs, and a summary count of
+140 value mappings. Source-rule edges include their value-mapping counts, not individual category
+nodes or value labels. Query the exact dictionary release in PostgreSQL or inspect its approved scope
+for the full 140-entry detail. The aggregate Mermaid overview is intentionally a higher-level view.
 
 ## Versioning
 

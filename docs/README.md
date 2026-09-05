@@ -14,6 +14,7 @@ Working documentation is written in English and tracked by Git.
 - [CSES questionnaire provenance release runbook](cses-questionnaire-provenance-runbook.md)
 - [CSES housing value audit runbook](cses-value-audit-runbook.md)
 - [CSES housing value mapping review runbook](cses-value-mapping-review-runbook.md)
+- [CSES value mapping publication and current validation](cses-value-mapping-publication-runbook.md)
 - [CSES lighting missing-code correction runbook](cses-lighting-correction-runbook.md)
 - [CSES lineage export runbook](cses-lineage-export-runbook.md)
 
@@ -37,3 +38,5 @@ Working documentation is written in English and tracked by Git.
 - [Housing value mapping review preflight v0.9](releases/cses-value-mapping-review-preflight-v0.9.md)
 - [Housing manual-review decisions v1](releases/cses-value-mapping-manual-decisions-v1.md)
 - [Housing value mapping preflight v0.10](releases/cses-value-mapping-preflight-v0.10.md)
+- [Housing value mapping execution preflight v1](releases/cses-value-mapping-execution-v1.md)
+- [Housing value mapping publication and graph v6](releases/cses-value-mapping-import-v1.md)

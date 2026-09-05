@@ -177,14 +177,26 @@ It catalogs all 171 registered source datasets and 4,092 physical variables, reg
 physical final-table columns as canonicals, and materializes 1,714 builder-supported mappings. The
 existing `cses_alignment` schema expresses this model, so no additional schema was required.
 Questionnaire links were subsequently imported in `cses-questionnaire-provenance-v1`. Canonical value
-mappings remain empty. The read-only housing value audit is now available for three classification
-fields across ten waves; its proposed categories are not approved database mappings.
+mappings were still empty at that stage. The read-only housing value audit covered three classification
+fields across ten waves; its proposed categories were not themselves approved database mappings.
 
 The approved `cses-housing-lighting-missing-v1` release subsequently corrected exactly one 2004 housing
 lighting cell from the explicitly labeled missing code 9 to NULL. It uses the existing schemas and
 appends one revised variable mapping, one release, and one load run. The original mapping remains
 immutable; the correction load identifies mapping 57 as superseded for this source/canonical pair.
-There are now 1,715 mapping records, not 1,715 distinct canonical fields. No category mapping, raw
+That stage contained 1,715 mapping records, not 1,715 distinct canonical fields. No category mapping, raw
 archive, questionnaire link, table identity, or compatibility interface changed. Graph v5 records the
 new release and load provenance; it remains a read-only DVC projection rather than a second source of
 truth. See the [correction release](releases/cses-lighting-correction-v1.md).
+
+The subsequent `cses-housing-value-mapping-v1` release uses the existing alignment schema to publish
+140 approved values under 21 new release-specific source rules. There are now 1,736 source-mapping
+records, still 280 canonical fields, six releases and six load runs. No new schema, analytical view,
+physical column, or rewritten source code is introduced. The 2004 lighting rule copies the accepted
+correction (mapping 1715), not the superseded baseline rule. All prior mapping records remain intact.
+
+Consumers must select the dictionary release explicitly; joining all historical rules can duplicate
+results. The dictionary retains provisional, compound/residual and routing qualifications, and does
+not settle cross-wave analytical denominators. Graph v6 projects the new provenance and value counts.
+See the [publication record](releases/cses-value-mapping-import-v1.md) and
+[current validator](cses-value-mapping-publication-runbook.md).

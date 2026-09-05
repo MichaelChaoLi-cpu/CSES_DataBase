@@ -24,7 +24,7 @@ a declaration of cross-wave equivalence, eligibility, or analysis-ready data. Al
 
 ## Build and verify
 
-From the repository root:
+Historical command, to replay only against the matching pre-publication database snapshot:
 
 ```bash
 uv run python rsc/cses_db/plan_cses_value_mapping_review.py --root .
@@ -108,8 +108,7 @@ does not rewrite the source review. See the
 [decision record](releases/cses-value-mapping-manual-decisions-v1.md).
 
 The user subsequently approved the remaining 70 candidates and requested careful verification. All
-140 substantive entries now have semantic approval. Generate the combined approved scope and live
-read-only publication preflight with:
+140 substantive entries received semantic approval. The historical combined preflight command is:
 
 ```bash
 uv run python rsc/cses_db/plan_cses_value_mapping_release.py --root .
@@ -129,9 +128,13 @@ The 52 unresolved rows remain unassigned. Priorities include household evidence 
 the untranslated 2021 lighting label, and the single undocumented 2021 tenure code 0. Do not borrow
 neighboring waves' meanings or assign a missingness reason based on a raw/published count difference.
 
-No additional schema is needed for this local review. A later approved metadata release can use
+No additional schema is needed. The separately authorized publication uses
 `cses_alignment.cses_value_mapping`, with exact variable-mapping/release identity, while retaining the
-physical numeric `*_source_code` fields. Any analytical category view or new field requires an explicit
-output contract. Before publication, specify the accepted subset, append-only history, conflict checks,
-backup scope, exact transaction plan, independent validation, and new lineage version. The current
-review is not authority to perform those writes.
+physical numeric source-code fields. Any analytical category view or new field requires an explicit
+output contract. See the [publication runbook](cses-value-mapping-publication-runbook.md) and
+[execution preflight](releases/cses-value-mapping-execution-v1.md) for its backup, append-only transaction,
+and independent validation. The original local review alone is not authority for database writes.
+
+After publication, use `publish_cses_value_mappings.py validate --root .` for current database checks.
+The review planner and combined preflight intentionally reject a changed catalog; preserve their
+original outputs and replay them only against the matching historical state.
