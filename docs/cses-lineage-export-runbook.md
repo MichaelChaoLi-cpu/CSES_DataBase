@@ -9,8 +9,8 @@ alignment, storage, and compatibility state in PostgreSQL. It never writes to Po
 
 - Git owns the exporter, tests, this runbook, and release notes.
 - DVC owns versioned pairs under `data/lineage/`, including the pre-storage-provenance v1 snapshot,
-  post-storage-provenance v2 snapshot, post-variable-catalog v3 snapshot, and
-  post-questionnaire-provenance v4 snapshot.
+  post-storage-provenance v2 snapshot, post-variable-catalog v3 snapshot,
+  post-questionnaire-provenance v4 snapshot, and post-lighting-correction v5 snapshot.
 - PostgreSQL remains the source of truth. The graph is a disposable read model and never writes back.
 
 ## Export
@@ -21,9 +21,12 @@ Run from the project root with local PostgreSQL authentication:
 uv run python rsc/cses_db/export_cses_lineage_graph.py \
   --root . \
   --dbname mda \
-  --output data/lineage/cses_lineage_graph_v4.json \
-  --overview data/lineage/cses_lineage_overview_v4.mmd
+  --output data/lineage/cses_lineage_graph_v5.json \
+  --overview data/lineage/cses_lineage_overview_v5.mmd
 ```
+
+This reproduces the v5 state only while the database projection is unchanged. Choose new output names
+after any later accepted release; always provide both paths because the legacy CLI default names v1.
 
 The exporter opens one forced read-only transaction and rejects the export unless:
 

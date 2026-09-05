@@ -22,7 +22,13 @@ research results remain outside this reusable core.
 
 ## Reproduce the local release
 
-From the project root:
+The command below reproduces the historical baseline when run with its matching Git/DVC revisions.
+The current housing builder includes the approved one-cell lighting correction, so an exact comparison
+against the unchanged `MJ02b` baseline is expected to find that difference. Do not overwrite the old
+baseline manifest or comparison evidence with the new release. Use the correction workflow below
+for current housing validation.
+
+Historical command, from the project root:
 
 ```bash
 uv run python rsc/cses_db/build_local_release.py \
@@ -116,7 +122,9 @@ phrase documented in the
 
 ## Audit housing codes and missingness
 
-Compare the three selected housing classification fields across ten waves without writing PostgreSQL:
+The following is the historical pre-correction pilot command. Its pinned builder/table/catalog
+fingerprints intentionally reject the newer correction release. Reproduce it only with the matching
+Git/DVC revisions and database snapshot, keeping the accepted v1 reports immutable:
 
 ```bash
 uv run python rsc/cses_db/plan_cses_value_audit.py --root . --dbname mda
@@ -130,17 +138,38 @@ See the [value audit runbook](../../docs/cses-value-audit-runbook.md) for the se
 cell-extraction command, confidence boundaries, and deterministic reproduction procedure. Candidate
 categories remain proposed; this command has no database-write mode.
 
+## Validate the current lighting correction
+
+The approved `cses-housing-lighting-missing-v1` release excludes source code 9 only from the 2004
+lighting field. Exactly one housing cell changed in the local artifact and `mda`; all other cells,
+keys, and dtypes are preserved. One revised variable mapping, one release, and one load run were
+appended without replacing the historical mapping or adding canonical value mappings.
+
+```bash
+uv run python rsc/cses_db/validate_cses_ho.py
+uv run python rsc/cses_db/correct_cses_housing_lighting.py validate --root .
+```
+
+The second command uses a forced read-only database transaction and the immutable correction evidence.
+See the [correction runbook](../../docs/cses-lighting-correction-runbook.md) and
+[release record](../../docs/releases/cses-lighting-correction-v1.md) for source checks, scoped backup,
+before/after comparisons, and version pins. Older catalog and release plans remain historical; their
+fingerprint gates must not be weakened to accept the corrected state.
+
 ## Export the lineage graph
 
 Export the authoritative database state through one forced read-only transaction:
 
 ```bash
-uv run python rsc/cses_db/export_cses_lineage_graph.py --root . --dbname mda
+uv run python rsc/cses_db/export_cses_lineage_graph.py --root . --dbname mda \
+  --output data/lineage/cses_lineage_graph_v5.json \
+  --overview data/lineage/cses_lineage_overview_v5.mmd
 ```
 
 The deterministic JSON graph and aggregate Mermaid overview are DVC-owned under `data/lineage/`. See the
 [lineage export runbook](../../docs/cses-lineage-export-runbook.md) for its validation, interpretation,
-and versioning contract.
+and versioning contract. Always specify a new version for a changed database state; the CLI's legacy
+default points to v1 and must not overwrite accepted historical evidence.
 
 ## Build order
 

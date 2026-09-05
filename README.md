@@ -15,8 +15,9 @@ The project separates four kinds of state:
 ## Current status
 
 The raw archive set matches the eleven CSES archives used by the earlier `MJ02b` database work. This
-repository now reproduces and validates the seven core local table artifacts. After normalizing the
-intentional raw-path change, every local table matches the earlier Parquet release value for value.
+repository reproduces and validates the seven core local table artifacts. The original baseline
+matched the earlier Parquet release value for value after normalizing the intentional raw-path change.
+The current release adds one reviewed 2004 housing lighting missing-code correction to that baseline.
 
 The v1 functional-schema migration is complete in `mda`: 22 physical CSES relations now reside in
 `cses_data`, `cses_alignment`, or `cses_analysis`; seven normalized management tables reside in
@@ -27,19 +28,23 @@ and local-baseline validation.
 The baseline, storage-provenance, variable-catalog, and questionnaire-provenance releases are imported
 and independently validated. All 22 registered storage relations have source provenance. The catalog
 covers 10 survey waves, 11 archives, 171 physical datasets, 4,092 source variables, 280 canonical
-variables, and 1,714 source-to-canonical mapping records. It also records 14 instruments, 164 questions,
-and 291 question links, including 51 provisional links to the 2014 draft.
+variables, and 1,715 source-to-canonical mapping records (1,714 baseline rules plus one correction).
+It also records 14 instruments, 164 questions, and 291 question links, including 51 provisional links
+to the 2014 draft.
 
-The current deterministic database lineage projection is graph v4: 4,800 nodes and 7,489 edges.
+The current deterministic database lineage projection is graph v5: 4,802 nodes and 7,495 edges.
 Canonical value mappings remain empty. Seven questionnaire gaps and all question-text confidence
 boundaries remain explicit.
 
-The read-only housing value audit now compares lighting, cooking fuel, and tenure across all ten
-waves: 30 source profiles, 100 located questionnaire options, and 208 code rows. It identifies 10
+The preserved pre-correction housing value audit compares lighting, cooking fuel, and tenure across
+all ten waves: 30 source profiles, 100 located questionnaire options, and 208 code rows. It identifies 10
 field/code groups with different meanings across waves and a documented 2004 lighting missing code
-retained in the published source-code field. The report contains proposed categories and unresolved
-codes; no new mappings or data corrections have been published. The next milestone is reviewing these
-findings and preparing a precisely scoped value-mapping or correction release.
+retained in the baseline source-code field. The approved `cses-housing-lighting-missing-v1` release
+has now changed that one cell from 9 to NULL in both the local housing artifact and `mda`, preserving
+all other values, keys, and types across 77,922 rows and 50 columns. One release, one revised variable
+mapping, and one load run retain its provenance without replacing the original mapping. Independent
+read-only validation passed. Cross-wave categories and unresolved codes still require semantic review;
+the historical audit is not an approval of canonical value mappings.
 
 ## Start here
 
@@ -50,6 +55,8 @@ findings and preparing a precisely scoped value-mapping or correction release.
 - [Baseline metadata import runbook](docs/cses-baseline-metadata-runbook.md)
 - [Lineage export runbook](docs/cses-lineage-export-runbook.md)
 - [Housing value audit runbook](docs/cses-value-audit-runbook.md)
+- [Lighting correction runbook](docs/cses-lighting-correction-runbook.md)
+- [Lighting correction release v1](docs/releases/cses-lighting-correction-v1.md)
 - [Housing code comparison](data/processing/cses/value_audit_v1/code_review.md) (DVC artifact)
 - [Housing code conflicts](data/processing/cses/value_audit_v1/conflicts.md) (DVC artifact)
 - [Questionnaire provenance import v1](docs/releases/cses-questionnaire-provenance-import-v1.md)

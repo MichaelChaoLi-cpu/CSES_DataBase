@@ -63,6 +63,13 @@ If cell evidence changes, inspect the differences before updating its pinned has
 
 ## Build the read-only report
 
+This v1 report is preserved evidence from before `cses-housing-lighting-missing-v1`. Its pinned
+builder, table, and catalog fingerprints intentionally reject the corrected current state. Reproduce
+it with its matching pre-correction Git/DVC revisions and database snapshot; do not replace old hashes
+or overwrite the report to make it pass against the newer release. The source-code missingness issue
+was corrected separately, as recorded in the [correction release](releases/cses-lighting-correction-v1.md).
+The following command describes the historical reproduction workflow, not a current-state audit:
+
 ```bash
 uv run python rsc/cses_db/plan_cses_value_audit.py --root . --dbname mda
 ```
@@ -94,10 +101,10 @@ untranslated labels, composite categories, extended missing values, and changed 
 
 ## Review before a later release
 
-Prioritize the documented 2004 lighting missing sentinel retained in the current source-code column,
-the undocumented 2021 tenure code 0, missing household evidence for 2007/2013/2017, and the untranslated
-2021 lighting category. Review compound/residual categories and skip rules. Retain all seven broader
-questionnaire gaps from questionnaire-provenance v1.
+The documented 2004 lighting missing sentinel is now corrected by its separate approved release.
+Remaining review includes the undocumented 2021 tenure code 0, missing household evidence for
+2007/2013/2017, and the untranslated 2021 lighting category. Review compound/residual categories and
+skip rules. Retain all seven broader questionnaire gaps from questionnaire-provenance v1.
 
 Any later write needs a concrete mapping or correction specification, its own validated plan, and
 authorization for that release. This command has no apply flag or database-write path.

@@ -1,5 +1,10 @@
 # CSES 2004 Lighting Missing-Code Correction
 
+Status: applied and independently validated on 2026-09-05. See the
+[release record](releases/cses-lighting-correction-v1.md) for the completed result and fingerprints.
+The prepare/rebuild/plan steps below describe the reviewed publication sequence, not instructions to
+recreate its before state on the corrected database. Current-state checks use the `validate` mode.
+
 ## Approved scope
 
 `cses-housing-lighting-missing-v1` implements the workflow approved by the user on 2026-09-05:

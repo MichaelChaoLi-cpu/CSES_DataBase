@@ -178,5 +178,13 @@ physical final-table columns as canonicals, and materializes 1,714 builder-suppo
 existing `cses_alignment` schema expresses this model, so no additional schema was required.
 Questionnaire links were subsequently imported in `cses-questionnaire-provenance-v1`. Canonical value
 mappings remain empty. The read-only housing value audit is now available for three classification
-fields across ten waves; its proposed categories are not approved database mappings. The graph remains
-a read-only DVC projection rather than a second source of truth.
+fields across ten waves; its proposed categories are not approved database mappings.
+
+The approved `cses-housing-lighting-missing-v1` release subsequently corrected exactly one 2004 housing
+lighting cell from the explicitly labeled missing code 9 to NULL. It uses the existing schemas and
+appends one revised variable mapping, one release, and one load run. The original mapping remains
+immutable; the correction load identifies mapping 57 as superseded for this source/canonical pair.
+There are now 1,715 mapping records, not 1,715 distinct canonical fields. No category mapping, raw
+archive, questionnaire link, table identity, or compatibility interface changed. Graph v5 records the
+new release and load provenance; it remains a read-only DVC projection rather than a second source of
+truth. See the [correction release](releases/cses-lighting-correction-v1.md).

@@ -13,6 +13,7 @@ Working documentation is written in English and tracked by Git.
 - [CSES variable catalog release runbook](cses-variable-catalog-runbook.md)
 - [CSES questionnaire provenance release runbook](cses-questionnaire-provenance-runbook.md)
 - [CSES housing value audit runbook](cses-value-audit-runbook.md)
+- [CSES lighting missing-code correction runbook](cses-lighting-correction-runbook.md)
 - [CSES lineage export runbook](cses-lineage-export-runbook.md)
 
 ## Release evidence
@@ -30,3 +31,5 @@ Working documentation is written in English and tracked by Git.
 - [Questionnaire provenance preflight v0.6](releases/cses-questionnaire-provenance-preflight-v0.6.md)
 - [Questionnaire provenance import v1](releases/cses-questionnaire-provenance-import-v1.md)
 - [Housing value audit preflight v0.7](releases/cses-value-audit-preflight-v0.7.md)
+- [Lighting correction preflight v0.8](releases/cses-lighting-correction-preflight-v0.8.md)
+- [Lighting missing-code correction v1](releases/cses-lighting-correction-v1.md)

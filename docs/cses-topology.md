@@ -324,9 +324,9 @@ Graphs v1 through v3 remain immutable historical projections.
 
 ## Housing value audit v1: proposed review evidence
 
-The next layer compares response options and observed source codes before any canonical value
-mapping is published. This is a local review projection; graph v4 still represents the current
-authoritative database state, with zero canonical value mappings.
+This historical layer compares response options and observed source codes before any canonical value
+mapping is published. It is a local review projection of the pre-correction baseline; graph v4
+represents the database at that milestone, with zero canonical value mappings.
 
 ```mermaid
 flowchart LR
@@ -351,11 +351,57 @@ draft. Nine profiles have Stata value labels. Sources without either form of evi
 unresolved, and untranslated labels are not assigned an invented category.
 
 The review exposes a concrete missingness issue: one 2004 lighting record has source code 9 labeled
-`missing`, and that code remains in the current published source-code column. The same number means
+`missing`, and that code remained in the baseline published source-code column. The same number means
 `Biogas` in the 2016 questionnaire and `Other` in the 2021 source labels. A global code-9-to-NULL rule
-would therefore be invalid. The current tables remain unchanged during this audit.
+would therefore be invalid. Tables were unchanged during this audit; the subsequent correction below
+addresses only the documented 2004 sentinel.
 
 The complete code comparison, conflict report, machine-readable preflight, and standalone Mermaid
 overview are DVC-owned under `data/processing/cses/value_audit_v1/`. See the
 [value audit runbook](cses-value-audit-runbook.md) and
 [preflight record](releases/cses-value-audit-preflight-v0.7.md).
+
+## Deterministic database projection v5: one-cell lighting correction
+
+The accepted `cses-housing-lighting-missing-v1` release changes exactly one published housing cell
+from 9 to NULL. The immutable raw source remains the evidence for the missingness rule. This is a
+wave-specific source-code correction, not a cross-wave category harmonization.
+
+```mermaid
+flowchart LR
+    RAW["2004 housing q03_08<br/>one value 9, labeled missing"]
+    BASE["Original mapping 57<br/>retained as baseline history"]
+    RULE["Correction variable mapping<br/>2004 lighting: exclude code 9"]
+    RELEASE["cses-housing-lighting-missing-v1<br/>approved alignment release"]
+    HO["cses_data.final_HO_CSES<br/>one cell 9 to NULL"]
+    RUN["Correction load run<br/>plan, fingerprints, superseded mapping"]
+    VIEW["public.final_HO_CSES<br/>unchanged compatibility view"]
+    GRAPH["Graph v5<br/>4,802 nodes / 7,495 edges"]
+    RAW --> RULE
+    BASE -.->|"explicit override"| RULE
+    RELEASE --> RULE
+    RULE --> HO
+    RELEASE --> RUN
+    RUN -.->|"validation evidence"| HO
+    HO --> VIEW
+    RELEASE -.-> GRAPH
+    RUN -.-> GRAPH
+    RULE -.-> GRAPH
+```
+
+The full projection now has five alignment releases, five load runs, and 1,771 source-to-canonical
+edges representing 1,715 mapping records. A mapping can reference multiple source fields, so edge and
+record counts differ. The release adds two nodes and six edges relative to graph v4. The correction
+mapping's transform rule and release are visible in the graph; its exact superseded mapping identity
+and one-cell proof remain in the load-run/release evidence. Graph v5 does not invent a separate
+supersedence edge or respondent node.
+
+All 22 registered storage relations retain dataset-output coverage. The 4,092 source variables,
+280 canonical variables, 14 instruments, 164 questions, and 291 question links are unchanged.
+Canonical value mappings remain empty. No new schema is introduced.
+
+The DVC-owned files are `data/lineage/cses_lineage_graph_v5.json` and
+`data/lineage/cses_lineage_overview_v5.mmd`. Two consecutive forced read-only exports were
+byte-identical. Graphs v1–v4 and the original value-audit reports remain immutable historical evidence.
+See the [correction release](releases/cses-lighting-correction-v1.md) for the before/after proof,
+backup scope, validation, and version fingerprints.
