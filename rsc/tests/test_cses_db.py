@@ -21,6 +21,17 @@ from cses_baseline_metadata import (  # noqa: E402
     split_source_dataset,
 )
 from cses_lineage_graph import build_lineage_graph, render_lineage_overview  # noqa: E402
+from cses_questionnaire_provenance import (  # noqa: E402
+    build_desired_state as build_questionnaire_provenance_state,
+)
+from cses_questionnaire_provenance import (  # noqa: E402
+    default_questionnaire_provenance_spec_path,
+    load_questionnaire_provenance_spec,
+    match_question_code,
+)
+from cses_questionnaire_provenance import (  # noqa: E402
+    reconcile_states as reconcile_questionnaire_provenance,
+)
 from cses_schema_contract import EXPECTED_FAMILY_COUNTS, default_contract_path, load_contract  # noqa: E402
 from cses_storage_provenance import (  # noqa: E402
     build_desired_state as build_storage_provenance_state,
@@ -43,6 +54,9 @@ from cses_variable_catalog import (  # noqa: E402
     reconcile_states as reconcile_variable_catalog,
 )
 from import_cses_baseline_metadata import validate_apply_gate, validate_reviewed_plan  # noqa: E402
+from import_cses_questionnaire_provenance import (  # noqa: E402
+    validate_apply_gate as validate_questionnaire_provenance_apply_gate,
+)
 from import_cses_storage_provenance import (  # noqa: E402
     validate_apply_gate as validate_storage_provenance_apply_gate,
 )
@@ -397,6 +411,88 @@ def test_variable_catalog_reconciliation_detects_conflict() -> None:
     assert conflicts == []
     existing["source_variables"][0]["variable_position"] = 2
     operations, conflicts = reconcile_variable_catalog(desired, existing)
+    assert [item["action"] for item in operations] == ["conflict"]
+    assert len(conflicts) == 1
+
+
+def test_questionnaire_provenance_is_conservative_and_write_gated() -> None:
+    spec = load_questionnaire_provenance_spec(default_questionnaire_provenance_spec_path(ROOT))
+    assert spec["source_alignment_release"] == "cses-variable-catalog-v1"
+    assert len(spec["instruments"]) == 14
+    assert len(spec["coverage_gaps"]) == 7
+    assert any(
+        item["survey_wave"] == "2014" and item["documentation_status"] == "provisional" for item in spec["instruments"]
+    )
+    with pytest.raises(ValueError, match="without --apply"):
+        validate_questionnaire_provenance_apply_gate(False, None, spec)
+    with pytest.raises(ValueError, match="without --confirm"):
+        validate_questionnaire_provenance_apply_gate(True, "wrong", spec)
+    validate_questionnaire_provenance_apply_gate(True, spec["approval_phrase"], spec)
+
+
+def test_questionnaire_provenance_has_deterministic_question_links() -> None:
+    desired, diagnostics = build_questionnaire_provenance_state(ROOT)
+    assert diagnostics["record_counts"] == {
+        "alignment_releases": 1,
+        "instruments": 14,
+        "questions": 164,
+        "source_variable_links": 291,
+        "load_runs": 1,
+    }
+    assert diagnostics["scope_counts"]["exact_question_texts"] == 0
+    assert diagnostics["source_link_counts_by_wave"] == {
+        "2004": 68,
+        "2007": 15,
+        "2009": 62,
+        "2011-12": 47,
+        "2014": 51,
+        "2016": 48,
+    }
+    assert all(diagnostics["local_checks"].values())
+    assert match_question_code("q04_10m2", ["q04_01", "q04_10"]) == "q04_10"
+    assert match_question_code("s1q10", ["s1q1"]) is None
+    assert match_question_code("s1q1_asonday", ["s1q1", "s1q1a"]) == "s1q1"
+    assert {
+        link["question_link_status"] for link in desired["source_variable_links"] if link["survey_wave"] == "2014"
+    } == {"proposed"}
+
+
+def test_questionnaire_provenance_reconciliation_requires_link_updates() -> None:
+    desired = {
+        "alignment_releases": [],
+        "instruments": [],
+        "questions": [],
+        "source_variable_links": [
+            {
+                "archive_relative_path": "data/raw/example.zip",
+                "member_path": "source.dta",
+                "nested_member_path": "",
+                "variable_name": "q1",
+                "survey_wave": "2021",
+                "instrument_type": "household_questionnaire",
+                "source_file": "questionnaire.xlsx",
+                "question_code": "q1",
+                "question_link_status": "reviewed",
+                "question_link_role": "direct_response",
+            }
+        ],
+        "load_runs": [],
+    }
+    existing = json.loads(json.dumps(desired))
+    for field in (
+        "survey_wave",
+        "instrument_type",
+        "source_file",
+        "question_code",
+        "question_link_status",
+        "question_link_role",
+    ):
+        existing["source_variable_links"][0][field] = None
+    operations, conflicts = reconcile_questionnaire_provenance(desired, existing)
+    assert [item["action"] for item in operations] == ["update"]
+    assert conflicts == []
+    existing["source_variable_links"][0]["question_code"] = "q2"
+    operations, conflicts = reconcile_questionnaire_provenance(desired, existing)
     assert [item["action"] for item in operations] == ["conflict"]
     assert len(conflicts) == 1
 

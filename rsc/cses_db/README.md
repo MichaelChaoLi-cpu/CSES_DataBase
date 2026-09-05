@@ -98,6 +98,21 @@ synthesize questionnaires or canonical value mappings. Any future import still r
 plus the exact phrase documented in the
 [variable catalog runbook](../../docs/cses-variable-catalog-runbook.md).
 
+## Plan questionnaire provenance
+
+Fingerprint the selected source-archive instruments and build deterministic question links in a
+forced read-only transaction:
+
+```bash
+uv run python rsc/cses_db/plan_cses_questionnaire_provenance.py --root . --dbname mda
+```
+
+Questionnaire provenance v1 uses the existing alignment schema. Its reviewed scope contains 14
+instrument files, 164 question transcriptions, and 291 same-wave source-variable links. The 2014 draft
+remains provisional, and image-only/OCR material is not promoted to authoritative question text. Any
+database write requires `--apply` plus the exact approval phrase in the
+[questionnaire provenance runbook](../../docs/cses-questionnaire-provenance-runbook.md).
+
 ## Export the lineage graph
 
 Export the authoritative database state through one forced read-only transaction:

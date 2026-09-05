@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "catalog_release_id": "cses-questionnaire-provenance-v1",
+  "database": "mda",
+  "approval_phrase": "ACCEPT-CSES-QUESTIONNAIRE-PROVENANCE-V1",
+  "source_alignment_release": "cses-variable-catalog-v1",
+  "source_data_dvc_revision": "md5:ce349471ab5bc4022c4c6ca847de84ca.dir",
+  "alignment_release": {
+    "mapping_version": "cses-questionnaire-provenance-v1",
+    "status": "approved",
+    "description": "Fingerprint the questionnaire material distributed inside the CSES source archives, register a conservative reviewed question subset, and link only source variables whose native names deterministically encode a registered question code.",
+    "requires_explicit_approval": true
+  },
+  "evidence": {
+    "baseline_plan": {
+      "path": "data/processing/cses/baseline_metadata_plan_v1.json",
+      "sha256": "5d3bad6f959c051eaff4c1b7ecfb73cbb59f387a1b296723ac1d8d8b93e5def2"
+    },
+    "question_catalog": {
+      "path": "rsc/specs/cses_questionnaire_questions_v1.json",
+      "sha256": "2cab89dcbdaa4378d9bc4dc60607d13a34e9e2870faed4cb3bc50a2b7e2b7c65"
+    },
+    "variable_catalog_plan": {
+      "path": "data/processing/cses/variable_catalog_plan_v1.json",
+      "sha256": "0d9563ff820073baa420b98e1c722b32cfdad77d2c27ce6df7fbdb307a4fa8c1"
+    }
+  },
+  "instruments": [
+    {
+      "survey_wave": "2004",
+      "instrument_type": "household_questionnaire",
+      "archive_relative_path": "data/raw/CSES 2004.zip",
+      "member_path": "CSES 2004/Questionnaires CSES0304/HSES V21 ENG.xls",
+      "source_sha256": "123bc8f2957f85787f2a0fab8a8ba769a78ae1e8ca26ff9d7009c3fb92dd8224",
+      "document_title": "Household Socio-Economic Survey 2003-04: Household Questionnaire, Form 3, English V21",
+      "language_code": "en",
+      "documentation_status": "verified",
+      "question_catalog_included": true
+    },
+    {
+      "survey_wave": "2004",
+      "instrument_type": "household_diary",
+      "archive_relative_path": "data/raw/CSES 2004.zip",
+      "member_path": "CSES 2004/Questionnaires CSES0304/HH Diaries_V16.xls",
+      "source_sha256": "6ea17bc31d605b716201128d9202e235fcc89c7088ecd4cf986db0547bc4dcfd",
+      "document_title": "CSES 2003-04 Household Diary, English V16",
+      "language_code": "en",
+      "documentation_status": "documented",
+      "question_catalog_included": false
+    },
+    {
+      "survey_wave": "2004",
+      "instrument_type": "household_listing",
+      "archive_relative_path": "data/raw/CSES 2004.zip",
+      "member_path": "CSES 2004/Questionnaires CSES0304/Listing_Eng.xls",
+      "source_sha256": "df85b409378301c0da617c10ffaeae4fd67a3342ddc7c29cee55af8531e22cc3",
+      "document_title": "CSES 2003-04 Household Listing, English",
+      "language_code": "en",
+      "documentation_status": "documented",
+      "question_catalog_included": false
+    },
+    {
+      "survey_wave": "2004",
+      "instrument_type": "village_questionnaire",
+      "archive_relative_path": "data/raw/CSES 2004.zip",
+      "member_path": "CSES 2004/Questionnaires CSES0304/VillageQ_V16 ENG.xls",
+      "source_sha256": "7f28a4fcda719aa03a9d75c66840998cc5c4eeeaeb40619bef2601d610e08be7",
+      "document_title": "CSES 2003-04 Village Questionnaire, English V16",
+      "language_code": "en",
+      "documentation_status": "documented",
+      "question_catalog_included": false
+    },
+    {
+      "survey_wave": "2007",
+      "instrument_type": "village_questionnaire",
+      "archive_relative_path": "data/raw/CSES 2007.zip",
+      "member_path": "CSES 2007/Village data/Village2007.xls",
+      "source_sha256": "439a33e05261ee1b36a6b865bbf4980d83d60528459717f6c3efe554ff12417d",
+      "document_title": "Cambodia Socio-Economic Survey Village Questionnaire 2007",
+      "language_code": "en",
+      "documentation_status": "verified",
+      "question_catalog_included": true
+    },
+    {
+      "survey_wave": "2009",
+      "instrument_type": "household_questionnaire",
+      "archive_relative_path": "data/raw/CSES 2009.zip",
+      "member_path": "CSES 2009/CSES2009 HH Questionnaire ENG.xls",
+      "source_sha256": "264469dacaacdd20ef2528741829b8b6f1095f6cff45a3e5531d15aa750d82dc",
+      "document_title": "Cambodia Socio-Economic Survey 2009 Household Questionnaire, English",
+      "language_code": "en",
+      "documentation_status": "verified",
+      "question_catalog_included": true
+    },
+    {
+      "survey_wave": "2009",
+      "instrument_type": "household_diary",
+      "archive_relative_path": "data/raw/CSES 2009.zip",
+      "member_path": "CSES 2009/Other Doc/CSES 2009 Diary ENG_ Final.xls",
+      "source_sha256": "6287bb0d370e64d82f8ec3038f18d85996c4718a1001c9a3a266e5b4e4665900",
+      "document_title": "CSES 2009 Household Diary, English Final",
+      "language_code": "en",
+      "documentation_status": "documented",
+      "question_catalog_included": false
+    },
+    {
+      "survey_wave": "2009",
+      "instrument_type": "village_questionnaire",
+      "archive_relative_path": "data/raw/CSES 2009.zip",
+      "member_path": "CSES 2009/CSES2009 ENG Village_Final_010709.xls",
+      "source_sha256": "08d8a1245dd043dc424529856cd6a40999b9c5e29c6c7a6f04f48dfb688ff285",
+      "document_title": "Cambodia Socio-Economic Survey Village Questionnaire 2009, English Final",
+      "language_code": "en",
+      "documentation_status": "verified",
+      "question_catalog_included": true
+    },
+    {
+      "survey_wave": "2011-12",
+      "instrument_type": "household_questionnaire",
+      "archive_relative_path": "data/raw/CSES 2011-12.zip",
+      "member_path": "CSES 2011-12/CSES2011HH Questionnaire ENG.xls",
+      "source_sha256": "8fa0d2705e3728a72866728a752b5323687956c3b08806b6e6efd81a61145e34",
+      "document_title": "Cambodia Socio-Economic Survey 2011 Household Questionnaire, English",
+      "language_code": "en",
+      "documentation_status": "verified",
+      "question_catalog_included": true
+    },
+    {
+      "survey_wave": "2011-12",
+      "instrument_type": "household_diary",
+      "archive_relative_path": "data/raw/CSES 2011-12.zip",
+      "member_path": "CSES 2011-12/CSES 2011 Diary ENG.xls",
+      "source_sha256": "70444d505908fe3a923710ba37dc436d3abd2cd6215f2bde5f09a2980a008a85",
+      "document_title": "CSES 2011 Household Diary, English",
+      "language_code": "en",
+      "documentation_status": "documented",
+      "question_catalog_included": false
+    },
+    {
+      "survey_wave": "2014",
+      "instrument_type": "household_questionnaire",
+      "archive_relative_path": "data/raw/CSES 2014.zip",
+      "member_path": "CSES 2014/CSES2014 HH Quest ENG_draft_16_11_2013_WFP comments.xlsx",
+      "source_sha256": "56aedde3928196266b77363c62bb76ce813c910b508f42e01b4d13b7573e63fa",
+      "document_title": "CSES 2014 Household Questionnaire, English Draft with WFP Comments",
+      "language_code": "en",
+      "documentation_status": "provisional",
+      "question_catalog_included": true
+    },
+    {
+      "survey_wave": "2016",
+      "instrument_type": "household_questionnaire",
+      "archive_relative_path": "data/raw/CSES2016.zip",
+      "member_path": "CSES2016/CSES2016/CSES2016 HH Quest ENG.xlsx",
+      "source_sha256": "dae72a884fa41583696ddc9ba7e76c9fcbb23f814b318f1fd14df1baf8973a64",
+      "document_title": "Cambodia Socio-Economic Survey 2016 Household Questionnaire, English",
+      "language_code": "en",
+      "documentation_status": "verified",
+      "question_catalog_included": true
+    },
+    {
+      "survey_wave": "2016",
+      "instrument_type": "village_questionnaire",
+      "archive_relative_path": "data/raw/CSES2016.zip",
+      "member_path": "CSES2016/CSES2016/VCSES2016/CSES2016 Village Quest  ENG.xls",
+      "source_sha256": "e158f99e7188c53d254ae71ec2fbde35fb407fec334785a0c2f9cd70866bf86e",
+      "document_title": "Cambodia Socio-Economic Survey Village Questionnaire 2016, English",
+      "language_code": "en",
+      "documentation_status": "verified",
+      "question_catalog_included": true
+    },
+    {
+      "survey_wave": "2019",
+      "instrument_type": "forms_bundle",
+      "archive_relative_path": "data/raw/CSES2019.zip",
+      "member_path": "CSES2019/Forms of CSES 2019-20-English​.docx",
+      "source_sha256": "93386dc67182f6dc3a4a6267c9ada01d6ccdb83c442f437148dfa879ad771da1",
+      "document_title": "Forms of CSES 2019-20, English (image-only DOCX bundle)",
+      "language_code": "en",
+      "documentation_status": "discovered",
+      "question_catalog_included": false
+    }
+  ],
+  "coverage_gaps": [
+    {
+      "survey_wave": "2007",
+      "missing_instrument_type": "household_questionnaire",
+      "reason": "No household questionnaire was found in the DVC-pinned 2007 archive; the village workbook is retained separately."
+    },
+    {
+      "survey_wave": "2011-12",
+      "missing_instrument_type": "village_questionnaire",
+      "reason": "No village questionnaire was found in the DVC-pinned 2011-12 archive."
+    },
+    {
+      "survey_wave": "2013",
+      "missing_instrument_type": "questionnaire",
+      "reason": "No questionnaire file was found in the DVC-pinned 2013 archive."
+    },
+    {
+      "survey_wave": "2014",
+      "missing_instrument_type": "final_household_questionnaire",
+      "reason": "Only an explicitly named draft household questionnaire with WFP comments was found; its questions and links remain provisional."
+    },
+    {
+      "survey_wave": "2017",
+      "missing_instrument_type": "questionnaire",
+      "reason": "No questionnaire file was found in the DVC-pinned 2017 archive."
+    },
+    {
+      "survey_wave": "2019",
+      "missing_instrument_type": "machine_readable_questionnaire",
+      "reason": "The distributed DOCX contains 66 page images and no machine-readable paragraph or table text; no OCR text is treated as authoritative in v1."
+    },
+    {
+      "survey_wave": "2021",
+      "missing_instrument_type": "questionnaire",
+      "reason": "No questionnaire file was found in either DVC-pinned 2021 archive."
+    }
+  ],
+  "question_policy": {
+    "scope": "Housing questions for 2004, 2009, 2011-12, 2014, and 2016 plus village demographic section 1 for 2007, 2009, and 2016.",
+    "transcription": "Question text is a whitespace-normalized transcription of the cataloged spreadsheet cell or adjacent continuation cell; it is not marked exact text.",
+    "link_rule": "Within the same survey wave, match a source variable to the longest registered question-code prefix, rejecting a numeric continuation such as q1 matching q10.",
+    "documented_link_status": "reviewed",
+    "provisional_link_status": "proposed",
+    "question_link_role": "direct_response"
+  },
+  "load_run": {
+    "run_scope": "questionnaire_instruments_questions_and_deterministic_source_links_v1",
+    "status": "loaded"
+  }
+}

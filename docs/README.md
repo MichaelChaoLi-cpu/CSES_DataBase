@@ -11,6 +11,7 @@ Working documentation is written in English and tracked by Git.
 - [CSES baseline metadata import runbook](cses-baseline-metadata-runbook.md)
 - [CSES storage provenance release runbook](cses-storage-provenance-runbook.md)
 - [CSES variable catalog release runbook](cses-variable-catalog-runbook.md)
+- [CSES questionnaire provenance release runbook](cses-questionnaire-provenance-runbook.md)
 - [CSES lineage export runbook](cses-lineage-export-runbook.md)
 
 ## Release evidence

@@ -98,6 +98,7 @@ flowchart LR
     SURVEY --> INSTRUMENT
     INSTRUMENT --> QUESTION
     DATASET --> SOURCE
+    QUESTION -.->|"reviewed native-code link"| SOURCE
     RELEASE --> MAPPING
     SOURCE -.->|"reviewed source rule"| MAPPING
     MAPPING --> CANONICAL

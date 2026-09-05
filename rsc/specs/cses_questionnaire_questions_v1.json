@@ -1,0 +1,1365 @@
+{
+  "schema_version": 1,
+  "catalogs": [
+    {
+      "wave": "2004",
+      "instrument_type": "household_questionnaire",
+      "questions": [
+        {
+          "question_code": "q03_01",
+          "question_text": "How many households reside in the same housing unit as your household?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A5",
+          "question_text_cell": "B5"
+        },
+        {
+          "question_code": "q03_02",
+          "question_text": "What is the floor area of the housing/dwelling unit occupied by your household?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A7",
+          "question_text_cell": "B7"
+        },
+        {
+          "question_code": "q03_03",
+          "question_text": "How many rooms in the dwelling unit are used by the household (other than kitchen, toilet and bathrooms)",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A9",
+          "question_text_cell": "B9"
+        },
+        {
+          "question_code": "q03_04",
+          "question_text": "What is the primary construction material of the outer wall of the housing/dwelling unit occupied by your household?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A11",
+          "question_text_cell": "B11"
+        },
+        {
+          "question_code": "q03_05",
+          "question_text": "What are the primary and secondary construction material of the inner wall of the housing/dwelling unit occupied by your household?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A17",
+          "question_text_cell": "B17"
+        },
+        {
+          "question_code": "q03_06",
+          "question_text": "What are the primary and secondary construction material of the roof of the housing /dwelling unit occupied by your household?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A23",
+          "question_text_cell": "B23"
+        },
+        {
+          "question_code": "q03_07",
+          "question_text": "What are the primary and secondary construction material of the floor of the housing /dwelling unit occupied by your household?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A30",
+          "question_text_cell": "B30"
+        },
+        {
+          "question_code": "q03_08",
+          "question_text": "What is your household’s main source of lighting?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A38",
+          "question_text_cell": "B38"
+        },
+        {
+          "question_code": "q03_09",
+          "question_text": "What is your household's main source of drinking water in wet season?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A42",
+          "question_text_cell": "B42"
+        },
+        {
+          "question_code": "q03_10",
+          "question_text": "What is the distance to the nearest drinking water source in wet season?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A48",
+          "question_text_cell": "B48"
+        },
+        {
+          "question_code": "q03_11",
+          "question_text": "Which members of your household are fetching drinking water in the wet season?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A50",
+          "question_text_cell": "B50"
+        },
+        {
+          "question_code": "q03_12",
+          "question_text": "How many minutes per day do they spend in total on fetching drinking water in wet season?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A52",
+          "question_text_cell": "B52"
+        },
+        {
+          "question_code": "q03_13",
+          "question_text": "What is your household's main source of drinking water in dry season?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A55",
+          "question_text_cell": "B55"
+        },
+        {
+          "question_code": "q03_14",
+          "question_text": "What is the distance to the nearest drinking water in dry season source?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A61",
+          "question_text_cell": "B61"
+        },
+        {
+          "question_code": "q03_15",
+          "question_text": "Which members of your household are fetching drinking water in the dry season?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A63",
+          "question_text_cell": "B63"
+        },
+        {
+          "question_code": "q03_16",
+          "question_text": "How many minutes per day do they spend in total on fetching drinking water in dry season?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A65",
+          "question_text_cell": "B65"
+        },
+        {
+          "question_code": "q03_17",
+          "question_text": "How much water charges did (your HH) pay last month? (Put \"0\" for not buying water source)",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A68",
+          "question_text_cell": "B68"
+        },
+        {
+          "question_code": "q03_18",
+          "question_text": "Did your household boil or otherwise treat the drinking water last month?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A75",
+          "question_text_cell": "B75"
+        },
+        {
+          "question_code": "q03_19",
+          "question_text": "How did you treat your drinking water last month?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A79",
+          "question_text_cell": "B79"
+        },
+        {
+          "question_code": "q03_20",
+          "question_text": "What toilet facility does your household have?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A83",
+          "question_text_cell": "B83"
+        },
+        {
+          "question_code": "q03_21",
+          "question_text": "How much did your household spend for sewage or waste water disposal last month?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A88",
+          "question_text_cell": "B88"
+        },
+        {
+          "question_code": "q03_22",
+          "question_text": "How much did your household spend for garbage collection last month?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A90",
+          "question_text_cell": "B90"
+        },
+        {
+          "question_code": "q03_23",
+          "question_text": "What type of fuel does your household mainly use for cooking?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A93",
+          "question_text_cell": "D93"
+        },
+        {
+          "question_code": "q03_24",
+          "question_text": "How much did the household spend on the following last month (including lights and cooking)?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A107",
+          "question_text_cell": "B107"
+        },
+        {
+          "question_code": "q03_25",
+          "question_text": "Does the household have the following facilities?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A115",
+          "question_text_cell": "B115"
+        },
+        {
+          "question_code": "q03_26",
+          "question_text": "What is the area of the yard belonging to this house?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A121",
+          "question_text_cell": "B121"
+        },
+        {
+          "question_code": "q03_27",
+          "question_text": "What's the legal status of the dwelling?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A123",
+          "question_text_cell": "B123"
+        },
+        {
+          "question_code": "q03_28",
+          "question_text": "How much did you pay for rent of this house last month?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A129",
+          "question_text_cell": "B129"
+        },
+        {
+          "question_code": "q03_29",
+          "question_text": "(Whether owned or rented: How much did you spend on maintenance and minor repairs last month?",
+          "section_name": "03. HOUSING",
+          "source_sheet": "03 Housing",
+          "question_code_cell": "A131",
+          "question_text_cell": "B131"
+        }
+      ]
+    },
+    {
+      "wave": "2009",
+      "instrument_type": "household_questionnaire",
+      "questions": [
+        {
+          "question_code": "q04_01",
+          "question_text": "How many households reside in the same housing unit as your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A6",
+          "question_text_cell": "B6"
+        },
+        {
+          "question_code": "q04_02",
+          "question_text": "What is the floor area of the housing/dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A8",
+          "question_text_cell": "B8"
+        },
+        {
+          "question_code": "q04_03",
+          "question_text": "How many rooms in the dwelling unit are used",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A10",
+          "question_text_cell": "B10"
+        },
+        {
+          "question_code": "q04_04",
+          "question_text": "What is the primary construction material of the wall of the housing/dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A14",
+          "question_text_cell": "B14"
+        },
+        {
+          "question_code": "q04_05",
+          "question_text": "What are the primary construction material of the roof of the housing / dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A20",
+          "question_text_cell": "B20"
+        },
+        {
+          "question_code": "q04_06",
+          "question_text": "What are the primary construction material of the floor of the housing / dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A27",
+          "question_text_cell": "B27"
+        },
+        {
+          "question_code": "q04_07",
+          "question_text": "What is your household’s main source of lighting?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A33",
+          "question_text_cell": "B33"
+        },
+        {
+          "question_code": "q04_08",
+          "question_text": "What is your household's main source of drinking water in wet season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A38",
+          "question_text_cell": "B38"
+        },
+        {
+          "question_code": "q04_09",
+          "question_text": "What is the distance from home to the drinking water source in wet season (source reported in Q8)?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A53",
+          "question_text_cell": "C53"
+        },
+        {
+          "question_code": "q04_10",
+          "question_text": "Which members of your household are fetching drinking water in the wet season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A55",
+          "question_text_cell": "C55"
+        },
+        {
+          "question_code": "q04_11",
+          "question_text": "How many minutes per day do they spend in total on fetching drinking water in wet season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A57",
+          "question_text_cell": "C57"
+        },
+        {
+          "question_code": "q04_12",
+          "question_text": "What is your household's main source of drinking water in dry season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A62",
+          "question_text_cell": "C62"
+        },
+        {
+          "question_code": "q04_13",
+          "question_text": "What is the distance from home to the drinking water source in dry season (source reported in Q12)?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A78",
+          "question_text_cell": "C78"
+        },
+        {
+          "question_code": "q04_14",
+          "question_text": "Which members of your household are fetching drinking water in the dry season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A80",
+          "question_text_cell": "C80"
+        },
+        {
+          "question_code": "q04_15",
+          "question_text": "How many minutes per day do they spend in total on fetching drinking water in dry season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A82",
+          "question_text_cell": "C82"
+        },
+        {
+          "question_code": "q04_16",
+          "question_text": "How much water charges did your household pay last month? (Put \"0\" for not buying water source)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A85",
+          "question_text_cell": "C85"
+        },
+        {
+          "question_code": "q04_17",
+          "question_text": "Did your household boil or otherwise treat the drinking water last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A88",
+          "question_text_cell": "C88"
+        },
+        {
+          "question_code": "q04_18",
+          "question_text": "How did you treat your drinking water last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A91",
+          "question_text_cell": "C91"
+        },
+        {
+          "question_code": "q04_19a",
+          "question_text": "What toilet facility does your household have within the premises? (in the area close to the dwelling)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A96",
+          "question_text_cell": "C96"
+        },
+        {
+          "question_code": "q04_19b",
+          "question_text": "What toilet facility does your household usually use?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A106",
+          "question_text_cell": "C106"
+        },
+        {
+          "question_code": "q04_20",
+          "question_text": "How much did your household spend for sewage or waste water disposal last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A112",
+          "question_text_cell": "C112"
+        },
+        {
+          "question_code": "q04_21",
+          "question_text": "How much did your household spend for garbage collection last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A114",
+          "question_text_cell": "C114"
+        },
+        {
+          "question_code": "q04_22",
+          "question_text": "What type of fuel does your household mainly use for cooking?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A121",
+          "question_text_cell": "D121"
+        },
+        {
+          "question_code": "q04_23",
+          "question_text": "How much did the household spend on the following items last month (including lights and cooking)?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A139",
+          "question_text_cell": "C139"
+        },
+        {
+          "question_code": "q04_24",
+          "question_text": "What's the legal status of the dwelling?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A156",
+          "question_text_cell": "C156"
+        },
+        {
+          "question_code": "q04_25a",
+          "question_text": "If rented: How much did you pay for rent of this house last month? (=>> Q26)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A163",
+          "question_text_cell": "C163+C164"
+        },
+        {
+          "question_code": "q04_25b",
+          "question_text": "How much would you have to pay per month to rent a similar dwelling? (Estimated value)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A166",
+          "question_text_cell": "C166"
+        },
+        {
+          "question_code": "q04_26",
+          "question_text": "Whether owned or rented: How much did you spend on maintenance and minor repairs of the dwelling last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A168",
+          "question_text_cell": "C168+C169"
+        }
+      ]
+    },
+    {
+      "wave": "2011-12",
+      "instrument_type": "household_questionnaire",
+      "questions": [
+        {
+          "question_code": "q04_01",
+          "question_text": "How many households reside in the same housing unit as your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A6",
+          "question_text_cell": "B6"
+        },
+        {
+          "question_code": "q04_02",
+          "question_text": "What is the floor area of the housing/dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A8",
+          "question_text_cell": "B8"
+        },
+        {
+          "question_code": "q04_03",
+          "question_text": "How many rooms in the dwelling unit are used",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A10",
+          "question_text_cell": "B10"
+        },
+        {
+          "question_code": "q04_04",
+          "question_text": "What is the primary construction material of the wall of the housing/dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A14",
+          "question_text_cell": "B14"
+        },
+        {
+          "question_code": "q04_05",
+          "question_text": "What are the primary construction material of the roof of the housing / dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A20",
+          "question_text_cell": "B20"
+        },
+        {
+          "question_code": "q04_06",
+          "question_text": "What are the primary construction material of the floor of the housing / dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A27",
+          "question_text_cell": "B27"
+        },
+        {
+          "question_code": "q04_07",
+          "question_text": "What is your household’s main source of lighting?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A33",
+          "question_text_cell": "B33"
+        },
+        {
+          "question_code": "q04_08",
+          "question_text": "What is your household's main source of drinking water in wet season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A38",
+          "question_text_cell": "B38"
+        },
+        {
+          "question_code": "q04_09",
+          "question_text": "What is the distance from home to the drinking water source in wet season (source reported in Q8)?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A52",
+          "question_text_cell": "C52"
+        },
+        {
+          "question_code": "q04_10",
+          "question_text": "Which members of your household are fetching drinking water in the wet season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A54",
+          "question_text_cell": "C54"
+        },
+        {
+          "question_code": "q04_11",
+          "question_text": "How many minutes per day do they spend in total on fetching drinking water in wet season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A57",
+          "question_text_cell": "C57"
+        },
+        {
+          "question_code": "q04_12",
+          "question_text": "What is your household's main source of drinking water in dry season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A62",
+          "question_text_cell": "C62"
+        },
+        {
+          "question_code": "q04_13",
+          "question_text": "What is the distance from home to the drinking water source in dry season (source reported in Q12)?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A78",
+          "question_text_cell": "C78"
+        },
+        {
+          "question_code": "q04_14",
+          "question_text": "Which members of your household are fetching drinking water in the dry season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A80",
+          "question_text_cell": "C80"
+        },
+        {
+          "question_code": "q04_15",
+          "question_text": "How many minutes per day do they spend in total on fetching drinking water in dry season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A82",
+          "question_text_cell": "C82"
+        },
+        {
+          "question_code": "q04_16",
+          "question_text": "How much water charges did your household pay last month? (Put \"0\" for not buying water source)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A85",
+          "question_text_cell": "C85"
+        },
+        {
+          "question_code": "q04_17",
+          "question_text": "Did your household treat water in anyway to make it safer to drink during the last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A88",
+          "question_text_cell": "C88"
+        },
+        {
+          "question_code": "q04_18",
+          "question_text": "How did you usually treat your drinking water during the last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A91",
+          "question_text_cell": "C91"
+        },
+        {
+          "question_code": "q04_19a",
+          "question_text": "What toilet facility does your household have within the premises? (in the area close to the dwelling)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A96",
+          "question_text_cell": "C96"
+        },
+        {
+          "question_code": "q04_19b",
+          "question_text": "What toilet facility does your household usually use?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A106",
+          "question_text_cell": "C106"
+        },
+        {
+          "question_code": "q04_20",
+          "question_text": "How much did your household spend for sewage or waste water disposal last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A113",
+          "question_text_cell": "C113"
+        },
+        {
+          "question_code": "q04_21",
+          "question_text": "How much did your household spend for garbage collection last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A115",
+          "question_text_cell": "C115"
+        },
+        {
+          "question_code": "q04_22",
+          "question_text": "What type of fuel does your household mainly use for cooking?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A122",
+          "question_text_cell": "D122"
+        },
+        {
+          "question_code": "q04_23",
+          "question_text": "How much did the household spend on the following items last month (including lights and cooking)?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A141",
+          "question_text_cell": "C141"
+        },
+        {
+          "question_code": "q04_24",
+          "question_text": "What's the legal status of the dwelling?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A158",
+          "question_text_cell": "C158"
+        },
+        {
+          "question_code": "q04_25a",
+          "question_text": "If rented: How much did you pay for rent of this house last month? (=>> Q26)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A165",
+          "question_text_cell": "C165+C166"
+        },
+        {
+          "question_code": "q04_25b",
+          "question_text": "How much would you have to pay per month to rent a similar dwelling? (Estimated value)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A168",
+          "question_text_cell": "C168"
+        },
+        {
+          "question_code": "q04_26",
+          "question_text": "Whether owned or rented: How much did you spend on maintenance and minor repairs of the dwelling last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A170",
+          "question_text_cell": "C170+C171"
+        }
+      ]
+    },
+    {
+      "wave": "2014",
+      "instrument_type": "household_questionnaire",
+      "questions": [
+        {
+          "question_code": "q04_01",
+          "question_text": "How many households reside in the same housing unit as your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A6",
+          "question_text_cell": "B6"
+        },
+        {
+          "question_code": "q04_02",
+          "question_text": "What is the floor area of the housing/dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A8",
+          "question_text_cell": "B8"
+        },
+        {
+          "question_code": "q04_03",
+          "question_text": "How many rooms in the dwelling unit are used",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A10",
+          "question_text_cell": "B10"
+        },
+        {
+          "question_code": "q04_04",
+          "question_text": "What is the primary construction material of the wall of the housing/dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A14",
+          "question_text_cell": "B14"
+        },
+        {
+          "question_code": "q04_05",
+          "question_text": "What are the primary construction material of the roof of the housing / dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A20",
+          "question_text_cell": "B20"
+        },
+        {
+          "question_code": "q04_06",
+          "question_text": "What are the primary construction material of the floor of the housing / dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A27",
+          "question_text_cell": "B27"
+        },
+        {
+          "question_code": "q04_07",
+          "question_text": "What is your household’s main source of lighting?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A33",
+          "question_text_cell": "B33"
+        },
+        {
+          "question_code": "q04_08",
+          "question_text": "What is your household's main source of drinking water in wet season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A38",
+          "question_text_cell": "B38"
+        },
+        {
+          "question_code": "q04_09",
+          "question_text": "What is the distance from home to the drinking water source in wet season (source reported in Q8)?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A52",
+          "question_text_cell": "C52"
+        },
+        {
+          "question_code": "q04_10",
+          "question_text": "Which members of your household are fetching drinking water in the wet season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A54",
+          "question_text_cell": "C54"
+        },
+        {
+          "question_code": "q04_11",
+          "question_text": "How many minutes per day do they spend in total on fetching drinking water in wet season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A57",
+          "question_text_cell": "C57"
+        },
+        {
+          "question_code": "q04_12",
+          "question_text": "What is your household's main source of drinking water in dry season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A62",
+          "question_text_cell": "C62"
+        },
+        {
+          "question_code": "q04_13",
+          "question_text": "What is the distance from home to the drinking water source in dry season (source reported in Q12)?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A76",
+          "question_text_cell": "C76"
+        },
+        {
+          "question_code": "q04_14",
+          "question_text": "Which members of your household are fetching drinking water in the dry season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A78",
+          "question_text_cell": "C78"
+        },
+        {
+          "question_code": "q04_15",
+          "question_text": "How many minutes per day do they spend in total on fetching drinking water in dry season?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A80",
+          "question_text_cell": "C80"
+        },
+        {
+          "question_code": "q04_16",
+          "question_text": "How much water charges did your household pay last month? (Put \"0\" for not buying water source)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A83",
+          "question_text_cell": "C83"
+        },
+        {
+          "question_code": "q04_17",
+          "question_text": "Did your household treat water in anyway to make it safer to drink during the last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A86",
+          "question_text_cell": "C86"
+        },
+        {
+          "question_code": "q04_18",
+          "question_text": "How did you usually treat your drinking water during the last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A89",
+          "question_text_cell": "C89"
+        },
+        {
+          "question_code": "q04_19a",
+          "question_text": "What toilet facility does your household have within the premises? (in the area close to the dwelling)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A94",
+          "question_text_cell": "C94"
+        },
+        {
+          "question_code": "q04_19b",
+          "question_text": "What toilet facility does your household usually use?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A105",
+          "question_text_cell": "C105"
+        },
+        {
+          "question_code": "q04_20",
+          "question_text": "How much did your household spend for sewage or waste water disposal last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A112",
+          "question_text_cell": "C112"
+        },
+        {
+          "question_code": "q04_21",
+          "question_text": "How much did your household spend for garbage collection last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A114",
+          "question_text_cell": "C114"
+        },
+        {
+          "question_code": "q04_22",
+          "question_text": "What is your Hand Washing Facilities within the premises (choose the most frequently used)?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A117",
+          "question_text_cell": "C117"
+        },
+        {
+          "question_code": "q04_23",
+          "question_text": "Where is hand washing facilities which the most frequently used? (please observe the hand washing place)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A129",
+          "question_text_cell": "C129"
+        },
+        {
+          "question_code": "q04_24",
+          "question_text": "Is there availability of water at the handwashing facilities? (check while visit and observe the hand washing place)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A136",
+          "question_text_cell": "C136"
+        },
+        {
+          "question_code": "q04_25",
+          "question_text": "Is there availability of soap at the handwashing facilities? (check while visit and observe the hand washing place)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A142",
+          "question_text_cell": "C142"
+        },
+        {
+          "question_code": "q04_26",
+          "question_text": "What type of fuel does your household mainly use for cooking?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A148",
+          "question_text_cell": "D148"
+        },
+        {
+          "question_code": "q04_27",
+          "question_text": "How much did the household spend on the following items last month (including lights and cooking)?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A167",
+          "question_text_cell": "C167"
+        },
+        {
+          "question_code": "q04_28",
+          "question_text": "What's the legal status of the dwelling?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A184",
+          "question_text_cell": "C184"
+        },
+        {
+          "question_code": "q04_29a",
+          "question_text": "If rented: How much did you pay for rent of this house last month? (=>> Q30)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A191",
+          "question_text_cell": "C191+C192"
+        },
+        {
+          "question_code": "q04_29b",
+          "question_text": "How much would you have to pay per month to rent a similar dwelling? (Estimated value)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A194",
+          "question_text_cell": "C194"
+        },
+        {
+          "question_code": "q04_30",
+          "question_text": "Whether owned or rented: How much did you spend on maintenance and minor repairs of the dwelling last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A196",
+          "question_text_cell": "C196+C197"
+        }
+      ]
+    },
+    {
+      "wave": "2016",
+      "instrument_type": "household_questionnaire",
+      "questions": [
+        {
+          "question_code": "q04_01",
+          "question_text": "How many households reside in the same housing unit as your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A6",
+          "question_text_cell": "B6"
+        },
+        {
+          "question_code": "q04_02",
+          "question_text": "What is the floor area of the housing/dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A8",
+          "question_text_cell": "B8"
+        },
+        {
+          "question_code": "q04_03",
+          "question_text": "How many rooms in the dwelling unit are used",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A10",
+          "question_text_cell": "B10"
+        },
+        {
+          "question_code": "q04_04",
+          "question_text": "What is the primary construction material of the wall of the housing/dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A14",
+          "question_text_cell": "B14"
+        },
+        {
+          "question_code": "q04_05",
+          "question_text": "What are the primary construction material of the roof of the housing / dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A20",
+          "question_text_cell": "B20"
+        },
+        {
+          "question_code": "q04_06",
+          "question_text": "What are the primary construction material of the floor of the housing / dwelling unit occupied by your household?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A27",
+          "question_text_cell": "B27"
+        },
+        {
+          "question_code": "q04_07",
+          "question_text": "What is your household’s main source of lighting?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A33",
+          "question_text_cell": "B33"
+        },
+        {
+          "question_code": "q04_08",
+          "question_text": "What is your household's main source of drinking water?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A38",
+          "question_text_cell": "B38"
+        },
+        {
+          "question_code": "q04_16",
+          "question_text": "How much water charges did your household pay last month? (Put \"0\" for not buying water source)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A50",
+          "question_text_cell": "C50"
+        },
+        {
+          "question_code": "q04_17",
+          "question_text": "Did your household treat water in anyway to make it safer to drink during the last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A53",
+          "question_text_cell": "C53"
+        },
+        {
+          "question_code": "q04_18",
+          "question_text": "How did you usually treat your drinking water during the last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A56",
+          "question_text_cell": "C56"
+        },
+        {
+          "question_code": "q04_19a",
+          "question_text": "What toilet facility does your household have within the premises? (in the area close to the dwelling)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A62",
+          "question_text_cell": "C62"
+        },
+        {
+          "question_code": "q04_19b",
+          "question_text": "What toilet facility does your household usually use?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A73",
+          "question_text_cell": "C73"
+        },
+        {
+          "question_code": "q04_20",
+          "question_text": "How much did your household spend for sewage or waste water disposal last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A80",
+          "question_text_cell": "C80"
+        },
+        {
+          "question_code": "q04_21",
+          "question_text": "How much did your household spend for garbage collection last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A82",
+          "question_text_cell": "C82"
+        },
+        {
+          "question_code": "q04_26",
+          "question_text": "What type of fuel does your household mainly use for cooking?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A85",
+          "question_text_cell": "D85"
+        },
+        {
+          "question_code": "q04_27",
+          "question_text": "How much did the household spend on the following items last month (including lights and cooking)?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A94",
+          "question_text_cell": "C94"
+        },
+        {
+          "question_code": "q04_28",
+          "question_text": "What's the legal status of the dwelling?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A111",
+          "question_text_cell": "C111"
+        },
+        {
+          "question_code": "q04_29a",
+          "question_text": "If rented: How much did you pay for rent of this house last month? (=>> Q30)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A118",
+          "question_text_cell": "C118+C119"
+        },
+        {
+          "question_code": "q04_29b",
+          "question_text": "How much would you have to pay per month to rent a similar dwelling? (Estimated value)",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A121",
+          "question_text_cell": "C121"
+        },
+        {
+          "question_code": "q04_30",
+          "question_text": "Whether owned or rented: How much did you spend on maintenance and minor repairs of the dwelling last month?",
+          "section_name": "04. HOUSING",
+          "source_sheet": "04 Housing",
+          "question_code_cell": "A123",
+          "question_text_cell": "C123+C124"
+        }
+      ]
+    },
+    {
+      "wave": "2007",
+      "instrument_type": "village_questionnaire",
+      "questions": [
+        {
+          "question_code": "s1q1",
+          "question_text": "How many households live in this village?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A3",
+          "question_text_cell": "B3"
+        },
+        {
+          "question_code": "s1q2",
+          "question_text": "How many people live in this village as of the same date?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A7",
+          "question_text_cell": "B7"
+        },
+        {
+          "question_code": "s1q3",
+          "question_text": "Of these, how many are below 18 years as of the same date?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A9",
+          "question_text_cell": "B9"
+        },
+        {
+          "question_code": "s1q4",
+          "question_text": "Of these, how many are 18 years or more as of the same date?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A13",
+          "question_text_cell": "B13"
+        },
+        {
+          "question_code": "s1q5",
+          "question_text": "What is the total land area of this village?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A17",
+          "question_text_cell": "B17"
+        },
+        {
+          "question_code": "s1q6",
+          "question_text": "During the last 5 years, have more new people moved to your village, or have",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A19",
+          "question_text_cell": "B19"
+        },
+        {
+          "question_code": "s1q7",
+          "question_text": "How many households were there 5 years ago?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A25",
+          "question_text_cell": "B25"
+        },
+        {
+          "question_code": "s1q8",
+          "question_text": "How many people were there 5 years ago?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A27",
+          "question_text_cell": "B27"
+        }
+      ]
+    },
+    {
+      "wave": "2009",
+      "instrument_type": "village_questionnaire",
+      "questions": [
+        {
+          "question_code": "s1q1",
+          "question_text": "How many households live in this village?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A3",
+          "question_text_cell": "B3"
+        },
+        {
+          "question_code": "s1q2",
+          "question_text": "How many people live in this village as of the same date?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A7",
+          "question_text_cell": "B7"
+        },
+        {
+          "question_code": "s1q3",
+          "question_text": "Of these, how many are below 18 years as of the same date?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A9",
+          "question_text_cell": "B9"
+        },
+        {
+          "question_code": "s1q4",
+          "question_text": "Of these, how many are 18 years or more as of the same date?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A13",
+          "question_text_cell": "B13"
+        },
+        {
+          "question_code": "s1q5",
+          "question_text": "What is the total land area of this village?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A17",
+          "question_text_cell": "B17"
+        },
+        {
+          "question_code": "s1q6",
+          "question_text": "During the last 5 years, have more new people moved to your village, or have",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A19",
+          "question_text_cell": "B19"
+        },
+        {
+          "question_code": "s1q7",
+          "question_text": "How many households were there 5 years ago?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A25",
+          "question_text_cell": "B25"
+        },
+        {
+          "question_code": "s1q8",
+          "question_text": "How many people were there 5 years ago?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A27",
+          "question_text_cell": "B27"
+        }
+      ]
+    },
+    {
+      "wave": "2016",
+      "instrument_type": "village_questionnaire",
+      "questions": [
+        {
+          "question_code": "s1q1",
+          "question_text": "How many households live in this village?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A3",
+          "question_text_cell": "B3"
+        },
+        {
+          "question_code": "s1q1a",
+          "question_text": "How many Enumeration Areas does this village have?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "B4",
+          "question_text_cell": "C4"
+        },
+        {
+          "question_code": "s1q1b",
+          "question_text": "If the village has more than one enumeration area, how many households live in the selected enumeration area?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "B6",
+          "question_text_cell": "C6"
+        },
+        {
+          "question_code": "s1q2",
+          "question_text": "How many people live in this village as of the same date?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A10",
+          "question_text_cell": "B10"
+        },
+        {
+          "question_code": "s1q3",
+          "question_text": "Of these, how many are below 18 years as of the same date?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A12",
+          "question_text_cell": "B12"
+        },
+        {
+          "question_code": "s1q4",
+          "question_text": "Of these, how many are 18 years or more as of the same date?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A16",
+          "question_text_cell": "B16"
+        },
+        {
+          "question_code": "s1q5",
+          "question_text": "What is the total land area of this village?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A20",
+          "question_text_cell": "B20"
+        },
+        {
+          "question_code": "s1q6",
+          "question_text": "During the last 5 years, have more new people moved to your village, or have",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A22",
+          "question_text_cell": "B22"
+        },
+        {
+          "question_code": "s1q7",
+          "question_text": "How many households were there 5 years ago?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A28",
+          "question_text_cell": "B28"
+        },
+        {
+          "question_code": "s1q8",
+          "question_text": "How many people were there 5 years ago?",
+          "section_name": "1. DEMOGRAPHIC INFORMATION",
+          "source_sheet": "Sections",
+          "question_code_cell": "A30",
+          "question_text_cell": "B30"
+        }
+      ]
+    }
+  ]
+}
