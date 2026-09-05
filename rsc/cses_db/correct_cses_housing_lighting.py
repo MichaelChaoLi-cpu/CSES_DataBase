@@ -27,6 +27,8 @@ IMPLEMENTATION = (SPEC, "rsc/cses_db/correct_cses_housing_lighting.py",
                   "rsc/cses_db/cses_housing.py", "rsc/cses_db/validate_cses_ho.py",
                   "rsc/cses_db/cses_baseline_metadata.py", "rsc/cses_db/inventory_cses_archives.py",
                   "rsc/cses_db/cses_hh_hl_common.py", "pyproject.toml", "uv.lock")
+PATH_COMPARISON = {"column": "source_archive", "old_prefix": "data/raw/CSE/",
+                   "local_prefix": "data/raw/", "comparison_only": True}
 
 
 def require(condition: bool, message: str) -> None:
@@ -179,8 +181,13 @@ def verify_protected_local(root: Path, before: dict) -> None:
         require(sha256_file(root / path) == digest, f"Unrelated local artifact changed: {path}")
 
 
+def normalize_legacy_archive_paths(values: pd.Series) -> pd.Series:
+    """The sole path normalization already accepted in baseline reproduction v0.1."""
+    return values.str.replace(r"^data/raw/CSE/", "data/raw/", regex=True)
+
+
 def compare_database_to_local(connection, spec: dict, path: Path) -> None:
-    """Compare every cell, preserving local declared numeric and string types."""
+    """Compare every cell after the accepted, comparison-only source-root normalization."""
     local = pd.read_parquet(path).rename(columns=snake_case)
     cursor = connection.execute(sql.SQL("SELECT * FROM {}").format(sql.Identifier(spec["table_schema"], spec["table"])))
     columns = [column.name for column in cursor.description]
@@ -188,6 +195,7 @@ def compare_database_to_local(connection, spec: dict, path: Path) -> None:
     observed = pd.DataFrame.from_records(cursor.fetchall(), columns=columns)
     for column in columns:
         observed[column] = observed[column].astype(local[column].dtype)
+    observed["source_archive"] = normalize_legacy_archive_paths(observed["source_archive"])
     keys = ["survey_wave", "household_id"]
     pd.testing.assert_frame_equal(local.sort_values(keys).reset_index(drop=True),
                                   observed.sort_values(keys).reset_index(drop=True), check_exact=True)
@@ -255,7 +263,8 @@ def build_plan(root: Path, spec: dict, directory: Path) -> None:
                "database_mutated": False, "preflight_ready": True, "spec_sha256": sha256_file(root / SPEC),
                "before_sha256": sha256_file(directory / "before.json"), "source": source_check(root, spec),
                "local_difference": diff, "after_files": after_files,
-               "prior_mapping": prior, "baseline_database_and_local_match_all_cells": True,
+               "prior_mapping": prior, "baseline_database_and_local_match_after_path_normalization": True,
+               "path_comparison": PATH_COMPARISON,
                "implementation_sha256": {path: sha256_file(root / path) for path in IMPLEMENTATION},
                "code_git_revision": revision, "metadata_insert_counts": spec["metadata_changes"]})
     print("preflight_ready=True changed_cells=1 database_mutated=False", flush=True)
@@ -420,7 +429,7 @@ def validate(root: Path, spec: dict, directory: Path) -> None:
                "release_id": spec["release_id"], "plan_sha256": plan_hash,
                "import_sha256": sha256_file(directory / "import.json"), "local_difference": difference,
                "after_database_sha256": canonical_sha256(observed), "transaction_read_only": True,
-               "database_and_local_match_all_cells": True})
+               "database_and_local_match_after_path_normalization": True, "path_comparison": PATH_COMPARISON})
     print("validation_passed=True database_mutated=False", flush=True)
 
 

@@ -10,7 +10,11 @@ import pytest
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "rsc/cses_db"))
 
-from correct_cses_housing_lighting import check_database_state, compare_local  # noqa: E402
+from correct_cses_housing_lighting import (  # noqa: E402
+    check_database_state,
+    compare_local,
+    normalize_legacy_archive_paths,
+)
 from cses_housing import lighting_source_codes  # noqa: E402
 
 
@@ -71,3 +75,9 @@ def test_current_full_release_changes_one_cell():
     before = pd.read_parquet(before_path)
     after = pd.read_parquet(ROOT / "data/processing/cses/final_HO_CSES.parquet")
     assert compare_local(before, after, spec)["rows"] == 77922
+
+
+def test_archive_comparison_normalizes_only_the_accepted_prefix():
+    values = pd.Series(["data/raw/CSE/CSES 2004.zip", "data/raw/CSES2019.zip", "elsewhere/data/raw/CSE/source.zip"])
+    assert normalize_legacy_archive_paths(values).tolist() == [
+        "data/raw/CSES 2004.zip", "data/raw/CSES2019.zip", "elsewhere/data/raw/CSE/source.zip"]

@@ -62,6 +62,11 @@ revision. Preserve and review `data/releases/cses-housing-lighting-missing-v1/pl
 literal SHA-256 as `--plan-sha256` to the following command. The scope was already approved in this
 task; the argument binds execution to the concrete verified plan, not a new approval phrase.
 
+For local/database cell comparison only, normalize the legacy database `source_archive` prefix
+`data/raw/CSE/` to the local `data/raw/` prefix, as already accepted in baseline reproduction v0.1.
+The plan and validation record this exception explicitly. Database source paths remain unchanged,
+and before/after database fingerprints compare their original values without normalization.
+
 ```text
 uv run python rsc/cses_db/correct_cses_housing_lighting.py apply --root . \
   --apply --plan-sha256 <verified plan SHA-256>
