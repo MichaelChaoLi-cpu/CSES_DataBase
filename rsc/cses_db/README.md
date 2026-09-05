@@ -92,9 +92,10 @@ forced read-only database transaction:
 uv run python rsc/cses_db/plan_cses_variable_catalog.py --root . --dbname mda
 ```
 
-The plan covers 171 registered source datasets and the 280 columns in the seven accepted final tables.
-It does not synthesize questionnaires or canonical value mappings. The separate importer requires
-`--apply` plus the exact phrase documented in the
+The imported and independently validated v1 release covers 171 registered source datasets, 4,092
+physical source variables, and the 280 columns in the seven accepted final tables. It does not
+synthesize questionnaires or canonical value mappings. Any future import still requires `--apply`
+plus the exact phrase documented in the
 [variable catalog runbook](../../docs/cses-variable-catalog-runbook.md).
 
 ## Export the lineage graph

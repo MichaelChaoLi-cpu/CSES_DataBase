@@ -251,3 +251,39 @@ Blank dictionary inputs remain canonical-only derivations. Stata value labels st
 variables and are not treated as reviewed cross-wave category mappings. See the
 [variable catalog runbook](cses-variable-catalog-runbook.md) for the exact write gate and validation
 sequence.
+
+## Deterministic database projection v3: variable catalog
+
+The accepted `cses-variable-catalog-v1` release added 4,092 physical source variables, 280 canonical
+variables, 1,714 tested mapping records, one alignment release, and one load run. Its independent
+read-only validation reconciled all 6,088 planned records as exact no-ops.
+
+```mermaid
+flowchart LR
+    SURVEY["10 survey waves"]
+    ARCHIVE["11 source archives"]
+    DATASET["171 physical datasets"]
+    SOURCE["4,092 source variables"]
+    RELEASE["3 alignment releases"]
+    MAPPING["1,714 mapping records<br/>1,770 source-field edges"]
+    CANONICAL["280 canonical variables<br/>7 final tables"]
+    STORAGE["22 authoritative relations<br/>22 covered"]
+    RUN["3 load runs"]
+
+    SURVEY --> ARCHIVE
+    ARCHIVE --> DATASET
+    DATASET --> SOURCE
+    SOURCE --> MAPPING
+    RELEASE --> MAPPING
+    MAPPING --> CANONICAL
+    CANONICAL --> STORAGE
+    RELEASE --> RUN
+```
+
+The full projection contains 4,620 natural-key nodes and 7,017 sorted edges. Of the 280 canonical
+variables, 194 have at least one reviewed source mapping; the remaining 86 stay canonical-only instead
+of receiving invented raw fields. Instruments, questions, and canonical value mappings remain empty.
+
+The DVC-owned files are `data/lineage/cses_lineage_graph_v3.json` and
+`data/lineage/cses_lineage_overview_v3.mmd`. Both were reproduced byte-for-byte in consecutive exports.
+Graph v1 and graph v2 remain immutable historical projections.

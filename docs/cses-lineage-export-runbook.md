@@ -8,8 +8,8 @@ The exporter creates a deterministic read-only projection of the authoritative C
 alignment, storage, and compatibility state in PostgreSQL. It never writes to PostgreSQL.
 
 - Git owns the exporter, tests, this runbook, and release notes.
-- DVC owns versioned pairs under `data/lineage/`, including the pre-storage-provenance v1 snapshot and
-  the post-import v2 snapshot.
+- DVC owns versioned pairs under `data/lineage/`, including the pre-storage-provenance v1 snapshot,
+  post-storage-provenance v2 snapshot, and post-variable-catalog v3 snapshot.
 - PostgreSQL remains the source of truth. The graph is a disposable read model and never writes back.
 
 ## Export
@@ -20,8 +20,8 @@ Run from the project root with local PostgreSQL authentication:
 uv run python rsc/cses_db/export_cses_lineage_graph.py \
   --root . \
   --dbname mda \
-  --output data/lineage/cses_lineage_graph_v2.json \
-  --overview data/lineage/cses_lineage_overview_v2.mmd
+  --output data/lineage/cses_lineage_graph_v3.json \
+  --overview data/lineage/cses_lineage_overview_v3.mmd
 ```
 
 The exporter opens one forced read-only transaction and rejects the export unless:
