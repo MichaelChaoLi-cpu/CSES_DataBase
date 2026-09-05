@@ -143,8 +143,10 @@ def test_orchestrator_references_existing_scripts() -> None:
 
 
 def test_no_legacy_raw_root_in_ported_code() -> None:
+    # These validators recognize the old prefix for comparison only; builders may not use it.
+    comparison_files = {"compare_reference_release.py", "correct_cses_housing_lighting.py"}
     for path in MODULE_ROOT.glob("*.py"):
-        if path.name == "compare_reference_release.py":
+        if path.name in comparison_files:
             continue
         assert "data/raw/CSE/" not in path.read_text(encoding="utf-8")
 
