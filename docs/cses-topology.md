@@ -288,3 +288,36 @@ of receiving invented raw fields. Instruments, questions, and canonical value ma
 The DVC-owned files are `data/lineage/cses_lineage_graph_v3.json` and
 `data/lineage/cses_lineage_overview_v3.mmd`. Both were reproduced byte-for-byte in consecutive exports.
 Graph v1 and graph v2 remain immutable historical projections.
+
+## Deterministic database projection v4: questionnaire provenance
+
+The accepted `cses-questionnaire-provenance-v1` release registered 14 source-archive instruments and
+164 questions, then attached 291 previously unlinked source variables through same-wave native-code
+matches. Its independent read-only validation reconciled all 471 planned records as exact no-ops.
+
+```mermaid
+flowchart LR
+    SURVEY["10 survey waves"]
+    INSTRUMENT["14 instruments<br/>7 waves with located documents"]
+    QUESTION["164 normalized questions<br/>0 exact-text claims"]
+    SOURCE["4,092 source variables<br/>291 question links"]
+    MAPPING["1,714 mapping records<br/>1,770 source-field edges"]
+    CANONICAL["280 canonical variables"]
+    STORAGE["22 authoritative relations"]
+
+    SURVEY --> INSTRUMENT
+    INSTRUMENT --> QUESTION
+    QUESTION -->|"240 reviewed + 51 proposed"| SOURCE
+    SOURCE --> MAPPING
+    MAPPING --> CANONICAL
+    CANONICAL --> STORAGE
+```
+
+The full projection contains 4,800 natural-key nodes and 7,489 sorted edges. The 51 proposed links all
+belong to the explicitly named 2014 draft; no OCR-derived 2019 text or canonical value mapping is
+included. The managed path from survey evidence to physical storage is now visible wherever the
+reviewed question subset overlaps the source-variable catalog.
+
+The DVC-owned files are `data/lineage/cses_lineage_graph_v4.json` and
+`data/lineage/cses_lineage_overview_v4.mmd`. Both were reproduced byte-for-byte in consecutive exports.
+Graphs v1 through v3 remain immutable historical projections.

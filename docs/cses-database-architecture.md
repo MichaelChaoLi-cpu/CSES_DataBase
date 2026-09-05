@@ -81,8 +81,8 @@ The minimum alignment relations are:
 - `cses_variable_mapping` for source-to-canonical rules, status, transformation, and release.
 - `cses_value_mapping` for reviewed category mappings rather than code-number assumptions.
 
-The questionnaire-provenance v1 design uses these existing relations without a new schema. Its
-reviewed scope fingerprints 14 source-archive instruments, catalogs 164 normalized question
+The accepted questionnaire-provenance v1 release uses these existing relations without a new schema.
+It fingerprints 14 source-archive instruments, catalogs 164 normalized question
 transcriptions, and links 291 existing source variables by deterministic native-code prefixes. Draft
 and image-only evidence remains explicitly provisional or discovered rather than being promoted to
 verified question text.

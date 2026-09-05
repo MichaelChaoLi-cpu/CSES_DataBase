@@ -107,10 +107,11 @@ forced read-only transaction:
 uv run python rsc/cses_db/plan_cses_questionnaire_provenance.py --root . --dbname mda
 ```
 
-Questionnaire provenance v1 uses the existing alignment schema. Its reviewed scope contains 14
-instrument files, 164 question transcriptions, and 291 same-wave source-variable links. The 2014 draft
-remains provisional, and image-only/OCR material is not promoted to authoritative question text. Any
-database write requires `--apply` plus the exact approval phrase in the
+The imported and independently validated questionnaire-provenance v1 release uses the existing
+alignment schema. It contains 14 instrument files, 164 question transcriptions, and 291 same-wave
+source-variable links. The 2014 draft remains provisional, and image-only/OCR material is not promoted
+to authoritative question text. Any later database write still requires `--apply` plus the exact
+phrase documented in the
 [questionnaire provenance runbook](../../docs/cses-questionnaire-provenance-runbook.md).
 
 ## Export the lineage graph
