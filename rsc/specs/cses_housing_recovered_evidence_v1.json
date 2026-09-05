@@ -1,0 +1,241 @@
+{
+  "release_id": "cses-housing-recovered-evidence-v1",
+  "target_waves": [
+    "2007",
+    "2013"
+  ],
+  "fields": [
+    "dwelling_tenure_source_code",
+    "main_cooking_fuel_source_code",
+    "main_lighting_source_code"
+  ],
+  "new_views": [
+    "cses_housing_value_dictionary_v3",
+    "cses_housing_categories_v3"
+  ],
+  "expected_dictionary_entries": 39,
+  "expected_observed_code_combinations": 34,
+  "expected_nonnull_values": 22289,
+  "expected_rows": {
+    "2007": 3593,
+    "2013": 3840
+  },
+  "definitions": {
+    "2007": {
+      "dwelling_tenure_source_code": {
+        "expected_labels": {
+          "1": "Owned by the household",
+          "2": "Not owned but no rent is paid",
+          "3": "Rented",
+          "4": "Other"
+        },
+        "canonical_categories": {
+          "1": "owned",
+          "2": "rent_free",
+          "3": "rented",
+          "4": "other"
+        }
+      },
+      "main_cooking_fuel_source_code": {
+        "expected_labels": {
+          "1": "Firewood",
+          "2": "Charcoal",
+          "3": "Liquefied petroleum gas LPG",
+          "4": "Kerosene",
+          "5": "Publicly-provided electricity/City power",
+          "6": "Household generator",
+          "7": "None/don't cook",
+          "8": "Other"
+        },
+        "canonical_categories": {
+          "1": "firewood",
+          "2": "charcoal",
+          "3": "lpg",
+          "4": "kerosene",
+          "5": "grid_electricity",
+          "6": "generator_electricity",
+          "7": "no_cooking",
+          "8": "other"
+        }
+      },
+      "main_lighting_source_code": {
+        "expected_labels": {
+          "1": "Publicly-provided electricity",
+          "2": "Privately-generated electricity",
+          "3": "Battery",
+          "4": "Kerosene lamp",
+          "5": "Candle",
+          "6": "None",
+          "7": "Other"
+        },
+        "canonical_categories": {
+          "1": "grid_electricity",
+          "2": "generator_electricity",
+          "3": "battery",
+          "4": "kerosene_lamp",
+          "5": "candle",
+          "6": "none",
+          "7": "other"
+        }
+      }
+    },
+    "2013": {
+      "dwelling_tenure_source_code": {
+        "expected_labels": {
+          "1": "Owned by the household",
+          "2": "Not owned but no rent is paid",
+          "3": "Rented",
+          "4": "Other"
+        },
+        "canonical_categories": {
+          "1": "owned",
+          "2": "rent_free",
+          "3": "rented",
+          "4": "other"
+        },
+        "question_code": "q04_24",
+        "printed_code": "Q24",
+        "question_text": "What's the legal status of the dwelling?",
+        "cells": {
+          "code": "A158",
+          "text": "C158",
+          "options": [
+            "D160"
+          ]
+        }
+      },
+      "main_cooking_fuel_source_code": {
+        "expected_labels": {
+          "1": "Firewood",
+          "2": "Charcoal",
+          "3": "Liquefied petroleum gas LPG",
+          "4": "Kerosene",
+          "5": "Publicly-provided electricity/City Power",
+          "6": "Household generator",
+          "7": "None/don't cook",
+          "8": "Other"
+        },
+        "canonical_categories": {
+          "1": "firewood",
+          "2": "charcoal",
+          "3": "lpg",
+          "4": "kerosene",
+          "5": "grid_electricity",
+          "6": "generator_electricity",
+          "7": "no_cooking",
+          "8": "other"
+        },
+        "question_code": "q04_22a",
+        "printed_code": "Q22",
+        "question_text": "What type of fuel does your household mainly use for cooking?",
+        "cells": {
+          "code": "A122",
+          "part": "C122",
+          "text": "D122",
+          "options": [
+            "B124",
+            "O124"
+          ]
+        }
+      },
+      "main_lighting_source_code": {
+        "expected_labels": {
+          "1": "Publicly-provided electricity/City power",
+          "2": "Generator",
+          "3": "Battery",
+          "4": "Kerosene lamp",
+          "5": "Candle",
+          "6": "None",
+          "7": "Solar",
+          "8": "Other"
+        },
+        "canonical_categories": {
+          "1": "grid_electricity",
+          "2": "generator_electricity",
+          "3": "battery",
+          "4": "kerosene_lamp",
+          "5": "candle",
+          "6": "none",
+          "7": "solar",
+          "8": "other"
+        },
+        "question_code": "q04_07",
+        "printed_code": "Q7",
+        "question_text": "What is your household's main source of lighting?",
+        "cells": {
+          "code": "A33",
+          "text": "B33",
+          "options": [
+            "C35",
+            "N35",
+            "U35",
+            "AC35"
+          ]
+        }
+      }
+    }
+  },
+  "instruments": [
+    {
+      "survey_wave": "2007",
+      "instrument_type": "code_lookup",
+      "field": "dwelling_tenure_source_code",
+      "code_column": "lid",
+      "archive": "data/raw/CSES 2007.zip",
+      "archive_sha256": "6584718cf62153bff8f549345a0a1fd7608bf47c3ebd1ee927b14d61c7223480",
+      "member_chain": [
+        "CSES 2007/HH data/CSES 2007/code/dbo_c_legalstatus.dta"
+      ],
+      "source_sha256": "755af5d6fd65b5123e6995e3335e0ee0c8e9a52574c20b773ccdf36d9b7992f3",
+      "document_title": "CSES 2007 dbo_c_legalstatus.dta English code lookup",
+      "language_code": "en",
+      "documentation_status": "documented"
+    },
+    {
+      "survey_wave": "2007",
+      "instrument_type": "code_lookup",
+      "field": "main_cooking_fuel_source_code",
+      "code_column": "fid",
+      "archive": "data/raw/CSES 2007.zip",
+      "archive_sha256": "6584718cf62153bff8f549345a0a1fd7608bf47c3ebd1ee927b14d61c7223480",
+      "member_chain": [
+        "CSES 2007/HH data/CSES 2007/code/dbo_c_fu.dta"
+      ],
+      "source_sha256": "8d8fa01be3112e411e5f28970bff6bc0fb9453dec37207fd633a09430ba1e275",
+      "document_title": "CSES 2007 dbo_c_fu.dta English code lookup",
+      "language_code": "en",
+      "documentation_status": "documented"
+    },
+    {
+      "survey_wave": "2007",
+      "instrument_type": "code_lookup",
+      "field": "main_lighting_source_code",
+      "code_column": "lid",
+      "archive": "data/raw/CSES 2007.zip",
+      "archive_sha256": "6584718cf62153bff8f549345a0a1fd7608bf47c3ebd1ee927b14d61c7223480",
+      "member_chain": [
+        "CSES 2007/HH data/CSES 2007/code/dbo_c_lightingsource.dta"
+      ],
+      "source_sha256": "d2ab6bc9fad1ad429e0b529d6f8393d41ecbdfc6f2d3882fdb4aa16e3feed24f",
+      "document_title": "CSES 2007 dbo_c_lightingsource.dta English code lookup",
+      "language_code": "en",
+      "documentation_status": "documented"
+    },
+    {
+      "survey_wave": "2013",
+      "instrument_type": "household_questionnaire",
+      "archive": "data/raw/CSES2013.zip",
+      "archive_sha256": "e67c3558ba11671b0bd5036fe8bdd035045a062a8073f7267b5c6ac8f4f19b98",
+      "member_chain": [
+        "CSES2013/CSES2013/CSES 2013.zip",
+        "CSES2013 HH Questionnaire ENG.xls"
+      ],
+      "source_sha256": "171b63fc410c1061e29c072dd9faf94c0e0fecd57fd742ddbcddd14c71505ce2",
+      "document_title": "Cambodia Socio-Economic Survey 2013 Household Questionnaire (English)",
+      "language_code": "en",
+      "documentation_status": "documented"
+    }
+  ],
+  "approval_basis": "user_approved_recovered_primary_evidence",
+  "policy": "Additive release; register three independent 2007 code lookups and the full 2013 workbook; catalog/link only three 2013 housing questions. Preserve source data, historical releases, v1/v2 interfaces and existing 2017 transfer. No 2007 household questionnaire or embedded Stata housing labels claimed; source_label remains NULL and actual evidence text is preserved separately."
+}

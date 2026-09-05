@@ -190,7 +190,7 @@ new release and load provenance; it remains a read-only DVC projection rather th
 truth. See the [correction release](releases/cses-lighting-correction-v1.md).
 
 The subsequent `cses-housing-value-mapping-v1` release uses the existing alignment schema to publish
-140 approved values under 21 new release-specific source rules. There are now 1,736 source-mapping
+140 approved values under 21 new release-specific source rules. That stage had 1,736 source-mapping
 records, still 280 canonical fields, six releases and six load runs. No new schema, analytical view,
 physical column, or rewritten source code is introduced. The 2004 lighting rule copies the accepted
 correction (mapping 1715), not the superseded baseline rule. All prior mapping records remain intact.
@@ -200,3 +200,30 @@ results. The dictionary retains provisional, compound/residual and routing quali
 not settle cross-wave analytical denominators. Graph v6 projects the new provenance and value counts.
 See the [publication record](releases/cses-value-mapping-import-v1.md) and
 [current validator](cses-value-mapping-publication-runbook.md).
+
+The subsequent housing-interface delivery adds only two ordinary views in `cses_analysis`:
+`cses_housing_value_dictionary_v1` and `cses_housing_categories_v1`. They expose 140 approved code
+entries and 77,922 housing records respectively, with original codes, match states and evidence intact.
+All 35 physical tables and the six-release metadata catalog remain unchanged. Graph v7 adds actual
+view dependencies. Interface provenance is bound in view comments and the local execution/import
+records; it does not create another alignment release. See the
+[historical interface runbook](cses-housing-interface-runbook.md).
+
+The subsequent `cses-housing-2017-from-2016-v1` release adds three 2017 source rules and 21 value
+entries by explicit user-approved transfer from 2016. That release brought the catalog to 1,739 source mappings,
+161 value mappings, seven alignment releases and seven load runs. Two new v2 analysis views combine
+the unchanged v1 dictionary with this transfer; all original physical data and v1 views remain intact.
+The evidence distinguishes user approval from target-questionnaire verification. No 2007 or 2013
+metadata is changed by this release. See [preserved v2 interface](cses-housing-2017-alignment.md).
+
+The subsequent `cses-housing-recovered-evidence-v1` release registers three independent 2007 code
+lookups and the nested 2013 household questionnaire, catalogs three housing questions and updates
+three formerly empty source-question links. Six source rules and 39 values bring the catalog to
+1,745 mappings, 200 value mappings, eight releases/runs, 18 instruments, 167 questions and 294 links.
+Its two v3 views retain physical data, prior interfaces and the qualified 2017 transfer. No additional
+schema is required; see [preserved v3 interface](cses-housing-recovered-evidence.md).
+
+The 2021 resolution subsequently adds one biogas mapping, two language instruments, four questions,
+two reviewed source links and v4 views. Current totals are 1,746 variable mappings, 201 values,
+nine releases/runs, 20 instruments, 171 questions and 296 links. Physical data and the tenure anomaly
+remain unchanged; see [current validation](cses-housing-2021-resolution.md).

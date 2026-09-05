@@ -1,0 +1,17 @@
+{
+  "release_id": "cses-housing-2017-from-2016-v1",
+  "reference_wave": "2016",
+  "target_wave": "2017",
+  "reference_dictionary_release": "cses-housing-value-mapping-v1",
+  "fields": ["dwelling_tenure_source_code", "main_cooking_fuel_source_code", "main_lighting_source_code"],
+  "decision": "如果数据结构一致就直接用2016对齐就好了",
+  "decision_date": "2026-09-05",
+  "approval_basis": "user_approved_cross_wave_transfer",
+  "policy": "Apply all 21 approved 2016 housing dictionary entries to 2017 after case-insensitive ordered raw-column equality and complete observed-code coverage checks. Retain unobserved options, raw codes, nulls, and all prior releases. This is a user-approved alignment assumption, not evidence of a recovered 2017 questionnaire.",
+  "expected_raw_columns": 32,
+  "expected_target_rows": 3840,
+  "expected_dictionary_entries": 21,
+  "expected_observed_code_combinations": 16,
+  "expected_target_nulls": {"dwelling_tenure_source_code": 1, "main_cooking_fuel_source_code": 0, "main_lighting_source_code": 0},
+  "new_views": ["cses_housing_value_dictionary_v2", "cses_housing_categories_v2"]
+}

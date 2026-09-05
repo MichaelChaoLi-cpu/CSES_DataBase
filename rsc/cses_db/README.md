@@ -20,6 +20,13 @@ validation are complete.
 Climate acquisition, general Cambodia boundary publication, heat-labor analytical tables, figures, and
 research results remain outside this reusable core.
 
+## Diagnose unlabeled housing codes
+
+`profile_cses_housing_reverse_evidence.py --root .` replays the 2007, 2013 and 2017 raw housing
+codes and expense fields against the pinned local release, then produces unweighted target and
+documented-reference profiles. It neither connects to PostgreSQL nor approves inferred meanings.
+See [interpretations and limitations](../../docs/cses-housing-reverse-inference.md).
+
 ## Reproduce the local release
 
 The command below reproduces the historical baseline when run with its matching Git/DVC revisions.
@@ -199,14 +206,14 @@ See the [correction runbook](../../docs/cses-lighting-correction-runbook.md) and
 before/after comparisons, and version pins. Older catalog and release plans remain historical; their
 fingerprint gates must not be weakened to accept the corrected state.
 
-## Publish and validate the approved value dictionary
+## Historical value dictionary publication and validation
 
 The `publish_cses_value_mappings.py` workflow separates external scoped backup, read-only execution
 preparation, an exact-hash-gated transaction, and independent read-only validation. It appends one
 release, 21 versioned source rules, 140 value mappings and one load run without changing physical
 data. See the [publication runbook](../../docs/cses-value-mapping-publication-runbook.md).
 
-Current validation command:
+Dictionary-only historical validation command (before the housing interface views):
 
 ```bash
 uv run python rsc/cses_db/publish_cses_value_mappings.py validate --root .
@@ -215,20 +222,47 @@ uv run python rsc/cses_db/publish_cses_value_mappings.py validate --root .
 This checks every published record, all 35 protected CSES tables, and full housing/local equality.
 The original review, decisions, preflight and correction evidence remain immutable.
 
+## Housing interface and current validation
+
+The current `cses_analysis.cses_housing_value_dictionary_v4` and `cses_housing_categories_v4` views
+retain all v3 entries and add the six-observation 2021 biogas definition with bilingual conflict
+provenance. Original columns, all records and all earlier interface versions remain unchanged. Use:
+
+```bash
+uv run python rsc/cses_db/publish_cses_housing_2021.py validate --root .
+```
+
+This verifies the new biogas definition, two instruments, four questions, two source links, the
+retained tenure anomaly, every category association and protected pre-existing state. The evidence
+module `cses_housing_2021_evidence.py` reads both original XLSM files without executing macros. Do not alter historical validators to ignore new structure. See the
+[current runbook](../../docs/cses-housing-2021-resolution.md).
+
+## Inventory core-table readiness
+
+For a separate read-only inventory of all seven core tables by field and wave, run:
+
+```bash
+uv run python rsc/cses_db/inventory_cses_readiness.py --root .
+```
+
+This preserves existing artifacts and writes a new immutable readiness report. It checks local
+validators, live natural keys, ordered columns/catalog types, per-wave row and non-null counts,
+linkage exceptions and approved dictionary coverage. It does not certify cross-wave comparability
+or full seven-table cell equality. See the [inventory and work queue](../../docs/cses-readiness-inventory.md).
+
 ## Export the lineage graph
 
 Export the authoritative database state through one forced read-only transaction:
 
 ```bash
-uv run python rsc/cses_db/export_cses_lineage_graph.py --root . --dbname mda \
-  --output data/lineage/cses_lineage_graph_v6.json \
-  --overview data/lineage/cses_lineage_overview_v6.mmd
+uv run python rsc/cses_db/publish_cses_housing_2021.py export --root .
 ```
 
-The deterministic JSON graph and aggregate Mermaid overview are DVC-owned under `data/lineage/`. See the
+The extended v10 JSON graph and interface dependency JSON are DVC-owned under `data/lineage/`. See the
 [lineage export runbook](../../docs/cses-lineage-export-runbook.md) for its validation, interpretation,
 and versioning contract. Always specify a new version for a changed database state; the CLI's legacy
-default points to v1 and must not overwrite accepted historical evidence.
+default points to v1 and must not overwrite accepted historical evidence. The legacy exporter covers
+the v1–v6 catalog model, not the two additive interface views.
 
 ## Build order
 

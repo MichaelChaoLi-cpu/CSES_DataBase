@@ -2,6 +2,31 @@
 
 [Documentation index](README.md) · [Architecture](cses-database-architecture.md) · [Processing workflow](cses-processing-workflow.md)
 
+## Current 2021 housing resolution
+
+Graph v10 has **4,838 nodes and 7,627 edges**. It adds two 2021 language instruments, four
+questions, two reviewed source links, one biogas mapping release/run and two v4 analysis views.
+Two language-aware evidence edges retain the questionnaire conflict and identify the Khmer
+source preference. All prior topology and decision edges remain intact. See
+[v4 contract](cses-housing-2021-resolution.md) and [release evidence](releases/cses-housing-2021-resolution-v1.md).
+
+## Preserved recovered housing evidence extension
+
+Graph v9 has **4,828 nodes and 7,600 edges**. It registers three 2007 code-lookup instruments and
+the nested 2013 questionnaire, three housing questions and three reviewed source links, the recovered
+release/load run, and the additive v3 dictionary/category views. Four explicit instrument-to-release
+evidence edges distinguish code lookups from questionnaire evidence. The 2017 user-decision edge and
+all prior view topology remain intact. See the [recovery diagram and query contract](cses-housing-recovered-evidence.md)
+and [release evidence](releases/cses-housing-recovered-evidence-v1.md).
+
+## Preserved housing transfer extension
+
+Graph v8 has **4,817 nodes and 7,562 edges**. It records the 2017 alignment release and load run,
+the v2 dictionary/category views and their database dependencies, and an explicit user-decision edge
+from the 2016 donor dictionary release. The v1 views and earlier graphs remain intact. See the
+[2017 alignment diagram and query contract](cses-housing-2017-alignment.md) and
+[release evidence](releases/cses-housing-2017-from-2016-v1.md).
+
 ## End-to-end control flow
 
 The diagram separates versioned evidence, transactional state, and downstream read-only use. A solid
@@ -494,3 +519,32 @@ The immutable DVC-owned outputs are `data/lineage/cses_lineage_graph_v6.json` an
 all earlier review evidence remain preserved. See the
 [publication record](releases/cses-value-mapping-import-v1.md) and
 [current validation runbook](cses-value-mapping-publication-runbook.md).
+
+## Deterministic database projection v7: additive housing interface
+
+Two non-materialized views expose the approved dictionary to readers without replacing any of the
+35 physical tables or existing metadata. The catalog still has six releases and six load runs.
+
+```mermaid
+flowchart LR
+    META["cses_meta<br/>survey, archive, dataset, release"] --> DICT["cses_analysis.cses_housing_value_dictionary_v1<br/>140 code entries + evidence"]
+    ALIGN["cses_alignment<br/>canonical, source rule, value mapping"] --> DICT
+    PLAN["Immutable approved review<br/>draft, skip, residual/compound notes"] -.->|"bound in view definition"| DICT
+    HO["cses_data.final_HO_CSES<br/>77,922 rows / 50 original columns"] --> WIDE["cses_analysis.cses_housing_categories_v1<br/>77,922 rows / 66 columns"]
+    DICT -->|"three exact-source LEFT JOINs"| WIDE
+    WIDE --> READER["mda_readonly<br/>matched / unmapped_nonnull / source_null"]
+    DICT --> READER
+```
+
+The wide view retains ten waves, all original values and 19 unmatched HH records. It adds category,
+label, match status, source-rule identity and evidence per field, plus the selected dictionary version.
+The 2007/2013/2017 unresolved values and six 2021 lighting observations stay visible as unmatched.
+The graph does not imply a sample restriction, denominator, weight policy or cross-wave equivalence.
+
+Graph v7 extends the immutable v6 base with two analysis-view nodes and seven nodes for already
+existing metadata relations. PostgreSQL dependency metadata verifies nine relation-to-view edges;
+schema containment adds nine more edges. Total: 4,813 nodes and 7,540 edges. The new graph and dependency
+JSON were exported twice with identical bytes. Older graphs, plans and inventory evidence stay intact.
+
+Use the [housing interface runbook](cses-housing-interface-runbook.md) for SQL examples and current
+validation, and the [publication record](releases/cses-housing-interface-v1.md) for evidence bindings.

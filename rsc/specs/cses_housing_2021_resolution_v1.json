@@ -1,0 +1,140 @@
+{
+  "release_id": "cses-housing-2021-resolution-v1",
+  "archive": "data/raw/Data of CSES2021.zip",
+  "archive_sha256": "99d631255933d8f13eef19ce15de5075f2db21d862745496d86edbae9c1face2",
+  "housing_member": "Data of CSES2021/S04_HHhousing.dta",
+  "instruments": [
+    {
+      "survey_wave": "2021",
+      "instrument_type": "household_questionnaire",
+      "source_file": "data/raw/Data of CSES2021.zip::Data of CSES2021/CSES2021 HH Quest ENG.xlsm",
+      "member": "Data of CSES2021/CSES2021 HH Quest ENG.xlsm",
+      "source_sha256": "b95c135e6d42357d0b3da8e7faf073bd2494b61562c9f6126b2cc6b73635c804",
+      "document_title": "CSES 2021 Household Questionnaire (English)",
+      "language_code": "en",
+      "documentation_status": "documented",
+      "source_sheet": "04 Housing_Revised-1",
+      "questions": [
+        {
+          "question_code": "q04_07",
+          "locators": {
+            "code": "A29",
+            "text": "B29",
+            "options": [
+              "C31",
+              "N31",
+              "U31",
+              "AC31"
+            ],
+            "skip": []
+          },
+          "expected_cells": {
+            "A29": "Q7",
+            "B29": "What is your household’s main source of lighting? ",
+            "C31": "1 = Publicly-provided electricity/City power\n2 = Generator",
+            "N31": "3 = Battery\n4 = Kerosene lamp\n",
+            "U31": "5 = Candle\n6 = None\n",
+            "AC31": "7 = Solar   \n8 = Other (specify)\n\n"
+          }
+        },
+        {
+          "question_code": "q04_28",
+          "locators": {
+            "code": "A155",
+            "text": "B155",
+            "options": [
+              "D157"
+            ],
+            "skip": []
+          },
+          "expected_cells": {
+            "A155": "Q28",
+            "B155": "What's the legal status of the dwelling? ",
+            "D157": "1 = Owned by the household (>> Q29b)\n2 = Not owned but no rent is paid (>> Q29b)\n3 = Rented   \n4 = Other  (Specify)  (>> Q29b)\n"
+          }
+        }
+      ]
+    },
+    {
+      "survey_wave": "2021",
+      "instrument_type": "household_questionnaire",
+      "source_file": "data/raw/Data of CSES2021.zip::Data of CSES2021/CSES2021 HH Quest KHM.xlsm",
+      "member": "Data of CSES2021/CSES2021 HH Quest KHM.xlsm",
+      "source_sha256": "162c3c5217dcd454fa509b695f7eca7ba476a42682ab002fadf9a59814bfcfda",
+      "document_title": "CSES 2021 Household Questionnaire (Khmer)",
+      "language_code": "km",
+      "documentation_status": "documented",
+      "source_sheet": "04 Housing_Revised-1",
+      "questions": [
+        {
+          "question_code": "q04_07",
+          "locators": {
+            "code": "B27",
+            "text": "C27",
+            "options": [
+              "D29",
+              "D30",
+              "M29",
+              "M30",
+              "T29",
+              "T30",
+              "AA28",
+              "AA29",
+              "AA30"
+            ],
+            "skip": []
+          },
+          "expected_cells": {
+            "B27": "Q7",
+            "C27": "តើប្រភពបំភ្លឺសំខាន់ចម្បងណាមួយដែលគ្រួសារអ្នកបានប្រើប្រាស់?",
+            "D29": "1= អគ្គិសនីផ្គត់ផ្គង់សាធារណៈ/ អគ្គិសនីរដ្ឋ",
+            "D30": "2= ម៉ាស៊ីនភ្លើង",
+            "M29": "3= អាគុយ",
+            "M30": "4= ចង្កៀងប្រងកាត",
+            "T29": "5= ទៀន",
+            "T30": "6= គ្មាន",
+            "AA28": "7= ពន្លឺព្រះអាទិត្យ",
+            "AA29": "8= ជីវឧស្ម័ន",
+            "AA30": "9= ផ្សេងទៀត (បញ្ជាក់)"
+          }
+        },
+        {
+          "question_code": "q04_28",
+          "locators": {
+            "code": "B151",
+            "text": "D151",
+            "options": [
+              "E153",
+              "E154",
+              "E155",
+              "E156"
+            ],
+            "skip": [
+              "N154",
+              "G156"
+            ]
+          },
+          "expected_cells": {
+            "B151": "Q28",
+            "D151": "តើលំនៅដ្ឋានរបស់អ្នកមានលក្ខណៈកម្មសិទ្ធបែបណា ?",
+            "E153": "1= ផ្ទះកម្មសិទ្ធិផ្ទាល់ខ្លួន  ( =>> Q29b )",
+            "E154": "2= ផ្ទះមិនមែនកម្មសិទ្ធិតែនៅមិនគិតថ្លៃ  ",
+            "E155": "3= ផ្ទះជួលគេ ",
+            "E156": "4= ផ្សេងៗ (បញ្ជាក់)",
+            "N154": "( =>> Q29b  )",
+            "G156": "( =>> Q29b  )"
+          }
+        }
+      ]
+    }
+  ],
+  "translation": {
+    "term": "ជីវឧស្ម័ន",
+    "canonical_value": "biogas",
+    "canonical_label": "Biogas",
+    "source_url": "https://www.moe.gov.kh/wp-content/uploads/2017/05/Lexicon-of-Climate-Change_Mar-2017-FINAL.pdf",
+    "pdf_page_one_based": 144
+  },
+  "decision": "Prefer agreement between the Khmer questionnaire and released Stata labels for lighting code 8; retain English questionnaire conflict. Preserve tenure 0 as an undocumented raw-code anomaly and existing analytical NULL; do not infer tenure.",
+  "housing_sha256": "732316e8fe46ab490a0aa9c1a17dface9bf43f05015f9b8936c3fab6cedaa7f5"
+}

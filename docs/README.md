@@ -4,6 +4,13 @@ Working documentation is written in English and tracked by Git.
 
 ## Architecture and operations
 
+- [Core table readiness inventory and prioritized work queue](cses-readiness-inventory.md)
+- [Current housing v4 interface and 2021 resolution](cses-housing-2021-resolution.md)
+- [Housing orphan diagnosis](cses-housing-orphan-diagnosis.md)
+- [Preserved housing v3 and recovered 2007/2013 evidence](cses-housing-recovered-evidence.md)
+- [Preserved housing v2 interface and 2017-to-2016 alignment](cses-housing-2017-alignment.md)
+- [Preserved housing v1 interface and query examples](cses-housing-interface-runbook.md)
+- [Housing reverse evidence for unlabeled 2007, 2013 and 2017 codes](cses-housing-reverse-inference.md)
 - [CSES database architecture](cses-database-architecture.md)
 - [CSES processing workflow](cses-processing-workflow.md)
 - [CSES database and lineage topology](cses-topology.md)
@@ -14,12 +21,15 @@ Working documentation is written in English and tracked by Git.
 - [CSES questionnaire provenance release runbook](cses-questionnaire-provenance-runbook.md)
 - [CSES housing value audit runbook](cses-value-audit-runbook.md)
 - [CSES housing value mapping review runbook](cses-value-mapping-review-runbook.md)
-- [CSES value mapping publication and current validation](cses-value-mapping-publication-runbook.md)
+- [CSES value mapping publication history](cses-value-mapping-publication-runbook.md)
 - [CSES lighting missing-code correction runbook](cses-lighting-correction-runbook.md)
 - [CSES lineage export runbook](cses-lineage-export-runbook.md)
 
 ## Release evidence
 
+- [2021 housing resolution and graph v10](releases/cses-housing-2021-resolution-v1.md)
+- [Recovered 2007/2013 housing evidence and graph v9](releases/cses-housing-recovered-evidence-v1.md)
+- [2017 housing transfer from 2016 and graph v8](releases/cses-housing-2017-from-2016-v1.md)
 - [Local baseline reproduction v0.1](releases/cses-baseline-reproduction-v0.1.md)
 - [Functional-schema preflight v0.2](releases/cses-schema-preflight-v0.2.md)
 - [Functional-schema migration v1](releases/cses-functional-schema-migration-v1.md)
@@ -40,3 +50,4 @@ Working documentation is written in English and tracked by Git.
 - [Housing value mapping preflight v0.10](releases/cses-value-mapping-preflight-v0.10.md)
 - [Housing value mapping execution preflight v1](releases/cses-value-mapping-execution-v1.md)
 - [Housing value mapping publication and graph v6](releases/cses-value-mapping-import-v1.md)
+- [Housing interface publication and graph v7](releases/cses-housing-interface-v1.md)

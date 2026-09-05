@@ -135,6 +135,7 @@ output contract. See the [publication runbook](cses-value-mapping-publication-ru
 [execution preflight](releases/cses-value-mapping-execution-v1.md) for its backup, append-only transaction,
 and independent validation. The original local review alone is not authority for database writes.
 
-After publication, use `publish_cses_value_mappings.py validate --root .` for current database checks.
+After the 2021 resolution publication, use `publish_cses_housing_2021.py validate --root .`
+for current database checks; see the [v4 interface runbook](cses-housing-2021-resolution.md).
 The review planner and combined preflight intentionally reject a changed catalog; preserve their
 original outputs and replay them only against the matching historical state.

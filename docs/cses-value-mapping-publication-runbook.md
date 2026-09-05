@@ -1,5 +1,10 @@
 # CSES Value Mapping Publication
 
+This describes the completed dictionary-only release. For current checks after the 2021 resolution,
+use `publish_cses_housing_2021.py validate --root .`. Earlier validators remain
+immutable historical release logic and reject the expanded catalog.
+See the [current housing v4 runbook](cses-housing-2021-resolution.md).
+
 The user authorized the complete archive, backup, publication, validation and lineage workflow for
 `cses-housing-value-mapping-v1`. Its semantic decisions cover exactly 140 values under 21 versioned
 source rules. The frozen [v0.10 preflight](releases/cses-value-mapping-preflight-v0.10.md) remains
@@ -46,8 +51,8 @@ identity allocation, not extra metadata records.
 
 Independent validation uses a new forced read-only transaction and verifies all 163 records,
 protected tables and full housing/local equality with the accepted comparison-only archive-path
-normalization. Its output binds the import evidence and execution manifest. Current validation uses
-this command; older baseline/correction-only preflights describe earlier catalog states.
+normalization. Its output binds the import evidence and execution manifest. This command validates
+the dictionary-only state; older baseline/correction-only preflights describe earlier catalog states.
 
 The load history stores the exact predecessor source-rule IDs and interpretation notes. Value
 metadata remains linked to the approved dictionary release; consumers should select this release
