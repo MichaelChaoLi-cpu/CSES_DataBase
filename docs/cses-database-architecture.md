@@ -166,6 +166,9 @@ approval is still required before:
 - promoting physical-table primary or foreign-key constraints;
 - publishing new data or replacing a prior CSES release.
 
-The next execution milestone is filling the 15 visible storage-provenance gaps and then building the
-variable-level source and canonical catalog through reviewed alignment releases. The graph remains a
-read-only DVC projection rather than a second source of truth.
+The 15 storage-provenance gaps are now closed. The next reviewed execution milestone is
+`cses-variable-catalog-v1`: catalog all 171 registered source datasets, register the exact 280 physical
+final-table columns as canonicals, and materialize only builder-supported mappings. The existing
+`cses_alignment` schema already expresses this model, so no additional schema is required. Questionnaire
+links and canonical value mappings remain independent later releases. The graph remains a read-only DVC
+projection rather than a second source of truth.

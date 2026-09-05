@@ -228,3 +228,26 @@ The post-import files are `data/lineage/cses_lineage_graph_v2.json` and
 `data/lineage/cses_lineage_overview_v2.mmd`. Snapshot v1 remains immutable because it is fingerprinted
 input evidence for the storage-provenance plan. The two non-CSES Cambodia boundary relations remain
 documented external dependencies, and the variable-level alignment tables remain empty by design.
+
+## Variable catalog v1 review boundary
+
+The next release uses the existing `cses_alignment` model rather than introducing another schema. Its
+read-only plan is built from all 171 registered Stata members and the exact seven-table physical
+contract:
+
+```mermaid
+flowchart LR
+    DATASETS["171 registered Stata datasets"] --> SOURCE["source-variable catalog<br/>type, position, label, source value labels"]
+    BUILDERS["7 pinned builders + dictionaries"] --> RULES["reviewed source-field rules"]
+    TABLES["7 accepted physical final tables<br/>280 columns"] --> CANONICAL["280 canonical variables"]
+    SOURCE --> MAPPING["tested variable mappings"]
+    RULES --> MAPPING
+    MAPPING --> CANONICAL
+    QUESTION["questionnaire links"] -.->|"later independent release"| SOURCE
+    VALUE["canonical value mappings"] -.->|"later independent release"| MAPPING
+```
+
+Blank dictionary inputs remain canonical-only derivations. Stata value labels stay attached to source
+variables and are not treated as reviewed cross-wave category mappings. See the
+[variable catalog runbook](cses-variable-catalog-runbook.md) for the exact write gate and validation
+sequence.

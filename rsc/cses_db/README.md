@@ -83,6 +83,20 @@ After an approved import, validate the exact reviewed plan in a separate forced 
 uv run python rsc/cses_db/validate_cses_baseline_metadata.py --root . --dbname mda
 ```
 
+## Plan the variable catalog
+
+Catalog all registered Stata columns and build the conservative source-to-canonical proposal in a
+forced read-only database transaction:
+
+```bash
+uv run python rsc/cses_db/plan_cses_variable_catalog.py --root . --dbname mda
+```
+
+The plan covers 171 registered source datasets and the 280 columns in the seven accepted final tables.
+It does not synthesize questionnaires or canonical value mappings. The separate importer requires
+`--apply` plus the exact phrase documented in the
+[variable catalog runbook](../../docs/cses-variable-catalog-runbook.md).
+
 ## Export the lineage graph
 
 Export the authoritative database state through one forced read-only transaction:

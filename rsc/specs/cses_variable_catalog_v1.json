@@ -1,0 +1,197 @@
+{
+  "alignment_release": {
+    "description": "Variable-level CSES catalog built from all 171 registered Stata datasets and reviewed mappings to the seven accepted final-table contracts. Questionnaire links and canonical value mappings remain out of scope until authoritative instruments and code harmonizations are reviewed.",
+    "mapping_version": "cses-variable-catalog-v1",
+    "requires_explicit_approval": true,
+    "status": "approved"
+  },
+  "approval_phrase": "ACCEPT-CSES-VARIABLE-CATALOG-V1",
+  "catalog_release_id": "cses-variable-catalog-v1",
+  "database": "mda",
+  "evidence": {
+    "baseline_plan": {
+      "path": "data/processing/cses/baseline_metadata_plan_v1.json",
+      "sha256": "5d3bad6f959c051eaff4c1b7ecfb73cbb59f387a1b296723ac1d8d8b93e5def2"
+    },
+    "local_release_manifest": {
+      "path": "data/processing/cses/local_release_manifest.json",
+      "sha256": "9b728c7883ec63b76782ba97c5b64bb60536756fd8a20f2ea71fdae738de0707"
+    },
+    "migration_postflight": {
+      "path": "data/processing/cses/migration_postflight_v1.json",
+      "sha256": "21a41f8cd9b3cad2b4b132db2cbe9883de8936c3a2f6dc32635f2b13ac752151"
+    },
+    "migration_validation": {
+      "path": "data/processing/cses/migration_validation_v1.json",
+      "sha256": "5bcebf76f6b96513aa8e2878fe0882c7698487fcc8e5823d8f56cb16264428d1"
+    }
+  },
+  "load_run": {
+    "run_scope": "variable_catalog_and_reviewed_mapping_v1",
+    "status": "loaded"
+  },
+  "module_rules": [
+    {
+      "builder_path": "rsc/cses_db/cses_employment.py",
+      "builder_sha256": "4ba6fb4377cfc636528e918cd35a6ae01221f24d9330f36e850896837c604d7a",
+      "dictionary_path": "data/processing/cses/ind_que_EC_CSES.csv",
+      "dictionary_sha256": "6083d1998e4856c731e2ba8cdadce3b355b6350a8b5c1d4d76b45dbf83a7adeb",
+      "module_code": "EC",
+      "source_modules": [
+        "employment_current"
+      ],
+      "target_table": "final_EC_CSES"
+    },
+    {
+      "builder_path": "rsc/cses_db/cses_education.py",
+      "builder_sha256": "8ce595114053b8b12dee1b8f371920538f86318788e543eb690f00707a29c592",
+      "dictionary_path": "data/processing/cses/ind_que_ED_CSES.csv",
+      "dictionary_sha256": "b91a871095d11a612b35e93c58c81eac45d4f2f8bf95780a58a6cd8a20e40244",
+      "module_code": "ED",
+      "source_modules": [
+        "education"
+      ],
+      "target_table": "final_ED_CSES"
+    },
+    {
+      "builder_path": "rsc/cses_db/cses_hh_hl_common.py",
+      "builder_sha256": "e3c7ff6ee357dc0c613e3a88f2598d904cf84862187e45dd846069a999000594",
+      "dictionary_path": "data/processing/cses/ind_que_HH_CSES.csv",
+      "dictionary_sha256": "e08d314bca484bf5796bf40f6b041a247529b26c7bae6294331150dba5565d5b",
+      "module_code": "HH",
+      "source_modules": [
+        "household_core",
+        "household_members",
+        "household_weights",
+        "person_weights"
+      ],
+      "target_table": "final_HH_CSES"
+    },
+    {
+      "builder_path": "rsc/cses_db/cses_hh_hl_common.py",
+      "builder_sha256": "e3c7ff6ee357dc0c613e3a88f2598d904cf84862187e45dd846069a999000594",
+      "dictionary_path": "data/processing/cses/ind_que_HL_CSES.csv",
+      "dictionary_sha256": "97425d50b327d14fad0c48290b6a6040749f1e8d248f757b8ab6b5ef657ea504",
+      "module_code": "HL",
+      "source_modules": [
+        "household_core",
+        "household_members",
+        "household_weights",
+        "person_weights"
+      ],
+      "target_table": "final_HL_CSES"
+    },
+    {
+      "builder_path": "rsc/cses_db/cses_housing.py",
+      "builder_sha256": "83373cf687684c12d36a87fe5855bafba973fd164f68769b8d47887e7cd8b6bf",
+      "dictionary_path": "data/processing/cses/ind_que_HO_CSES.csv",
+      "dictionary_sha256": "432ee62c570459fbbcd9b54109f625533bfbb12b8e15cfeadb4f64fbcfb00e60",
+      "module_code": "HO",
+      "source_modules": [
+        "housing"
+      ],
+      "target_table": "final_HO_CSES"
+    },
+    {
+      "builder_path": "rsc/cses_db/cses_village.py",
+      "builder_sha256": "f5cfee06085246736f1b84b791ff1582fe3ec6e049cb9d5b0144d1220c367323",
+      "dictionary_path": "data/processing/cses/ind_que_VL_CSES.csv",
+      "dictionary_sha256": "592aa0d07f0ede1c54396ab61c2a7dd1dd0089fc390fed29801b44ab30aa5fa7",
+      "module_code": "VL",
+      "source_modules": [
+        "village"
+      ],
+      "target_table": "final_VL_CSES"
+    },
+    {
+      "builder_path": "rsc/cses_db/build_cses_survey_dates.py",
+      "builder_sha256": "69d72112722c47181163d24dda047f87464c2b77967b9bdd3f6831807102746d",
+      "dictionary_path": "data/processing/cses/ind_que_SURVEY_DATE_CSES.csv",
+      "dictionary_sha256": "9e6128f09118aaf55e2b4f674855831e34fd054b7d982052805c562daec18f60",
+      "module_code": "SURVEY_DATE",
+      "source_modules": [],
+      "target_table": "final_SURVEY_DATE_CSES"
+    }
+  ],
+  "questionnaire_policy": {
+    "instrument_count": 0,
+    "question_count": 0,
+    "reason": "No authoritative questionnaire files are registered in the repository evidence for this release."
+  },
+  "schema_version": 1,
+  "source_alignment_release": "cses-storage-provenance-v1",
+  "source_data_dvc_revision": "md5:3f0d35f3aca7700c3132a1294162c180.dir",
+  "survey_date_contract": {
+    "path": "rsc/cses_db/cses_survey_date_contract.py",
+    "sha256": "f114eab1bab1d2d4c6faaa644b074de3d4ed96c06ef12aa9e3afb3e503222442"
+  },
+  "survey_date_sources": [
+    {
+      "archive_relative_path": "data/raw/CSES 2004.zip",
+      "member_path": "CSES 2004/Stata 2004/2004hh_s99_singlequestions.dta",
+      "nested_member_path": "",
+      "survey_wave": "2004"
+    },
+    {
+      "archive_relative_path": "data/raw/CSES2019.zip",
+      "member_path": "CSES2019/S01-17_HHOtherInfo.dta",
+      "nested_member_path": "",
+      "survey_wave": "2019"
+    },
+    {
+      "archive_relative_path": "data/raw/Data of CSES2021.zip",
+      "member_path": "Data of CSES2021/S01-17_HHOtherInfo.dta",
+      "nested_member_path": "",
+      "survey_wave": "2021"
+    }
+  ],
+  "survey_date_variable_rules": {
+    "2004": {
+      "candidate_actual_month": ["q40_intm"],
+      "candidate_actual_year": ["q40_inty"],
+      "candidate_reference_date": ["q40_intd", "q40_intm", "q40_inty"],
+      "confirmed_survey_month": ["q40_intm"],
+      "confirmed_survey_year": ["q40_inty"],
+      "household_id": ["hhid"],
+      "interview_date": ["q40_intd", "q40_intm", "q40_inty"],
+      "last_visit_date": ["q40_lasd", "q40_lasm", "q40_lasy"],
+      "reinterview_date": ["q40_ared", "q40_arem", "q40_arey"],
+      "survey_actual_day": ["q40_intd"],
+      "survey_actual_month": ["q40_intm"],
+      "survey_actual_year": ["q40_inty"]
+    },
+    "2019": {
+      "candidate_actual_month": ["month"],
+      "candidate_actual_year": ["year"],
+      "candidate_reference_date": ["day", "month", "year"],
+      "confirmed_survey_month": ["monthsur"],
+      "confirmed_survey_year": ["yearsur"],
+      "household_id": ["hhid"],
+      "last_visit_date": ["day", "month", "year"],
+      "released_survey_month": ["monthsur"],
+      "released_survey_year": ["yearsur"],
+      "survey_actual_day": ["day"],
+      "survey_actual_month": ["month"],
+      "survey_actual_year": ["year"]
+    },
+    "2021": {
+      "candidate_actual_month": ["month_2nd"],
+      "candidate_actual_year": ["year_2nd"],
+      "candidate_reference_date": ["day_2nd", "month_2nd", "year_2nd"],
+      "confirmed_survey_month": ["monthsur"],
+      "confirmed_survey_year": ["yearsur"],
+      "first_visit_date": ["day_1st", "month_1st", "year_1st"],
+      "household_id": ["hhid"],
+      "last_visit_date": ["day_2nd", "month_2nd", "year_2nd"],
+      "released_survey_month": ["monthsur"],
+      "released_survey_year": ["yearsur"],
+      "survey_actual_day": ["day_2nd"],
+      "survey_actual_month": ["month_2nd"],
+      "survey_actual_year": ["year_2nd"]
+    }
+  },
+  "value_mapping_policy": {
+    "count": 0,
+    "reason": "Released Stata value labels are source metadata, not reviewed cross-wave canonical value mappings."
+  }
+}

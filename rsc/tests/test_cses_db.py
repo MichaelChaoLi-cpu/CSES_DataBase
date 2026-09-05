@@ -32,12 +32,25 @@ from cses_storage_provenance import (  # noqa: E402
 from cses_storage_provenance import (  # noqa: E402
     reconcile_states as reconcile_storage_provenance,
 )
+from cses_variable_catalog import (  # noqa: E402
+    build_desired_state as build_variable_catalog_state,
+)
+from cses_variable_catalog import (  # noqa: E402
+    default_variable_catalog_spec_path,
+    load_variable_catalog_spec,
+)
+from cses_variable_catalog import (  # noqa: E402
+    reconcile_states as reconcile_variable_catalog,
+)
 from import_cses_baseline_metadata import validate_apply_gate, validate_reviewed_plan  # noqa: E402
 from import_cses_storage_provenance import (  # noqa: E402
     validate_apply_gate as validate_storage_provenance_apply_gate,
 )
 from import_cses_storage_provenance import (  # noqa: E402
     validate_reviewed_plan as validate_storage_provenance_plan,
+)
+from import_cses_variable_catalog import (  # noqa: E402
+    validate_apply_gate as validate_variable_catalog_apply_gate,
 )
 from inventory_cses_archives import normalize_wave  # noqa: E402
 from render_cses_migration_sql import render_migration_sql  # noqa: E402
@@ -311,6 +324,81 @@ def test_storage_provenance_closes_exact_15_storage_gaps() -> None:
         if record["table_name"].startswith("align_summary_")
     } == {"validation"}
     assert desired["load_runs"][0]["validation_summary"]["variable_level_mapping_created"] is False
+
+
+def test_variable_catalog_contract_is_conservative_and_write_gated() -> None:
+    spec = load_variable_catalog_spec(default_variable_catalog_spec_path(ROOT))
+    assert len(spec["module_rules"]) == 7
+    assert spec["source_alignment_release"] == "cses-storage-provenance-v1"
+    assert spec["alignment_release"]["mapping_version"] == "cses-variable-catalog-v1"
+    assert spec["questionnaire_policy"]["instrument_count"] == 0
+    assert spec["questionnaire_policy"]["question_count"] == 0
+    assert spec["value_mapping_policy"]["count"] == 0
+    with pytest.raises(ValueError, match="without --apply"):
+        validate_variable_catalog_apply_gate(False, None, spec)
+    with pytest.raises(ValueError, match="without --confirm"):
+        validate_variable_catalog_apply_gate(True, "wrong", spec)
+    validate_variable_catalog_apply_gate(True, spec["approval_phrase"], spec)
+
+
+def test_variable_catalog_covers_all_sources_and_physical_canonicals() -> None:
+    desired, diagnostics = build_variable_catalog_state(ROOT)
+    assert diagnostics["record_counts"] == {
+        "alignment_releases": 1,
+        "source_variables": 4092,
+        "canonical_variables": 280,
+        "variable_mappings": 1714,
+        "load_runs": 1,
+    }
+    assert diagnostics["scope_counts"]["instruments"] == 0
+    assert diagnostics["scope_counts"]["questions"] == 0
+    assert diagnostics["scope_counts"]["value_mappings"] == 0
+    assert all(diagnostics["local_checks"].values())
+    assert len(
+        {
+            (
+                row["archive_relative_path"],
+                row["member_path"],
+                row["nested_member_path"],
+            )
+            for row in desired["source_variables"]
+        }
+    ) == 171
+    assert set(diagnostics["mapping_counts_by_target"]) == {
+        "final_EC_CSES",
+        "final_ED_CSES",
+        "final_HH_CSES",
+        "final_HL_CSES",
+        "final_HO_CSES",
+        "final_SURVEY_DATE_CSES",
+        "final_VL_CSES",
+    }
+
+
+def test_variable_catalog_reconciliation_detects_conflict() -> None:
+    desired = {
+        "alignment_releases": [],
+        "source_variables": [
+            {
+                "archive_relative_path": "data/raw/example.zip",
+                "member_path": "source.dta",
+                "nested_member_path": "",
+                "variable_name": "hhid",
+                "variable_position": 1,
+            }
+        ],
+        "canonical_variables": [],
+        "variable_mappings": [],
+        "load_runs": [],
+    }
+    existing = json.loads(json.dumps(desired))
+    operations, conflicts = reconcile_variable_catalog(desired, existing)
+    assert [item["action"] for item in operations] == ["noop"]
+    assert conflicts == []
+    existing["source_variables"][0]["variable_position"] = 2
+    operations, conflicts = reconcile_variable_catalog(desired, existing)
+    assert [item["action"] for item in operations] == ["conflict"]
+    assert len(conflicts) == 1
 
 
 def test_storage_provenance_reconciliation_is_conflict_sensitive() -> None:
