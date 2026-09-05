@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "review_id": "cses-value-mapping-review-v1",
+  "database": "mda",
+  "status": "proposed",
+  "database_write_allowed": false,
+  "source_data_dvc_revision": "md5:3c393945cb2a4af8c12d24833590d0e6.dir",
+  "scope": "Evidence triage for lighting, cooking fuel and tenure across ten waves; no category adoption or database import.",
+  "manual_review_flags": [
+    "draft_questionnaire",
+    "category_comparability_review",
+    "skip_instruction_retained_not_evaluated",
+    "observed_code_outside_questionnaire",
+    "raw_published_frequency_difference"
+  ],
+  "policies": {
+    "category_identity": "canonical field plus category name; never raw code alone",
+    "candidate": "Documented label interpretation with no outstanding triage flag; still requires human approval, not a claim of full cross-wave comparability.",
+    "manual_review": "Interpretable label with draft, residual, compound, skip or frequency qualifications; do not promote automatically.",
+    "blocked": "Meaning unresolved or source evidence conflicts; retain the original code and all evidence without assigning a category or missingness reason.",
+    "missing_only": "Keep source missing-code evidence separate from substantive categories; do not infer refusal, eligibility or nonresponse cause.",
+    "publication": "All rows remain proposed, publication_ready=false. No database-write or SQL-generation path exists.",
+    "denominator": "Unweighted records within each wave/field; pooled three-field counts are not distinct households. SQL NULL is reported separately and cannot be assigned a raw missing reason by aggregate frequencies."
+  },
+  "evidence": {
+    "audit": {
+      "path": "data/processing/cses/value_audit_v1/preflight.json",
+      "sha256": "e46fbd6d78322afdce885bd326253ebad9f4bc1e7940dc6f9943098ac87c24ca"
+    },
+    "audit_spec": {
+      "path": "rsc/specs/cses_value_audit_v1.json",
+      "sha256": "4cc612240245cad39f9e70f1ae0d0dbb42da48ef74b72eae4802c4cdad9746eb"
+    },
+    "correction_spec": {
+      "path": "rsc/specs/cses_housing_lighting_missing_v1.json",
+      "sha256": "fd0402fc998b569719e38ebd0174ac3c94675c544125f828ab4180e10d67d7aa"
+    },
+    "correction_before": {
+      "path": "data/releases/cses-housing-lighting-missing-v1/before.json",
+      "sha256": "1d0d8481d4dc2dceaa701d65317c244c219e5b3a48caf76a5330bb651a5957ea"
+    },
+    "correction_plan": {
+      "path": "data/releases/cses-housing-lighting-missing-v1/plan.json",
+      "sha256": "68470cbeba231c0b09bb2bf06e2cb46e6a0163f9663d934246cfcf3c944c57c9"
+    },
+    "correction_import": {
+      "path": "data/releases/cses-housing-lighting-missing-v1/import.json",
+      "sha256": "6aa48a67bebc822aee0a313695c0ee1cca233ad26333e9eac2609ff8bd0ad362"
+    },
+    "correction_validation": {
+      "path": "data/releases/cses-housing-lighting-missing-v1/validation.json",
+      "sha256": "f4b51d586294c9f7d9dce9c02481c30a718d9c6b74949c3dcac62d0773ac3d15"
+    },
+    "before_housing": {
+      "path": "data/releases/cses-housing-lighting-missing-v1/before/final_HO_CSES.parquet",
+      "sha256": "0c9922a6366737348d09721b985c8f3f402a38ab80ef8101558135b770cc35c8"
+    },
+    "current_housing": {
+      "path": "data/processing/cses/final_HO_CSES.parquet",
+      "sha256": "e0dae1a43267250b22fd8e18070b4a9243cd8f451fd40511ac4f7666e4b4826d"
+    }
+  }
+}

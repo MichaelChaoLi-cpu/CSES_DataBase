@@ -405,3 +405,41 @@ The DVC-owned files are `data/lineage/cses_lineage_graph_v5.json` and
 byte-identical. Graphs v1–v4 and the original value-audit reports remain immutable historical evidence.
 See the [correction release](releases/cses-lighting-correction-v1.md) for the before/after proof,
 backup scope, validation, and version fingerprints.
+
+## Value mapping review v1: correction-aware local projection
+
+The database remains at graph v5. A separate local review projection uses the pinned original audit,
+accepted lighting correction, raw-source replay, and current read-only database checks to triage all
+208 code rows. It does not register a new alignment release or populate value mappings.
+
+```mermaid
+flowchart LR
+    AUDIT["Immutable audit v1<br/>30 profiles / 208 code rows"] --> REVIEW["Correction-aware review v1<br/>all rows proposed"]
+    CORRECTION["Accepted lighting correction<br/>one cell 9 to NULL"] --> REVIEW
+    CURRENT["Raw sources + local table + mda<br/>validated read-only"] -.-> REVIEW
+    REVIEW --> CANDIDATE["70 candidate interpretations<br/>human approval still required"]
+    REVIEW --> MANUAL["70 manual-review rows<br/>draft, compound, residual, skip"]
+    REVIEW --> BLOCKED["52 unresolved rows<br/>no category assigned"]
+    REVIEW --> MISSING["16 missing-evidence rows<br/>not substantive categories"]
+```
+
+Each row retains its archive/member/variable, wave, field, code kind, and code identity. Category keys
+include the field rather than treating the same number as a universal meaning. Baseline and current
+frequencies are separate, and the resolved lighting issue remains linked to its accepted correction.
+The complete JSON also retains questionnaire locations and historical conflict flags.
+
+The proposed files live under `data/processing/cses/value_mapping_review_v1/` and await separate
+version synchronization. No graph v6 was exported because no database state changed. See the
+[review runbook](cses-value-mapping-review-runbook.md) and
+[preflight record](releases/cses-value-mapping-review-preflight-v0.9.md).
+
+The user subsequently approved the exact proposed categories for the 70 `manual_review` rows. That
+semantic decision is a new local evidence node, not a database release: it preserves all qualifications,
+leaves the other 138 rows unchanged, and does not alter graph v5. See the
+[decision record](releases/cses-value-mapping-manual-decisions-v1.md).
+
+The remaining 70 candidates subsequently received approval as well. The combined 140-entry publication
+preflight resolves 21 effective source rules and proposes 21 new release-specific mapping records,
+140 attached value entries, one release, and one load run. Current physical tables and database graph
+v5 are unchanged. The [v0.10 record](releases/cses-value-mapping-preflight-v0.10.md) contains the concrete
+approved scope and the planned relationship between source-rule history and the semantic dictionary.

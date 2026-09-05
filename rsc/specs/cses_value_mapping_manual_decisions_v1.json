@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "decision_id": "cses-value-mapping-manual-decisions-v1",
+  "status": "approved_semantic_decisions",
+  "decision_date": "2026-09-05",
+  "database_write_allowed": false,
+  "publication_ready": false,
+  "approval_basis": "The user confirmed all 70 rows explicitly listed from the manual_review bucket without changing their proposed categories.",
+  "source_review": {
+    "path": "data/processing/cses/value_mapping_review_v1/review.json",
+    "sha256": "aec4d1184e3675ec30b69e79291c41c5838edebc9be45d42f3b0e1bc68fdd81f"
+  },
+  "selection": {
+    "field": "review_bucket",
+    "value": "manual_review",
+    "expected_rows": 70,
+    "decision": "accept_exact_proposed_category"
+  },
+  "qualifications": {
+    "preserve_review_reasons": true,
+    "draft_evidence_remains_provisional": true,
+    "skip_routing_effect_not_inferred": true,
+    "compound_categories_remain_distinct": true,
+    "other_remains_a_residual_category": true,
+    "source_codes_remain_wave_and_mapping_specific": true,
+    "database_publication_requires_a_separate_reviewed_plan": true,
+    "unselected_candidate_blocked_and_missing_rows_remain_unchanged": true
+  },
+  "canonical_labels": {
+    "battery": "Battery",
+    "candle": "Candle",
+    "charcoal": "Charcoal",
+    "firewood": "Firewood",
+    "firewood_and_charcoal": "Firewood and charcoal",
+    "gas_and_electricity": "Gas and electricity",
+    "generator_electricity": "Generator electricity",
+    "grid_electricity": "Grid electricity",
+    "kerosene": "Kerosene",
+    "kerosene_lamp": "Kerosene lamp",
+    "kerosene_or_diesel": "Kerosene or diesel",
+    "lpg": "Liquefied petroleum gas (LPG)",
+    "no_cooking": "No cooking",
+    "none": "None",
+    "other": "Other",
+    "owned": "Owned",
+    "rent_free": "Rent free",
+    "rented": "Rented",
+    "solar": "Solar"
+  }
+}

@@ -138,6 +138,45 @@ See the [value audit runbook](../../docs/cses-value-audit-runbook.md) for the se
 cell-extraction command, confidence boundaries, and deterministic reproduction procedure. Candidate
 categories remain proposed; this command has no database-write mode.
 
+## Build the correction-aware value mapping review
+
+```bash
+uv run python rsc/cses_db/plan_cses_value_mapping_review.py --root .
+```
+
+This separate read-only planner uses the preserved audit and accepted lighting correction rather than
+repinning historical evidence. It replays the ten raw housing datasets, checks the full corrected
+local/database housing table, and verifies 35 protected CSES tables. The new local review partitions
+208 code rows into candidate, manual-review, unresolved, and missing-only evidence buckets. Every row
+remains proposed; there is no apply or SQL-generation mode. See the
+[review runbook](../../docs/cses-value-mapping-review-runbook.md) for output files, exact bucket meanings,
+immutable output/replay rules, and publication boundaries.
+
+After an exact user decision on a review bucket, materialize it separately rather than rewriting the
+source review:
+
+```bash
+uv run python rsc/cses_db/record_cses_value_mapping_decisions.py --root .
+```
+
+The current decision specification selects the 70 user-approved `manual_review` identities from the
+pinned review hash. It retains provisional/skip/comparability qualifications and has no database
+connection or publication path. See the
+[decision record](../../docs/releases/cses-value-mapping-manual-decisions-v1.md).
+
+Both substantive buckets are now approved (140 entries). To recheck their source evidence and build
+the combined publication preflight without database writes:
+
+```bash
+uv run python rsc/cses_db/plan_cses_value_mapping_release.py --root .
+```
+
+This retains the original review and manual-decision bundles. It writes the combined approved scope
+and proposed 21 versioned source rules plus 140 value mappings under
+`data/processing/cses/value_mapping_release_v1/`. See the
+[v0.10 preflight](../../docs/releases/cses-value-mapping-preflight-v0.10.md) for detailed checks,
+interpretation boundaries, and remaining version/backup/execution preparation.
+
 ## Validate the current lighting correction
 
 The approved `cses-housing-lighting-missing-v1` release excludes source code 9 only from the 2004

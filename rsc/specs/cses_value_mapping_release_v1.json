@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "release_id": "cses-housing-value-mapping-v1",
+  "database": "mda",
+  "semantic_status": "approved",
+  "approval_date": "2026-09-05",
+  "approval_basis": "The user approved the 70 manual-review entries, then approved the remaining 70 candidates and requested careful verification.",
+  "stage": "read_only_preflight",
+  "selected_buckets": ["candidate", "manual_review"],
+  "expected_counts": {"candidate": 70, "manual_review": 70, "value_mappings": 140, "variable_mappings": 21},
+  "inputs": {
+    "review": {"path": "data/processing/cses/value_mapping_review_v1/review.json", "sha256": "aec4d1184e3675ec30b69e79291c41c5838edebc9be45d42f3b0e1bc68fdd81f"},
+    "manual_decisions": {"path": "data/processing/cses/value_mapping_manual_decisions_v1/decisions.json", "sha256": "08fe761b003e737122e90bdf3f936c74cbba59ed16f4659886c67d2fcdfbaa51"},
+    "review_spec": {"path": "rsc/specs/cses_value_mapping_review_v1.json", "sha256": "1750e20fb0a48fa26cad93f7fe32d49e92b06206d9227ca11920dcacc443e620"},
+    "manual_spec": {"path": "rsc/specs/cses_value_mapping_manual_decisions_v1.json", "sha256": "be63b02f41e638acecb7679bc0f06e67ce22a3620a39decfe96f2b04e090883f"}
+  },
+  "additional_labels": {"biogas": "Biogas"},
+  "interpretation_notes": {
+    "electricity": "Grid electricity and generator electricity retain the approved category keys as labels for public/city supply and private generation/generator source categories. They do not establish grid connection, provider ownership, off-grid status, or generator technology.",
+    "other": "Other remains a field- and wave-specific residual. Equal category names do not imply identical residual contents across waves.",
+    "compound_fuels": "Firewood and charcoal, gas and electricity, and kerosene or diesel remain separate from each component category; do not split their frequencies.",
+    "none": "Lighting None and cooking None/don't cook are substantive responses in different fields, not missingness reasons.",
+    "encoding": "The 2019 cooking label None/don?t cook retains its exact source spelling; the approved alias only normalizes the displayed category.",
+    "draft": "The 20 selected 2014 rows retain provisional questionnaire provenance despite semantic approval.",
+    "skip": "Retain all 46 selected skip annotations. Category acceptance does not determine eligibility or an analytical denominator.",
+    "code_nine": "2016 lighting code 9 is Biogas; 2021 lighting code 9 is Other. The corrected 2004 missing sentinel is excluded from this category release.",
+    "no_technology_inference": "Source categories do not by themselves define clean fuel, renewable energy, or an access indicator. Such derived classifications require an analytical definition."
+  },
+  "publication_design": {
+    "value_role": "Auxiliary semantic dictionary for existing numeric source-code fields; no recoding of physical table values.",
+    "history": "Append a release-specific copy of each of the 21 effective source rules and attach 140 value mappings to those new identities. Keep existing source rules and correction provenance intact.",
+    "ddl_changes": 0,
+    "physical_data_updates": 0,
+    "alignment_releases": 1,
+    "load_runs": 1,
+    "total_appended_records": 163,
+    "later_execution_steps": ["Version the implementation and all evidence in Git/DVC", "Verify a scoped backup of the four affected metadata tables", "Bind the publication transaction to a fresh plan and current database fingerprints", "Append the exact planned records, independently validate, and export the next lineage version"]
+  }
+}

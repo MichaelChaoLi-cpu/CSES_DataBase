@@ -46,6 +46,16 @@ mapping, and one load run retain its provenance without replacing the original m
 read-only validation passed. Cross-wave categories and unresolved codes still require semantic review;
 the historical audit is not an approval of canonical value mappings.
 
+A correction-aware local value-mapping review now partitions all 208 code rows into 70 candidate label
+interpretations, 70 manual-review rows, 52 unresolved rows, and 16 missing-evidence rows. Raw-source and
+current database checks passed; every row remains proposed and non-publishable. The review does not
+change `mda` or graph v5 and currently awaits Git/DVC version synchronization.
+
+All 140 substantive entries (70 manually qualified rows and 70 candidates) have since received semantic
+approval, with their original evidence limitations retained. Detailed source verification and a
+read-only publication preflight passed for 21 versioned source rules and 140 value mappings. The
+52 blocked and 16 missing-only rows remain excluded. No value mapping has yet been imported.
+
 ## Start here
 
 - [Database architecture and schema decision](docs/cses-database-architecture.md)
@@ -55,6 +65,11 @@ the historical audit is not an approval of canonical value mappings.
 - [Baseline metadata import runbook](docs/cses-baseline-metadata-runbook.md)
 - [Lineage export runbook](docs/cses-lineage-export-runbook.md)
 - [Housing value audit runbook](docs/cses-value-audit-runbook.md)
+- [Housing value mapping review runbook](docs/cses-value-mapping-review-runbook.md)
+- [Current housing value review](data/processing/cses/value_mapping_review_v1/review.md) (local DVC-owned artifact)
+- [Value mapping review preflight v0.9](docs/releases/cses-value-mapping-review-preflight-v0.9.md)
+- [Approved housing manual-review decisions v1](docs/releases/cses-value-mapping-manual-decisions-v1.md)
+- [Approved 140-entry scope and publication preflight](docs/releases/cses-value-mapping-preflight-v0.10.md)
 - [Lighting correction runbook](docs/cses-lighting-correction-runbook.md)
 - [Lighting correction release v1](docs/releases/cses-lighting-correction-v1.md)
 - [Housing code comparison](data/processing/cses/value_audit_v1/code_review.md) (DVC artifact)
