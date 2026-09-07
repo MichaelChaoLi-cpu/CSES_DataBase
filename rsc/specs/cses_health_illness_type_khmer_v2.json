@@ -1,0 +1,15 @@
+{
+  "review_id": "cses-health-illness-type-khmer-v2",
+  "publication_approved": false,
+  "upstream_manifest_sha256": "d6bead367ec333fb64ce984ab0c376299e36815b0b4b836307e0b1a1835b6018",
+  "questionnaire_id": "253ed542d52c8f46",
+  "questionnaire_sha256": "162c3c5217dcd454fa509b695f7eca7ba476a42682ab002fadf9a59814bfcfda",
+  "sheet": "13 HEALTH CARE SEEKING_EXPE-2",
+  "locators": ["B3", "B5", "B9", "B27", "B30", "F9", "F24", "F30", "B46", "B47"],
+  "mapping": {
+    "19": {"khmer": "ជម្ងឺកូវីដ-១៩", "english_gloss": "COVID-19 (reported)", "category": "covid19_reported_khmer2021"},
+    "20": {"khmer": "គ្រុនផ្តាសាយ", "english_gloss": "Flu/cold (Khmer questionnaire category)", "category": "flu_cold_khmer2021"},
+    "21": {"khmer": "ជំងឺផ្សេងទៀត (បញ្ជាក់)...", "english_gloss": "Other diseases (specify)", "category": "other_specified_khmer2021"}
+  },
+  "qualification": "Direct Khmer-form evidence for 2021 only. English form is discordant at code 19 and native labels stop at 18. English glosses are review translations, not official English codes or clinical diagnoses. Do not map codes 22-73 to other or transfer a shifted 2019 dictionary. Keep the original conservative eligibility flag and add a separate version-qualified flag."
+}

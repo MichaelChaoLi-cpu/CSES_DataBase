@@ -1,0 +1,47 @@
+{
+  "plan_id": "cses-health-illness-table-preflight-v1",
+  "target_schema": "cses_data",
+  "target_table": "cses_health_illness_source_v1",
+  "source_topic": "illness_care",
+  "stage": "designed_and_preflighted_not_published",
+  "database_publication_authorized": false,
+  "expected_source_records": {
+    "2004": 74719,
+    "2007": 17401,
+    "2009": 57082,
+    "2011-12": 16327,
+    "2013": 17225,
+    "2014": 53968,
+    "2016": 16985,
+    "2017": 16909,
+    "2019": 44548,
+    "2021": 43695
+  },
+  "columns": [
+    {"name": "survey_wave", "type": "text", "nullable": false, "meaning": "Survey wave, not a longitudinal follow-up identifier."},
+    {"name": "household_id", "type": "text", "nullable": false, "meaning": "Source hhid normalized with the existing wave-specific minimum width; raw hhid retained."},
+    {"name": "person_id", "type": "text", "nullable": false, "meaning": "Source persid normalized with the existing wave-specific minimum width; raw persid retained."},
+    {"name": "source_id", "type": "text", "nullable": false, "meaning": "Local immutable source identity; not cses_meta.dataset_id."},
+    {"name": "source_row_number", "type": "bigint", "nullable": false, "meaning": "One-based row position in the original Stata member."},
+    {"name": "source_archive", "type": "text", "nullable": false, "meaning": "Original archive path relative to the repository."},
+    {"name": "source_member_chain", "type": "jsonb", "nullable": false, "meaning": "Ordered archive-member chain, including nested ZIP members."},
+    {"name": "source_sha256", "type": "text", "nullable": false, "meaning": "SHA-256 of the original Stata member bytes."},
+    {"name": "raw_record", "type": "jsonb", "nullable": false, "meaning": "All native fields with original case, values and nulls; numeric sentinels are unchanged."},
+    {"name": "hh_link_matched", "type": "boolean", "nullable": false, "meaning": "Household-wave key occurs in the checked HH snapshot."},
+    {"name": "hl_link_status", "type": "text", "nullable": false, "meaning": "matched, person_not_in_roster, or household_conflict against the checked HL snapshot."},
+    {"name": "roster_household_id", "type": "text", "nullable": true, "meaning": "HL household ID for the same wave/person; null if the person is absent."},
+    {"name": "questionnaire_evidence_status", "type": "text", "nullable": false, "meaning": "Local form availability only; not question-specific semantic approval."},
+    {"name": "harmonization_status", "type": "text", "nullable": false, "meaning": "Always native_codes_not_harmonized in this source-layer table."}
+  ],
+  "primary_key": ["source_id", "source_row_number"],
+  "unique_key": ["survey_wave", "household_id", "person_id"],
+  "foreign_keys": [],
+  "policy": [
+    "Retain every source row, including unmatched people; do not synthesize records for roster-only people.",
+    "Do not attach population characteristics or weights to unmatched people through household-only matching.",
+    "Do not replace native codes, infer cross-wave questions, transfer 2016 wording to 2017, or assume zero for absence.",
+    "This version requires zero extended Stata missing codes; a new explicit representation is required if they appear.",
+    "New source datasets, variable metadata, output registry, release and load-run records are required before publication.",
+    "The preflight does not perform DDL, INSERT, COPY, UPDATE or DELETE and does not authorize a named release."
+  ]
+}

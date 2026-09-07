@@ -1,0 +1,29 @@
+{
+  "module_code": "HEALTH",
+  "stage": "source_intake_not_harmonized",
+  "database_publication_authorized": false,
+  "dedicated_leaf_patterns": {
+    "illness_care": "illness|healthexpenses",
+    "healthcare_access": "personhealthcare",
+    "maternal_health": "maternalhealth",
+    "child_feeding_vaccination": "healthu2|childcare|feedingvaccinations",
+    "child_measurements": "healthu5|health5years|healthcheckchildren",
+    "disability": "disability",
+    "tobacco": "smoke",
+    "hiv_aids": "hivaids",
+    "fertility": "fertility",
+    "mortality": "mortality",
+    "accidents": "accidents"
+  },
+  "village_leaf_pattern": "health|medical|medicine",
+  "mixed_household_leaf_pattern": "otherinfo|other info|singlequestions",
+  "mixed_household_question_prefix": "q13a",
+  "scope_notes": [
+    "Dedicated source files retain every native column and row, including context fields.",
+    "Mixed household files expose only native q13a fields plus available identifiers and weights in Parquet; originals remain complete.",
+    "Village medical filenames establish candidate scope, not service-access versus medicine-price semantics.",
+    "Health questions embedded in other modules, violence, consumption diaries and integrated village datasets remain a separately flagged discovery queue.",
+    "No source presence, equal variable name, code label or sheet name certifies cross-wave comparability.",
+    "Physical field occurrences, records, distinct identifiers and actual respondents are different counts."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "review_id": "cses-health-illness-type-v1",
+  "database_publication_authorized": false,
+  "screening_manifest_sha256": "93ce63be2aaa9e3d16058cc70a88948cb23d7b82c62fdf4045a251886bbd78c1",
+  "core18_labels": ["Respiratory", "High blood pressure", "Diabetic", "Heart diseases", "TB", "HIV/AIDS", "Miningitis", "Malaria", "Diarrhea", "Dengue-Fever", "Cholera", "Typhoid", "Liver cancer", "Lung cancer", "Cervical cancer", "H1N1", "H5N1", "Chikungunya"],
+  "core18_categories": ["respiratory", "high_blood_pressure", "diabetes_reported", "heart_diseases", "tuberculosis_reported", "hiv_aids_reported", "meningitis_reported", "malaria_reported", "diarrhoea", "dengue_fever_reported", "cholera_reported", "typhoid_reported", "liver_cancer_reported", "lung_cancer_reported", "cervical_cancer_reported", "h1n1_reported", "h5n1_reported", "chikungunya_reported"],
+  "five_categories": ["symptom_fever", "symptom_cough", "diarrhoea", "symptom_flu", "other_in_five_option_list"],
+  "waves": {
+    "2004": {"fields": ["q14a07"], "family": "early_28day_41", "status": "separate_broader_28day_question", "option_cells": ["AD5", "AK5", "AR5"], "context_cells": ["AD4", "AD16", "AG15"], "missing_codes": [99]},
+    "2007": {"fields": ["q14ac07a", "q14ac07b", "q14ac07c", "q14ac07d", "q14ac07e"], "family": "unverified_five_slots", "status": "blocked_no_household_form", "option_cells": [], "context_cells": [], "missing_codes": []},
+    "2009": {"fields": [], "family": "absent_from_illness_section", "status": "not_collected_in_reviewed_section", "option_cells": [], "context_cells": [], "missing_codes": []},
+    "2011-12": {"fields": ["q13bc2b"], "family": "five_symptom_categories", "status": "qualified_distributed_2011_form", "option_cells": ["AX16"], "context_cells": ["AX8", "AX9", "AX22", "AX26"], "missing_codes": []},
+    "2013": {"fields": ["Q13BC2B"], "family": "five_symptom_categories", "status": "form_supported_five_categories", "option_cells": ["AX16"], "context_cells": ["AX8", "AX9", "AX22", "AX26"], "missing_codes": []},
+    "2014": {"fields": ["q13bc2b"], "family": "five_symptom_categories", "status": "qualified_draft_form", "option_cells": ["AX16"], "context_cells": ["AX8", "AX9", "AX22", "AX26"], "missing_codes": []},
+    "2016": {"fields": ["q13bc2b"], "family": "detailed_19", "status": "form_supported_nineteen_categories", "option_cells": ["AU46", "BE46", "BN46"], "context_cells": ["AX8", "AX9", "AX19", "AX22", "AX26"], "missing_codes": []},
+    "2017": {"fields": ["Q13BC2B"], "family": "unverified_detailed", "status": "blocked_no_household_form", "option_cells": [], "context_cells": [], "missing_codes": []},
+    "2019": {"fields": ["q13bc2b"], "family": "native_dictionary_72", "status": "qualified_native_labels_only", "option_cells": [], "context_cells": [], "missing_codes": []},
+    "2021": {"fields": ["q13bc2b"], "family": "core18_plus_unresolved_extensions", "status": "partial_form_and_native_core18", "option_cells": ["C42"], "context_cells": ["I7", "I8", "I15", "I25"], "missing_codes": []}
+  }
+}
