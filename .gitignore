@@ -12,3 +12,9 @@ __pycache__/
 .DS_Store
 /data
 /etc
+
+# Local SQL scripts and query outputs
+*.[sS][qQ][lL]
+# Required source inputs for schema migration and regression tests
+!/rsc/sql/cses_schema_v1.sql
+!/rsc/sql/cses_public_to_functional_v1.sql
