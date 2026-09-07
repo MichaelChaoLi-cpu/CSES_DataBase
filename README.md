@@ -14,6 +14,125 @@ The project separates four kinds of state:
 
 ## Current status
 
+The [HEALTH database release and variable brief](docs/cses-health-database-release.md) is the current
+entry point for illness/care publication: ten sources, 358,859 person-wave records, a 41-column
+qualified analysis interface and graph v15. It adds three physical tables and two views without
+changing the seven core tables. Two HEALTH concepts are reviewed, neither equivalent across all ten waves.
+
+The [2021 illness dictionary v2](docs/cses-health-2021-dictionary-recovery.md) recovers three codes
+from the Khmer form, with 3,097 additional version-qualified usable records and 1,053 still unresolved.
+
+The [second HEALTH variable review](docs/cses-health-illness-type.md) adds a partial illness-type
+crosswalk, preserving changing classification families and unresolved 2021 codes. The new named
+release publishes these qualified results, not an all-ten-wave harmonization claim.
+
+The [first HEALTH variable review](docs/cses-health-recent-illness.md) adds a local recent-illness/injury
+crosswalk: four form-supported waves and 134,977 conservative usable person-wave records. Qualified
+or unverified waves remain separate. This historical local review is now consumed by the named HEALTH release.
+
+The new [HEALTH source-intake module](docs/cses-health-module.md) provides 68 native source datasets
+under `data/processed/cses_health/v1/`, without changing the seven published core tables. The
+[extracted questionnaire library](data/processed/cses_questionnaires/v1/README.md) provides per-wave
+originals and searchable cells for routine review without reopening archives. Only the ten illness/care
+sources are included in the new database release; the other HEALTH topics remain local.
+
+The first [illness/care table design and preflight](docs/cses-health-illness-preflight.md) now retains
+358,859 source records in a local table draft. Five people absent from HL and 66 roster records
+without health rows are explicitly recorded. This historical read-only plan is preserved and is
+now implemented by the separate authorized HEALTH publisher.
+
+Start with the [variable brief](docs/cses-variable-brief.md) for current alignment scope and
+record denominators, and the [280-field inventory](docs/cses-variable-inventory.md) for individual
+definitions and non-null counts. The seven core tables contain 358,920 HL member-wave records and
+77,904 HH household-wave records; these are not counts of actual people interviewed. The
+[15-question-link publication plan](docs/cses-questionnaire-batch-plan.md) has passed read-only
+preflight but has not changed the published catalog.
+
+The [education alignment review](docs/cses-education-alignment.md) examines nine ED fields across ten
+waves, including 48 question correspondences in seven English forms. Its reviewed 30-record
+current-level code-21 correction is now available in the additive
+[corrected ED interface](docs/cses-education-corrected-interface.md),
+`cses_analysis.cses_ed_aligned_v1` (343,204 rows, 37 columns), and a matching versioned Parquet.
+The 2014 draft qualification is retained; eight 2017 records remain unresolved. Original physical
+tables, public compatibility views and the earlier age-only ED view still retain the old values.
+No question links or historical metadata records were changed by this interface release.
+
+The first [employment screening brief](docs/cses-employment-screening-alignment.md) reviews four of
+39 employment fields, 28 question-wave correspondences and 40 field-wave profiles across 332,903 EC
+records. The 2021 paid/unpaid-work distinction, changing search periods and routing restrictions
+prevent treating equal option codes as fully comparable meanings.
+
+The second [hours, workdays and status brief](docs/cses-employment-hours-status-alignment.md) adds seven
+fields, 49 field/question correspondences (46 distinct printed items) and 70 field-wave profiles.
+Together the two batches examine 11 of 39 employment fields, leaving 28 for subsequent batches;
+reviewed fields are not certified as comparable across all ten waves. The new review identifies an
+omitted 2009 secondary-days alias with 13,830 recoverable values, 256 retained 2004 status cells
+labelled missing, and six 2004 total-hours records labelled 96+.
+
+Those three issues are now handled in the [corrected EC interface](docs/cses-employment-corrected-interface.md),
+`cses_analysis.cses_ec_aligned_v1` (332,903 rows, 74 columns). A versioned auxiliary table supplies
+13,830 same-wave secondary-day values; separate interpreted status fields qualify the 185 main-job
+and 71 secondary-job missing codes, and six total-hours records receive 96+ lower-bound/exact-value
+qualifications. Original status codes and hours, all 35 pre-existing physical relations and historical
+interfaces remain unchanged. The auxiliary table is a 36th physical relation, not an eighth core
+table or an addition to the historical 22-entry storage registry. Four versioned rule rows and the
+execution/graph evidence retain its provenance. See the
+[EC publication record](docs/releases/cses-employment-recovery-qualified-v1.md).
+
+The 2,412 retained hours-reconciliation inconsistencies and unverified hourly 98/99 exclusions are
+not changed. Earlier general, ED, screening and hours/status briefs remain preserved snapshots;
+use the corrected interface supplement for current values and denominators.
+
+The third [occupation, industry and employer-type brief](docs/cses-employment-classification-alignment.md)
+adds six fields, bringing review coverage to 17 of 39 employment fields (22 remaining). It records
+42 question correspondences, 60 field-wave profiles, 774 retained labelled-missing/not-stated cells,
+12 unlabelled observed code cells and an omitted 2007 long-format source with 11,949 job rows for
+10,174 people. All selected values match the original EC table and current corrected view in read-only
+checks. That review remains a preserved pre-publication snapshot.
+
+The subsequent [classification correction](docs/cses-classification-corrected-interface.md) publishes
+`cses_analysis.cses_ec_classification_v1` (332,903 rows, 86 columns), with 774 explicit missing-code
+interpretations in new fields and all 74 prior columns preserved. The omitted 2007 source is recovered
+in `cses_ec_jobs_2007_source_v1` and its diagnostic view `cses_ec_jobs_2007_v1`: all 11,949 job-index
+rows remain, including 65 index/count conflicts and 21 index-2-only rows. The 2007 main/secondary
+wide fields are deliberately not filled without verified job-index meanings. No all-wave classification
+crosswalk is published. The additional source table is the 37th physical CSES relation, preserving
+the prior 36 and historical metadata. See the
+[release evidence](docs/releases/cses-employment-classification-qualified-v1.md) and graph v14.
+
+The next [one-variable review: main job works the whole year](docs/cses-main-job-whole-year.md)
+raises EC review coverage to 18 of 39 fields (21 remaining). The already stored binary field has
+124,104 non-null member-wave responses across seven waves: 85,793 Yes and 38,311 No. Five forms
+support the question/options, with the 2014 draft and 2021 screening/gate wording qualifications
+retained. No new database values, question links or graph version are published by this review.
+
+The [seasonality review and local alignment](docs/cses-main-job-seasonal.md) raises coverage to
+19 of 39 EC fields (20 remaining). `main_job_was_usual_past_7_days` is a misleading legacy name
+for question 10c about seasonal work; its stored Yes/No polarity is correct. A local 89-column
+projection and equivalent read-only SQL preserve all 86 current interface columns and add an
+evidence-qualified seasonal alias plus evidence/route flags. The alias covers 29,061 reported values
+in five question-supported waves, while all 38,176 original values remain available in the legacy
+field. The 2017 question is unverified and the 2019 Stata label is truncated before “seasonal”.
+Route exceptions remain visible. The review also records 13 nonbinary raw codes previously
+converted to NULL (12 in 2019 and one in 2021); these are not reinterpreted as Yes/No.
+No persistent database alias or graph v15 is published.
+
+The [main-job abroad review](docs/cses-main-job-abroad.md) raised detailed EC review coverage to
+20 of 39 fields (19 remaining). The existing field describes the location of the main job, not the
+ownership of its employer. It has 123,829 non-null values: 3,086 Yes and 120,743 No. Its independent
+OR-screen gate does not require a seasonal response or whole-year No. The brief records six
+outside-route responses in the five inspected-question waves and three nonbinary source codes
+previously converted to NULL in 2019. No database values or published graph nodes are changed.
+
+The [final 19-field review](docs/cses-employment-remaining-review.md) completes the **39/39 EC
+business-variable review queue**, with [190 field-wave profiles](docs/cses-employment-remaining-field-waves.md).
+This is review completion, not a claim that every field is fully harmonized or all corrections are
+published. Findings include the secondary-seasonal naming error, 244 total-count and four search-method
+values explicitly labelled missing, 398 empty search-method slots stored as zero, 14 count-suppressed
+secondary answers, and qualified earlier-source recovery candidates. All 19 fields and their context
+match the original table and current view in read-only checks. Original data, releases and graph v14
+remain unchanged; the report separates evidence-backed correction proposals from unresolved recoveries.
+
 The raw archive set matches the eleven CSES archives used by the earlier `MJ02b` database work. This
 repository reproduces and validates the seven core local table artifacts. The original baseline
 matched the earlier Parquet release value for value after normalizing the intentional raw-path change.
@@ -38,7 +157,16 @@ to the 2014 draft.
 The catalog records 201 approved value mappings across 31 dictionary source rules, nine alignment
 releases and nine load runs. Three recovered 2007 code tables, the nested 2013 questionnaire and both
 2021 language questionnaires are registered. Historical gap reports remain preserved.
-The current lineage projection is graph v10: 4,838 nodes and 7,627 edges, exported twice identically.
+The age-qualification projection is preserved as graph v11: 4,843 nodes and 7,640 edges. Its five
+views retain explicit 96+ interpretation for three 2004 members. The preserved graph v12 has 4,845
+nodes and 7,644 edges, exported twice identically. It adds the corrected ED interface and its
+evidence-rule view; see the
+[ED publication record](docs/releases/cses-education-current-postgraduate-v1.md) for independently
+verified counts and topology. The EC correction extends this projection to graph v13, with 4,848
+nodes and 7,654 edges, exported twice identically; the
+[EC publication record](docs/releases/cses-employment-recovery-qualified-v1.md) records the current
+export and validation results. Existing physical data and earlier interfaces, including housing v4,
+remain unchanged by these additive interface releases.
 
 The preserved pre-correction housing value audit compares lighting, cooking fuel, and tenure across
 all ten waves: 30 source profiles, 100 located questionnaire options, and 208 code rows. It identifies 10
@@ -97,6 +225,22 @@ or imputed. Whole-database semantic completion is not claimed.
 
 ## Start here
 
+- [Corrected EC interface, population counts and query examples](docs/cses-employment-corrected-interface.md)
+- [EC recovery/qualification publication and graph v13](docs/releases/cses-employment-recovery-qualified-v1.md)
+- [Corrected education interface and query examples](docs/cses-education-corrected-interface.md)
+- [Education correction publication and graph v12](docs/releases/cses-education-current-postgraduate-v1.md)
+- [Employment screening brief: first four fields and comparability limits](docs/cses-employment-screening-alignment.md)
+- [Employment field-wave counts, option counts and source locators](docs/cses-employment-screening-field-waves.md)
+- [Employment hours, workdays and status: second batch and correction candidates](docs/cses-employment-hours-status-alignment.md)
+- [Hours/status field-wave counts and source locators](docs/cses-employment-hours-status-field-waves.md)
+- [Occupation, industry and employer type: third batch variable brief](docs/cses-employment-classification-alignment.md)
+- [Classification field-wave counts, dictionaries and 2007 recovery candidates](docs/cses-employment-classification-field-waves.md)
+- [Current classification interpretations and recovered 2007 job-index source](docs/cses-classification-corrected-interface.md)
+- [Classification/source-job publication evidence and graph v14](docs/releases/cses-employment-classification-qualified-v1.md)
+- [Questionnaires by wave and current question-alignment workbench](docs/cses-questionnaire-organization.md)
+- [Resolved question ambiguities, HH/HL foundations and age-top-code qualification](docs/cses-questionnaire-review.md)
+- [Published 2004 age-96+ analysis interface](docs/cses-age-topcode.md)
+- [Age interface publication and graph v11](docs/releases/cses-age-2004-topcode-v1.md)
 - [Core table readiness inventory and prioritized work queue](docs/cses-readiness-inventory.md)
 - [Current housing v4 interface and 2021 resolution](docs/cses-housing-2021-resolution.md)
 - [2021 publication and graph v10](docs/releases/cses-housing-2021-resolution-v1.md)

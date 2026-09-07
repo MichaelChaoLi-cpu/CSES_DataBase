@@ -13,9 +13,10 @@ alignment release, and a successful load run.
 | Layer | Location | Owner | Rule |
 |---|---|---|---|
 | Raw survey archives | `data/raw/` | DVC | Immutable; read archive members in memory |
+| Extracted questionnaire library and HEALTH intake | `data/processed/` | DVC | Hash-verified local originals and source-grain artifacts; not automatically approved for analysis |
 | Processing and release evidence | `data/processing/`, `data/releases/` | DVC | Reproducible outputs, not hand-edited truth |
 | Mapping specifications | `rsc/specs/` | Git | Reviewable, deterministic, and versioned |
-| Loader, validators, SQL, tests | `rsc/` | Git | No research-project-specific analysis |
+| Loader, validators, tests and required schema SQL | `rsc/` | Git | Standalone SQL examples and generated projections are local/ignored; preserve the two required migration SQL inputs |
 | Current approved state | PostgreSQL `mda` | Database | Transactional source of truth after publication |
 | Lineage graph snapshots | `data/lineage/` | DVC | Deterministic read models; never write back |
 | Architecture, operations, releases | `docs/` | Git | English project record |
@@ -52,6 +53,12 @@ link does not by itself approve cross-wave comparability.
 
 ### 2. Catalog physical variables
 
+- When original ZIPs and manually extracted copies coexist, use the explicit
+  [archive-first source policy](cses-archive-source-policy.md). It verifies matching extraction
+  paths and identical bytes before excluding aliases; frozen legacy code and source files remain intact.
+- For new questionnaire and HEALTH reviews, start with the
+  [extracted library and native-source workbench](cses-health-module.md). Use cache-only verification
+  for routine checks; rebuild from archives only for explicit recovery or a new source version.
 - Read Stata metadata and source variables at their native grain.
 - Preserve original names, labels, storage types, value labels, position, and observation counts.
 - Record unreadable files and unsupported formats as visible inventory states.

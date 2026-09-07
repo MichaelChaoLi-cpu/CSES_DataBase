@@ -2,7 +2,129 @@
 
 [Documentation index](README.md) · [Architecture](cses-database-architecture.md) · [Processing workflow](cses-processing-workflow.md)
 
-## Current 2021 housing resolution
+## Current HEALTH extension: graph v15
+
+Graph v15 has **5,118 nodes and 8,000 edges** (+265 nodes and +323 edges).
+
+The [HEALTH database release](cses-health-database-release.md) extends the preserved graph v14 with
+ten registered illness/care datasets, 248 native source variables, three physical objects, two
+analysis views, a release and a load run. It retains every historical graph node and edge. The
+HEALTH brief shows source → storage → qualified analysis and the separate questionnaire-evidence branch.
+
+The sections below describe historical releases and local reviews as they stood at graph v14;
+their “local only” statements are superseded for illness/care by the named HEALTH release.
+Other unimplemented employment proposals remain local.
+
+## Preserved classification and job-source interfaces (v14)
+
+The new [HEALTH intake and questionnaire library](cses-health-module.md) has a separate local
+processing topology. Its 68 native-source artifacts and extracted questionnaire files are not newly
+published database relations. They do not change the graph v14 counts below.
+
+The [illness/care table preflight](cses-health-illness-preflight.md) adds only a local source-table
+draft and HH/HL linkage diagnostics. Its five retained unmatched people and 66 roster-only records
+are not new database relations or published graph edges.
+
+The [first HEALTH variable crosswalk](cses-health-recent-illness.md) adds a separate local screening
+projection and processing diagram, with four form-supported waves and 12 retained record exceptions.
+Its qualified/unverified branches are explicit; no new PostgreSQL graph version is published.
+
+The [illness-type review](cses-health-illness-type.md) consumes that pinned screening projection
+and adds a local code crosswalk, an all-row type projection and 4,184 review-queue records. Its 18
+corresponding detailed labels are categories of one concept, not 18 database variables or new graph nodes.
+
+The [Khmer-form illness-type v2](cses-health-2021-dictionary-recovery.md) adds a separate local
+version-conflict evidence branch and recovers 2021 codes 19–21. Its type-review queue has 1,087
+records; the 4,184-record v1 queue is preserved. This does not change published graph v14.
+
+Graph v14 has **4,853 nodes and 7,677 edges** and extends v13 with the
+[classification and job-source correction](cses-classification-corrected-interface.md).
+It preserves all prior nodes and edges and adds five nodes and 23 edges. The new 86-column EC view
+uses the preserved 74-column EC view; the 2007 job diagnostic view uses that same EC view and the
+new source-job table. These three SQL dependencies are distinct from 14 source-label evidence links,
+the logical rule-to-view link and the original archive-member-to-source-table link.
+
+The 11,949-row source-job table is the 37th CSES physical relation; all 36 pre-existing physical
+relations and the historical storage registry remain unchanged. Its archive-member node is explicitly
+an unregistered source artifact, not a fabricated canonical dataset registration. The 774 missing-code
+interpretations use separate fields. The 2007 primary/secondary pivot remains unverified and is not
+a published dependency. See the [publication evidence](releases/cses-employment-classification-qualified-v1.md).
+
+The subsequent [main-job whole-year review](cses-main-job-whole-year.md) records five question
+locators and seven reproduced raw-column mappings for one already stored field. Its local process
+diagram adds no database dependencies or published graph nodes. It raised EC review coverage to
+18 of 39 fields.
+
+The [seasonality review](cses-main-job-seasonal.md) raised coverage to 19 of 39 fields. It corrects
+the misleading “usual” meaning through a local/SELECT-only 89-column projection of the current
+86-column classification interface. The five-wave seasonal alias, evidence status and nullable route
+flag are not persistent database objects. Its local evidence diagram must not be mistaken for a
+published SQL dependency; the later HEALTH release extends graph v14 without publishing this proposal.
+
+The [main-job abroad review](cses-main-job-abroad.md) raised coverage to 20 of 39 fields.
+It verifies the existing binary field and its separate OR-screen gate. Its questionnaire-routing
+diagram explains why whole-year Yes bypasses seasonal 10c but still enters abroad 10d; it adds no
+database objects or graph nodes. Previous reviews remain preserved under the later HEALTH extension.
+
+The [remaining employment review](cses-employment-remaining-review.md) completes **39 of 39 EC
+fields reviewed**. Its 190 field-wave profiles and questionnaire-routing diagram are local audit
+outputs, not database objects. The secondary-seasonal rename, explicit missing/control-code
+interpretations and earlier-source recoveries have not been published by the HEALTH extension;
+review completion is separate from correction publication and full cross-wave comparability.
+
+## Preserved workday/status/hour correction
+
+Graph v13 has **4,848 nodes and 7,654 edges**. The EC extension adds an auxiliary recovery table and
+two analysis views while preserving all v12
+nodes and edges. The [EC interface diagram](cses-employment-corrected-interface.md) separates the
+two actual SQL dependencies (existing EC age view and recovery table) from the logical evidence-rule
+link. The four rule records also link to original source variables, including the previously omitted
+2009 `q15_c17`. See the [publication record](releases/cses-employment-recovery-qualified-v1.md) for
+the graph v13 checksum and independent validation results.
+
+The auxiliary table increases the physical CSES relation count from 35 to 36 without changing the
+35 historical relations or their catalog records. It is a versioned analysis-support table, not a new
+core table. Its provenance is exposed through the source-rule view and execution/graph evidence;
+the historical 22-entry storage registry remains a preserved canonical-release registry.
+
+## Preserved corrected education interface
+
+Graph v12 has **4,845 nodes and 7,644 edges**. It preserves every v11 node and edge and adds two
+analysis views, two schema-exposure links, one database-verified dependency on the existing age ED
+view, and one explicitly logical correction-rule link. The rule view stores three qualified source
+rules; it is not a new physical-table mapping release. See the
+[corrected ED contract](cses-education-corrected-interface.md) and
+[publication evidence](releases/cses-education-current-postgraduate-v1.md).
+
+```mermaid
+flowchart LR
+    ED["Original physical ED<br/>343,204 rows; unchanged"] --> AGE["cses_ed_age_v1<br/>34 columns; preserved"]
+    AGE --> NEW["cses_ed_aligned_v1<br/>37 columns; 30 corrected values"]
+    RULE["cses_ed_current_level_rule_v1<br/>3 source rules; 2014 draft retained"] -.->|"logical evidence, not SQL join"| NEW
+    ED --> OLD["public.final_ED_CSES<br/>old values retained"]
+```
+
+The [first employment screening review](cses-employment-screening-alignment.md) and
+[second hours/status review](cses-employment-hours-status-alignment.md) remain preserved local
+evidence snapshots. Their process diagrams are not additional published database dependencies.
+The three bounded candidates from the second batch are handled by the later EC interface described
+above. The review snapshots themselves did not publish database changes.
+
+The [third EC classification review](cses-employment-classification-alignment.md) adds a local evidence
+diagram for six occupation/industry/employer fields, the 2009 coding workbook and the omitted 2007
+person/job-index source. It raises review coverage to 17 of 39 employment fields, but publishes no
+new database edges, dictionaries, recovery table or cross-wave classification in that review snapshot.
+The later graph v14 release publishes labelled-missing interpretation and intact job-index source rows;
+the proposed 2007 main/secondary pivot remains separate work.
+
+## Preserved age-qualification interface
+
+Graph v11 has **4,843 nodes and 7,640 edges**. It preserves graph v10 and adds five age-analysis/evidence
+views, their schema-exposure links, four verified physical-table dependencies and four separately
+labeled logical rule links. The 2004 age-96+ qualification changes no physical values or prior metadata.
+See the [age interface](cses-age-topcode.md) and [publication evidence](releases/cses-age-2004-topcode-v1.md).
+
+## Preserved 2021 housing resolution
 
 Graph v10 has **4,838 nodes and 7,627 edges**. It adds two 2021 language instruments, four
 questions, two reviewed source links, one biogas mapping release/run and two v4 analysis views.
