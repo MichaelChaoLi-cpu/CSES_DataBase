@@ -1,0 +1,32 @@
+{
+  "review_id": "cses-education-questionnaire-review-v1",
+  "database_publication_authorized": false,
+  "canonical_data_changes_authorized": false,
+  "sheet": "02 Education",
+  "education_builder_sha256": "8ce595114053b8b12dee1b8f371920538f86318788e543eb690f00707a29c592",
+  "fields": ["can_read", "can_write", "ever_attended_school", "years_attended_school", "highest_education_level_source_code", "currently_attending_school", "current_education_level_source_code"],
+  "layouts": {
+    "2004": {"minimum_age": 5, "universe": "A2", "respondent": "AA1", "code_row": 15, "question_row": 3, "columns": ["C", "G", "K", null, "O", "X", "AB"], "options": ["C8", "G8", "K8", null, "O5", "X8", "AB5"], "holiday": "X10", "never_skip_question": 10, "current_no_skip_question": 10, "extra_notes": []},
+    "2009": {"minimum_age": 3, "universe": "A4", "respondent": "H3", "code_row": 19, "question_row": 5, "columns": ["C", "G", "K", "N", "Q", "Z", "AD"], "options": ["C11", "G11", "K11", "N12", "Q7", "Z10", "AD7"], "holiday": "Z12", "never_skip_question": 11, "current_no_skip_question": 11, "extra_notes": []},
+    "2011-12": {"minimum_age": 3, "universe": "A4", "respondent": "G3", "code_row": 22, "question_row": 5, "columns": ["F", "I", "L", "O", "R", "AB", "AF"], "options": ["F11", "I11", "L11", "O12", "R7", "AB10", "AF7"], "holiday": "AB12", "never_skip_question": 11, "current_no_skip_question": 11, "extra_notes": []},
+    "2013": {"minimum_age": 3, "universe": "A4", "respondent": "G3", "code_row": 22, "question_row": 5, "columns": ["F", "I", "L", "O", "R", "AB", "AF"], "options": ["F11", "I11", "L11", "O12", "R7", "AB10", "AF7"], "holiday": "AB12", "never_skip_question": 11, "current_no_skip_question": 11, "extra_notes": []},
+    "2014": {"minimum_age": 3, "universe": "A4", "respondent": "G3", "code_row": 22, "question_row": 5, "columns": ["F", "I", "L", "O", "R", "AB", "AF"], "options": ["F11", "I11", "L11", "O12", "R7", "AB10", "AF7"], "holiday": "AB12", "never_skip_question": 11, "current_no_skip_question": 11, "extra_notes": []},
+    "2016": {"minimum_age": 3, "universe": "A4", "respondent": "G3", "code_row": 22, "question_row": 5, "columns": ["F", "I", "L", "O", "R", "AB", "AF"], "options": ["F11", "I11", "L11", "O12", "R7", "AB10", "AF7"], "holiday": "AB12", "never_skip_question": 11, "current_no_skip_question": 11, "extra_notes": []},
+    "2021": {"minimum_age": 3, "universe": "B3", "respondent": "J2", "code_row": 27, "question_row": 10, "columns": ["F", "I", "L", "O", "R", "AB", "AF"], "options": ["F16", "I16", "L16", "O17", "R12", "AB15", "AF12"], "holiday": "AB17", "never_skip_question": 11, "current_no_skip_question": 11, "extra_notes": ["C5", "C6", "C7", "C8"]}
+  },
+  "unreviewed_household_form_waves": {
+    "2007": "No located household questionnaire; released values and labels are not substitutes for verified routing.",
+    "2017": "No located household questionnaire; earlier housing-only transfer is not extended to education.",
+    "2019": "Registered image-based DOCX bundle requires page transcription; no other wave is substituted."
+  },
+  "correction_candidate": {
+    "field": "current_education_level_harmonized",
+    "source_code": 21,
+    "source_label": "Postgraduate studies",
+    "questionnaire_supported_waves": ["2013", "2014", "2016"],
+    "provisional_waves": ["2014"],
+    "current_group": 7,
+    "proposed_group": 6,
+    "status": "proposed_only_requires_separate_approval_and_publication"
+  }
+}

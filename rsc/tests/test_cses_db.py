@@ -148,6 +148,7 @@ def test_no_legacy_raw_root_in_ported_code() -> None:
         "compare_reference_release.py",
         "correct_cses_housing_lighting.py",
         "publish_cses_housing_interface.py",  # View join comparison only; h.* retains original paths.
+        "review_cses_education.py",  # Read-only comparison only; never writes paths or canonical data.
     }
     for path in MODULE_ROOT.glob("*.py"):
         if path.name in comparison_files:
