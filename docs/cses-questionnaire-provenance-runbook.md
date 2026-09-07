@@ -1,5 +1,12 @@
 # CSES Questionnaire Provenance Runbook
 
+This is the preserved original v1 publication procedure. Its source counts and gaps describe that
+historical release, not current questionnaire availability. For the reorganized ten-wave sources,
+current 171-question checks and local candidate crosswalks, start with
+[questionnaire organization](cses-questionnaire-organization.md). That workbench does not mutate
+PostgreSQL; current published-state validation is in the [age interface runbook](cses-age-topcode.md).
+Do not rerun this historical planner/importer against the expanded catalog or weaken its gates.
+
 ## Purpose
 
 This release connects the DVC-pinned questionnaire files to the existing functional metadata model. It

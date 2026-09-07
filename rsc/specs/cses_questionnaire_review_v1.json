@@ -1,0 +1,32 @@
+{
+  "review_id": "cses-questionnaire-review-v1",
+  "baseline": "data/processing/cses/questionnaire_alignment_v1",
+  "input_sha256": {
+    "registry.json": "127354a1a066bc070daf9dbc1a770bb4bffd3e7d346cba582afabdb7e4f6fda4",
+    "source_inventory.json": "5f5b809901f1e5f65058cf31b6c0874c26286d83c98b62ad4d60a84431d11b63",
+    "source_cells.json": "05c1857ece1c9c37b4b1e9e0420e936239155d8ce256cb210842e0486ab059b0",
+    "alignment.json": "60d1f8368c40aeaec1f65597e48729ee6b12cf30761c566be56ecf0d2afd6c19"
+  },
+  "question_resolutions": [
+    {"source_variable_id": 100, "sheet": "02 Education", "code_cell": "C44", "text_cell": "C32", "context_cells": ["A30", "C38"], "reason": "A26 is member row 11, not question 11. The continued education table labels column 11 at C44."},
+    {"source_variable_id": 101, "sheet": "02 Education", "code_cell": "F44", "text_cell": "F32", "context_cells": ["A30", "F38"], "reason": "A27 is member row 12, not question 12. The continued education table labels column 12 at F44."},
+    {"source_variable_id": 206, "sheet": "04 HH Ec. Activ", "code_cell": "AA21", "text_cell": "AA10", "context_cells": ["B3", "AA14"], "reason": "B58 is plot row 9 in the continued land table. Its nearby crop-section instruction is not the ownership-paper question."},
+    {"source_variable_id": 207, "sheet": "04 HH Ec. Activ", "code_cell": "AF21", "text_cell": "AF10", "context_cells": ["AA14", "AF12"], "reason": "B59 is plot row 10, not question 10. Column 10 asks the kind of ownership or rental paper."},
+    {"source_variable_id": 313, "sheet": "13 Econ. Status", "code_cell": "AJ15", "text_cell": "AJ5", "context_cells": ["B3", "S11", "AJ11", "AJ14"], "reason": "A25 is member row 10. The following occupation-section wording does not belong to the desired-hours column."},
+    {"source_variable_id": 316, "sheet": "13 Econ. Status", "code_cell": "AS15", "text_cell": "AS4", "context_cells": ["B3", "AS9", "AS11"], "reason": "A27 is member row 12. Column 12 asks the number of occupations, not the following occupation description."},
+    {"source_variable_id": 412, "sheet": "05 Liabilities & 06Other income", "code_cell": "A2", "text_cell": "B2", "context_cells": ["A1", "R3", "R4", "A39", "C41", "C49"], "reason": "C49 is the source-number column of section 06 in a combined sheet. Section 05 question 1 is A2/B2."},
+    {"source_variable_id": 415, "sheet": "08 Construction", "code_cell": "A3", "text_cell": "B3", "context_cells": ["AC3", "AG3", "B22", "B33"], "reason": "B33 repeats a building identifier (printed as column 1). It is not the household-level ownership question A3/B3."},
+    {"source_variable_id": 1857, "sheet": "04 Housing", "code_cell": "A6", "text_cell": "B6", "context_cells": ["A1", "AA57", "AA80", "AA134"], "reason": "AA80 and AA134 are numbered time-use columns, not housing question Q1. Preserve the nested 2013 data-member chain."}
+  ],
+  "identifier_resolutions": [
+    {"source_variable_id": 199, "label": "PLOT NUMBER", "occurrences": [["04 HH Ec. Activ", "B21", "B10"], ["04 HH Ec. Activ", "B49", "B38"]]},
+    {"source_variable_id": 854, "label": "PLOT NUMBER", "occurrences": [["05 A_ Land", "AP19", "AP3"], ["05 A_ Land", "A40", "A29"], ["05 A_ Land", "AP40", "AP29"], ["05 A. Land_2", "A17", "A5"], ["05 A. Land_2", "A38", "A26"]]},
+    {"source_variable_id": 1186, "label": "PLOT NUMBER", "occurrences": [["05 A_ Land", "AP19", "AP3"], ["05 A_ Land", "A40", "A29"], ["05 A_ Land", "AP40", "AP29"], ["05 A_ Land_2", "A17", "A5"], ["05 A_ Land_2", "A37", "A26"]]},
+    {"source_variable_id": 1611, "label": "PARCEL NUMBER", "occurrences": [["05 A_ Land", "AP19", "AP3"], ["05 A_ Land", "A40", "A29"], ["05 A_ Land", "AP40", "AP29"], ["05 A_ Land_2", "A17", "A5"], ["05 A_ Land_2", "A39", "A28"]]},
+    {"source_variable_id": 1908, "label": "PLOT NUMBER", "occurrences": [["05 A_ Land", "AP19", "AP3"], ["05 A_ Land", "A40", "A29"], ["05 A_ Land", "AP40", "AP29"], ["05 A_ Land_2", "A17", "A5"], ["05 A_ Land_2", "A39", "A28"]]},
+    {"source_variable_id": 2259, "label": "PARCEL NUMBER", "occurrences": [["05 A_ Land", "AP19", "AP3"], ["05 A_ Land", "A40", "A29"], ["05 A_ Land", "AP40", "AP29"], ["05 A_ Land_2", "A17", "A5"], ["05 A_ Land_2", "A39", "A28"]]},
+    {"source_variable_id": 3896, "label": "PARCEL NUMBER", "occurrences": [["05 A_ Land (1)", "A45", "A34"], ["05 A_ Land (2)", "A19", "A3"], ["05 A_ Land (2)", "A41", "A30"], ["05 A_ Land (3)", "A20", "A8"], ["05 A_ Land (3)", "A40", "A29"]]}
+  ],
+  "publication_authorized": false,
+  "whole_variable_harmonization_certified": false
+}
