@@ -4,6 +4,65 @@
 
 ## Decision status
 
+The [published health screening interface](cses-health-screen-interface.md), release 28,
+retains all 571,699 member-wave records in 43 columns and qualifies a bounded eight-wave
+30-day subset of 308,955 records. Two new tables and five views have 197 source-output edges
+and additive release/storage/load metadata. The source bridge preserves selected native
+branch values absent from earlier JSON; old tables and interfaces are not overwritten.
+Distinct four-week concepts, 2017's unverified form, 2019's code conflict, 66 missing-health
+members and five source orphans remain explicit. The accepted pilot and preflight are
+preserved separately rather than re-labelled as production releases.
+
+The [unified fifteen-wave education interface](cses-education-unified-interface.md), release 26
+on 2026-10-18, preserves 571,699 member-wave records in one 77-column analysis view with eight
+targets. Four additive source/rule/audit tables support three views; 141 source-output edges
+reuse existing dataset identities. The 120-row matrix and 360-row coverage view expose field
+availability, form scope and denominators. Strict 2017 values remain withheld; the accepted
+positive-years conflict guard blocks two people's four inferred values. A native bridge
+preserves evidence lost by earlier cleaning without rewriting canonical tables. All prior
+relations, privileges and registry prefixes remain unchanged; select the new interface
+explicitly to use this contract rather than assuming older views inherit it.
+
+The [five-wave literacy and observed school-years interface](cses-additional-literacy-years.md),
+release 24 on 2026-10-18, adds 20 source rules and two analysis views. It preserves all 212,779
+members, keeps legacy combined literacy separate from modern component-derived conjunctions,
+and qualifies observed completed years without skip or grade imputation. Publisher revision 2
+uses the existing `source_dictionary` and `alignment_summary` metadata families; database
+constraints, original answers and all previous interfaces remain unchanged.
+
+The [five-wave education-level interface](cses-additional-education-levels.md), release 21
+on 2026-10-18, adds a native
+level codebook, a member-level analysis view and a field-level coverage view. It keeps
+highest attainment and current study separate, preserves all 212,779 members and source codes,
+and records source/form numbering differences and field-specific route qualifications.
+Existing source data and interfaces remain unchanged; no ISCED equivalence is certified.
+
+The [five-wave school attendance interface](cses-additional-school-attendance.md), release 19
+on 2026-10-18, adds a member
+view, coverage view and source-rule view. It preserves all 212,779 roster records, uses the
+published 2025 age selection, and separates observed, skip-derived, unresolved and out-of-age
+records. Source/storage/load metadata is additive. Original education tables and all earlier
+interfaces remain unchanged; no unrestricted school-concept equivalence is certified.
+
+The additive [2025 age selection](cses-2025-age-interface.md), release 17 on 2026-10-18, introduces one source bridge,
+one person-age view and one field-rule view, with release/storage/source-output/load metadata.
+It selects native calculated age for all 51,775 members while preserving original manual ages
+and keeping calculation/reference-date/top-code verification flags false. No existing table,
+view or public compatibility interface is replaced. Use the new age view explicitly.
+
+Current additional-wave release (2026-10-03): the approved
+[qualified publication](cses-additional-waves.md#additional-wave-database-release), release ID 14,
+adds seven module tables for 1996/1997/1999/2023/2025, a geography bridge, an original-EC audit table,
+two evidence/mapping tables and three geography views. Existing ten-wave tables remain unchanged;
+the v2 person-geography interface covers all 15 waves. Native JSON-array keys and qualified fields
+are not forced into the older physical contracts. Survey/source/storage/load metadata is additive.
+
+Current additive geography interface (2026-10-03): the approved
+[geography release](cses-additional-waves.md#geography-interface-release-approved-scope) adds a
+2004 household-level source supplement and household/person/coverage views. Existing physical
+tables and public compatibility interfaces remain unchanged. Select the new views explicitly to
+use recovered 2004 geography; the five additional-wave candidates are not published by this release.
+
 **Status: Accepted and implemented on 2026-09-04.** The four functional schemas are active in `mda`,
 the 22 scoped physical relations have moved, and exact-name `public` compatibility views are validated.
 

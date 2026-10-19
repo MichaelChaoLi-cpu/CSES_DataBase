@@ -1,7 +1,139 @@
 # CSES Database Build Infrastructure
 
-This directory contains the reusable local build inherited from the validated `MJ02b` CSES work. The
-source archives in this repository are byte-identical to the eleven archives used by that project.
+This directory contains the reusable local build inherited from the validated `MJ02b` CSES work.
+Its historical baseline uses eleven byte-identical archives from that project. Five additional
+archives now have a separate [qualified publication workflow](../../docs/cses-additional-waves.md).
+Use `build_cses_additional_waves.py`, not the historical builders, for those new waves.
+
+The [published health screening interface](../../docs/cses-health-screen-interface.md),
+release 28, uses `publish_cses_health_screen_v2.py`. Publication adds two tables, five views,
+197 source-output edges and release/storage/load metadata. The frozen first formal executor
+stopped on a redundant orphan anti-join uniqueness query; revision 2 retains full exact-row
+and unique-key validation, uses new-table statistics and preserves all SQL and source values.
+Normal operations are read-only: `publish_cses_health_screen_v2.py validate` and
+`validate_cses_health_screen_native.py` (fresh native-source and independent scalar checks).
+Do not rerun publication or use the superseded first executor's rehearsal/validation actions.
+
+For the [local fifteen-wave health screening pilot](../../docs/cses-health-all-waves-pilot.md),
+`pilot_cses_health_all_waves.py` preserves the initial native-source candidate and
+`pilot_cses_health_all_waves_v2.py` adds separately checked 2012 questionnaire evidence.
+Use `validate_cses_health_all_waves.py --database` for the prerequisite first acceptance,
+then `validate_cses_health_all_waves_v2.py --database` for the current candidate. Native-source
+and scalar checks are independent of the vector classifier; database transactions are forced
+read-only. These scripts have no publication action. Do not mix four-week concepts, adjudicate
+the 2019 option conflict, borrow a form for 2017 or turn missing health rows into healthy No.
+
+For the separate [health-screen preflight](../../docs/cses-health-screen-preflight.md),
+`rebuild_cses_questionnaire_archive_cache.py` preserves v1 and builds a fully checked cache.
+`audit_cses_health_release.py` checks annual native inputs and full negative-screen skip ranges;
+`audit_cses_health_database_inputs.py` records missing stored branch inputs with read-only SQL.
+`prepare_cses_health_screen_interface.py` supplies `build` and `prepare` for the frozen v2
+preflight. Its old `rehearse` action stopped on canonical-JSON object ordering and is retained
+only as historical code: use `rehearse_cses_health_screen_v3.py build` then `rehearse` instead.
+The revised plan adds a five-wave native-input bridge, and rehearsal unconditionally rolls back.
+There is deliberately no production publication or formal registry action in this tool.
+
+For the published [fifteen-wave education interface](../../docs/cses-education-unified-interface.md),
+`publish_cses_education_unified.py` has separate `build`, `prepare`, `rehearse`, `publish`
+and read-only `validate` actions. It pins the accepted pilot and creates only additive
+objects, with a full backup and matching rollback receipt required before publication.
+The independent SQL policy lives in `cses_education_all_waves_sql.py`.
+`validate_cses_education_unified.py` independently checks fresh native inputs and scalar
+decisions; add `--database` for read-only published/source/geography acceptance. Release 26
+is already committed: use only the two validation paths, not another publication attempt.
+Keep the 2017 withholding, positive-years conflict guard and separate four-record orphan audit.
+
+The [fifteen-wave local education prototype](../../docs/cses-education-all-waves-pilot.md)
+uses `pilot_cses_education_all_waves.py` for native verification and the first immutable
+candidate, then `pilot_cses_education_all_waves_v2.py` for the current positive-years conflict
+guard. Use `validate_cses_education_all_waves.py --database` for the prerequisite first receipt
+and `validate_cses_education_all_waves_v2.py --database` for current independent acceptance.
+Database transactions are forced read-only under `mda_readonly`; there is no publication action.
+Keep the 2017 form gap, raw responses, four ED orphans and all old interfaces intact.
+
+For [literacy and observed school years](../../docs/cses-additional-literacy-years.md),
+`align_cses_additional_literacy_years.py` builds 20 field-wave rules and the local projection.
+Run `validate_cses_additional_literacy_years.py --local` before the separate publication
+preflight/backup/rehearsal actions in `publish_cses_additional_literacy_years_v2.py`. After
+publication use only its `validate` action and the independent validator without `--local`.
+Do not split legacy combined answers, recode undefined writing 0 to No, or impute skipped
+school years from a gate or grade. Existing outputs and source catalogs remain unchanged.
+The frozen first publisher remains a shared SQL helper and first-attempt audit record;
+its registration path failed rollback rehearsal. Use revision 2, which keeps the existing
+`source_dictionary` metadata family and separate execution/rehearsal evidence.
+
+For [highest attainment and current study](../../docs/cses-additional-education-levels.md),
+use `align_cses_additional_levels.py` for the 188-entry native dictionary and local qualified
+projection, then `publish_cses_additional_levels.py` for separate preflight/backup/rehearsal/
+publication actions. After publication use only `validate` and the independent
+`validate_cses_additional_levels.py` (or its database-free `--local` acceptance). The selected
+1996 source lacks current grade; no synthetic grade or degree equivalence is created.
+
+For the [five-wave school attendance interface](../../docs/cses-additional-school-attendance.md),
+`align_cses_additional_school.py` builds the source-verified local projection and rules;
+`publish_cses_additional_school.py` provides separate preflight, backup, rollback rehearsal,
+publication and read-only validation actions. After publication use only its `validate` action
+and `validate_cses_additional_school.py` for independent source/scalar-logic acceptance.
+Do not replace historical builders or rewrite original education answers to resolve skips.
+
+The [2025 age interface](../../docs/cses-2025-age-interface.md) has its own additive workflow:
+`publish_cses_2025_age_v2.py`. Use its `validate` action and `validate_cses_2025_age.py` for read-only
+acceptance. Do not republish an existing target or rerun the original five-wave publication to
+fix age selection. The new view selects native `age`; formula/reference-date/top-code flags
+remain unverified, and all original columns and values are preserved.
+The frozen `publish_cses_2025_age.py` is the transaction engine, not the current entry point;
+its standalone source-v1 diagnostic was rolled back and never published.
+
+The approved additive five-wave release is published as alignment release ID 14. For current
+read-only verification, use `publish_cses_additional_waves.py validate` and
+`validate_cses_additional_analysis.py`. The latter checks per-wave counts and critical scope
+qualifications as `mda_readonly`. Do not rerun `prepare`, `rehearse` or `publish` on this existing
+release. Preserve its immutable plans, backup and validation evidence under `data/releases/`.
+
+For the read-only sex/age/school comparability pilot, run `experiment_cses_alignment.py`.
+Its local aggregate report identifies the sparse published 2025 age field and school-denominator
+sensitivity; native calculated age is used only for a local scenario, never a database update.
+That pilot and its evidence stay historical; the later age interface is documented separately.
+
+`audit_cses_source_gaps.py` checks supplied archive CRCs/hashes, cached document coverage, all
+171 selected-field missingness profiles and focused native routing patterns. It writes local
+aggregate evidence only and flags the unresolved 2025 treatment-sought scope.
+
+## Retrieve missing questionnaire materials
+
+The [current materials checklist](../../docs/cses-questionnaire-organization.md) separates
+actual missing forms from draft/year qualifications and instruments not used in a given wave.
+Open the [questionnaire collection index](../../data/processed/cses_questionnaires/README.md)
+for archive-free access to historical caches and additive retrievals.
+
+With Python providing `pypdf`, run from the project root:
+
+```bash
+python rsc/cses_db/retrieve_cses_questionnaire_materials.py \
+  --plan rsc/specs/cses_questionnaire_retrieval_initial_six_v1.json
+```
+
+The plan pins six NIS PDFs for 1997, 1999 and 2011 by SHA-256, page count and cover evidence.
+Original bytes are kept in `data/raw/questionnaire_supplements/20261016/`; library copies,
+literal per-page text and manifests are under `data/processed/cses_questionnaires/official_retrieval_v1/`.
+Existing differing files are not overwritten. Network retrieval is needed only for absent raw files.
+
+`archive_cses_1997_questionnaire_bundle.py` extracts a 12-page village scan from physical pages
+5-16 of the NIS-authored IHSN bundle. `archive_cses_2019_village_questionnaire.py` extracts physical
+pages 202-211 of the official 2019/20 report (nine image-based form pages and one blank verso).
+Each script documents its source URL and expected local input path; originals and separate
+extraction manifests are retained. The local QA helper at
+`data/processing/cses/materials_retrieval_20261016/archive_followup_qa.py` checks hashes, renders
+all 73 form pages and compares both extracts pixel-for-pixel with their source pages.
+These operations do not connect to PostgreSQL, alter historical hash-pinned caches, certify
+variable mappings, or update Git/DVC versions.
+
+`archive_cses_priority_search_evidence.py` registers the later 2017/2021/2023 follow-up references:
+the unchanged 312-page Khmer 2021 report and a third-party paper citing the 2017 household form.
+It explicitly records **zero newly recovered missing original forms**. The large report is retained
+once under raw and linked from the library index; it must not be committed to Git. The
+[priority search ledger](../../data/processing/cses/materials_priority_search_20261016/README.md)
+records appendix-screening boundaries, retired/unavailable routes and the eight remaining targets.
 
 ## Boundary
 

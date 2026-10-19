@@ -2,7 +2,122 @@
 
 [Documentation index](README.md) · [Architecture](cses-database-architecture.md) · [Processing workflow](cses-processing-workflow.md)
 
-## Current HEALTH extension: graph v15
+## Published health screening interface
+
+The [published health topology](cses-health-screen-interface.md#objects-and-source-lineage),
+release 28, connects the unchanged ten-wave source and a 212,779-row five-wave native-input
+bridge to a 571,638-row source view and all 571,699 members. Fifteen rules support the
+43-column member view, 45 denominator rows, 15-wave matrix and five source orphans.
+Seven new objects have 197 registered source-output edges. The eight-wave strict subset
+has 308,955 records; other periods, unverified 2017 scope and 2019 conflicts remain separate.
+All earlier relations and historical machine-readable topology exports remain preserved.
+
+## Local fifteen-wave health screening comparison
+
+The [local screening topology](cses-health-all-waves-pilot.md#local-topology-and-reproduction)
+connects 571,638 native health rows, the existing 571,699-member roster/age contract and
+fifteen instrument rules to a 43-column local candidate and 45 coverage rows. Five source
+orphans stay separate; 66 members without health rows remain in the roster. Current v2
+adds reviewed 2012 evidence and supports an eight-wave, 308,955-record strict 30-day subset.
+Different four-week concepts, the 2019 option conflict and unverified 2017 form remain
+explicit. This graph is local processing lineage, not a new database dependency or release.
+
+## Published fifteen-wave education interface
+
+The [unified education topology](cses-education-unified-interface.md#lineage-and-release-evidence),
+release 26 on 2026-10-18, connects the unchanged older roster, a 358,920-row native bridge,
+the existing newer five-wave sources, 120 source rules and 564 native level codes to one
+571,699-member view, 360 coverage rows and a 120-row matrix. Four unmatched ED records remain
+in a separate audit. Seven new objects have 141 source-output edges and additive release/load
+metadata. The view withholds strict 2017 results and two people's conflicting inferences;
+old objects and historical topology exports remain unchanged.
+
+## Preserved local fifteen-wave education prototype
+
+The [local education topology](cses-education-all-waves-pilot.md#local-artifacts-and-topology)
+connects old and newer native sources, reviewed form evidence and a 120-cell matrix to the
+571,699-member roster prototype and 360 denominator rows. Four unmatched ED records remain
+in a separate audit. The current revision adds a positive-years conflict guard and withholds
+strict 2017 results pending form evidence. This is local-only: no database dependency, release
+registry or historical machine-readable graph has been modified.
+
+## Additional wave literacy and observed school years
+
+The [literacy and school-years topology](cses-additional-literacy-years.md#database-use-and-provenance),
+release 24 on 2026-10-18, connects 20 field-wave rules, native ED values and published age/linkage
+context to a 212,779-row member view and 40 denominator rows. Observed combined literacy,
+derived modern conjunctions and independent skills remain distinct. Observed school years
+are not derived from grades or skipped answers. The three outputs have additive storage,
+source-output and release/load records; historical graph exports and existing interfaces are preserved.
+
+## Additional wave educational levels
+
+The [level-code topology](cses-additional-education-levels.md#database-interface-and-source-evidence)
+connects 188 native code meanings and the unchanged school context to separate highest/current
+qualifications for 212,779 members and ten field-wave denominator rows. Source labels, code
+differences and unknowns remain explicit. Storage/source-output/load records are additive;
+the historical machine-readable graphs and existing views are preserved.
+
+## Additional wave school attendance
+
+The [school attendance topology](cses-additional-school-attendance.md#database-use-and-provenance), release 19,
+connects the unchanged five-wave HL/ED sources, published 2025 age selection and five
+questionnaire rules to a 212,779-row qualified member view and 15-row denominator view.
+Skip-derived values and unresolved routes are explicit. Source-output metadata is additive;
+no physical education values or historical lineage files are overwritten.
+
+## 2025 age source extension
+
+The [age source and analysis interface](cses-2025-age-interface.md#source-lineage-and-release-evidence)
+adds a 51,775-row native-age bridge and a qualified person-age view, using the existing roster
+and cover dataset registrations. A field-rule view pins the evidence hash. Additive storage,
+dataset-output and release/load records retain database provenance; the historical graph and
+all prior relations are preserved. The first-visit date comparison is diagnostic, not an
+automatic age correction or a certified electronic calculation formula.
+
+## Additional-wave extension (2026-10-03, release 14)
+
+The [qualified five-wave publication](cses-additional-waves.md#additional-wave-database-release)
+adds 45,444 households and 212,779 roster records without rewriting the older ten-wave tables.
+
+```mermaid
+flowchart LR
+    A["Five immutable archives"] --> C["173 datasets / 5,427 native variables<br/>Existing source catalogs"]
+    A --> P["33 wave/module candidates<br/>Age, route and 2023 reviews"]
+    P --> D["Seven typed module tables<br/>Native fields + explicit qualifications"]
+    P --> E["171 field mappings / 45 evidence documents<br/>Original 2023 EC audit rows retained"]
+    A --> G["45,444 household geography rows<br/>Exact native-key correspondence"]
+    D --> N["Additional person-geography v1"]
+    G --> N
+    N --> V["Person-geography v2<br/>15 waves / 571,699 records"]
+    L["Unchanged ten-wave geography v1"] --> V
+    B["Read-only county/commune boundaries<br/>Reference dates; no village geometry claim"] --> N
+    C --> R["Release 14 / storage / dataset-output edges / load run"]
+    E --> R
+    D --> R
+```
+
+This is a documentation overview, not a replacement of the immutable machine-readable graph v15.
+Current provenance is registered in PostgreSQL and in the release manifests. The geography views
+do not certify historical village identity, and the field-mapping catalog does not assert universal
+cross-wave comparability. Both earlier graph exports and earlier view versions remain intact.
+
+## Geography interface extension (2026-10-03)
+
+The [geography release](cses-additional-waves.md#geography-interface-release-approved-scope)
+adds one source table and three views. The registered 2004 single-question dataset supplies
+`cses_data.cses_geography_2004_source_v1`, which joins the preserved HH table by wave/household.
+The resulting `cses_analysis.cses_household_geography_v1` joins the preserved HL table to expose
+`cses_person_geography_v1`; `cses_geography_coverage_v1` summarizes the latter by wave.
+County and commune reference dimensions remain external, read-only dependencies. No village
+geometry node or spatial-location assertion is introduced.
+
+The release, storage table, original-dataset contribution and load run are registered in `cses_meta`.
+The previously exported graph v15 below is a historical snapshot and does **not** include this new
+extension; it has not been overwritten. Use the release evidence and current PostgreSQL view
+dependencies for this extension until a separately versioned graph export is produced.
+
+## HEALTH extension: graph v15 (pre-geography snapshot)
 
 Graph v15 has **5,118 nodes and 8,000 edges** (+265 nodes and +323 edges).
 
