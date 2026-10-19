@@ -12,10 +12,174 @@ The project separates four kinds of state:
   analytical relations.
 - Database backups remain external recovery artifacts and are not substitutes for Git or DVC.
 
+## Using the CSES database
+
+The database is **`mda` (PostgreSQL)**. For research, start with the explicitly named
+`cses_analysis` views below, not a publication script. The ingestion and technical validation
+of the approved releases are complete; study-specific adjustments remain a separate research
+decision. This guide reflects the releases validated on **2026-10-18**.
+
+### Connect and inspect safely
+
+For the existing local PostgreSQL instance, connect with your configured database login:
+
+```bash
+psql -X -v ON_ERROR_STOP=1 -d mda
+```
+
+If connecting from another machine, obtain the actual host, port and authorized login from
+the database administrator; they are not supplied by this repository. Do not put credentials
+in Git or DVC. `mda_readonly` is the reader role, not necessarily a directly usable login.
+With a login authorized to assume it, run:
+
+```sql
+BEGIN READ ONLY;
+SET LOCAL ROLE mda_readonly;
+SELECT current_database(), current_user, current_setting('transaction_read_only');
+
+-- Discover the published analysis interfaces and their columns.
+SELECT table_name
+FROM information_schema.views
+WHERE table_schema = 'cses_analysis'
+ORDER BY table_name;
+
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_schema = 'cses_analysis'
+  AND table_name = 'cses_health_screen_unified_v1'
+ORDER BY ordinal_position;
+ROLLBACK;
+```
+
+Run the query examples below inside the same `BEGIN READ ONLY` / `SET LOCAL ROLE` /
+`ROLLBACK` pattern. A login lacking permission to assume the reader role needs administrator
+configuration, not a rerun of ingestion or publication.
+
+### Which relation should I query?
+
+| Research need | Recommended relation | Scope and documentation |
+| --- | --- | --- |
+| Member spine, selected age and education | `cses_analysis.cses_education_unified_v1` | All 15 waves, 571,699 member-wave rows; eight qualified education targets, native inputs and statuses. [Education contract](docs/cses-education-unified-interface.md) |
+| Education availability and denominators | `cses_analysis.cses_education_coverage_v1`, `cses_analysis.cses_education_matrix_v1` | Target/wave coverage, routing and questionnaire evidence; inspect before choosing a denominator. [Coverage definitions](docs/cses-education-unified-interface.md#qualified-coverage-and-use) |
+| Recent illness/injury screening | `cses_analysis.cses_health_screen_unified_v1` | All 15 wave rosters; use `illness_injury_30d_qualified` for the strict eight-wave subset. [Health screening contract](docs/cses-health-screen-interface.md) |
+| Health screening availability and denominators | `cses_analysis.cses_health_screen_coverage_v1`, `cses_analysis.cses_health_screen_matrix_v1` | Age-band denominators, annual statuses and source/form evidence. [Coverage limits](docs/cses-health-screen-interface.md#coverage-and-qualifications) |
+| Province, district, commune and village source codes | `cses_analysis.cses_person_geography_v2`, `cses_analysis.cses_geography_coverage_v2` | All 15 waves; code linkage does not certify historical village entities or village geometry. [Geography contract](docs/cses-additional-waves.md#geography-and-provenance-access) |
+| Employment and occupation/industry interpretations | `cses_analysis.cses_ec_classification_v1` | Historical ten-wave EC scope, 332,903 records; not a unified 15-wave employment interface. [EC contract](docs/cses-classification-corrected-interface.md) |
+| Housing categories | `cses_analysis.cses_housing_categories_v4` | Historical ten-wave housing scope, 77,922 records, including 19 unmatched HH records. [Housing contract](docs/cses-housing-2021-resolution.md) |
+| Historical illness-type/care review | `cses_analysis.cses_health_illness_v1` | Historical ten-wave health-source scope, 358,859 records; not the newer 15-wave screening contract. [Illness/care contract](docs/cses-health-database-release.md) |
+| Household, roster, education, employment, housing or timing source projections | `cses_data` relations described below | Published source projections preserve native codes and qualifications; not every archived variable is materialized. [Variable brief](docs/cses-variable-brief.md) and [additional-wave release](docs/cses-additional-waves.md#additional-wave-database-release) |
+
+The 15 wave labels are `1996`, `1997`, `1999`, `2004`, `2007`, `2009`, `2011-12`,
+`2013`, `2014`, `2016`, `2017`, `2019`, `2021`, `2023` and `2025`. Use `survey_wave`
+as text; `2011-12` is one combined release, not two independent annual samples.
+
+The source projections are deliberately **not one appended set of tables**:
+
+- Historical ten waves (2004 through 2021): `cses_data."final_HH_CSES"`,
+  `"final_HL_CSES"`, `"final_ED_CSES"`, `"final_EC_CSES"`, `"final_HO_CSES"`,
+  `"final_VL_CSES"` and `"final_SURVEY_DATE_CSES"` (each in `cses_data`).
+  HH = household, HL = member roster, ED = education, EC = employment, HO = housing,
+  VL = village-questionnaire/PSU record, SURVEY_DATE = household timing.
+  Module records and non-null fields do not necessarily cover every household or wave.
+- Additional five waves (1996, 1997, 1999, 2023, 2025):
+  `cses_data.cses_additional_hh_v1`, `cses_additional_hl_v1`, `cses_additional_ed_v1`,
+  `cses_additional_ec_v1`, `cses_additional_ho_v1`, `cses_additional_health_v1` and
+  `cses_additional_survey_date_v1` (each in `cses_data`). No new VL records are fabricated;
+  timing records cover only 1996, 2023 and 2025.
+- Exact-name `public` compatibility views preserve the historical interfaces. They do not
+  automatically include the five additional waves or inherit later qualification rules.
+  Do not use `SELECT * ... UNION ALL SELECT * ...` across the two table families: their
+  keys, columns and source meanings differ.
+
+### First queries and joins
+
+```sql
+-- Count the full member spine; then inspect usable answers separately.
+SELECT survey_wave, count(*) AS member_wave_records,
+       count(attendance_qualified) AS usable_attendance_records
+FROM cses_analysis.cses_education_unified_v1
+GROUP BY survey_wave ORDER BY survey_wave;
+
+-- Strict 30-day screening: NULL means unavailable/unqualified, never healthy No.
+SELECT survey_wave, count(*) AS member_wave_records,
+       count(illness_injury_30d_qualified) AS usable_30day_records,
+       count(*) FILTER (WHERE illness_injury_30d_qualified = 1) AS yes_records,
+       count(*) FILTER (WHERE illness_injury_30d_qualified = 0) AS no_records
+FROM cses_analysis.cses_health_screen_unified_v1
+GROUP BY survey_wave ORDER BY survey_wave;
+
+-- Connect modules and geography using the entire member-wave key.
+SELECT e.survey_wave, e.household_key, e.record_key, e.age_for_analysis,
+       e.attendance_qualified, e.attendance_status,
+       h.illness_injury_30d_qualified, h.strict_30d_status,
+       g.admin1_code, g.admin2_code, g.admin3_code, g.admin4_code
+FROM cses_analysis.cses_education_unified_v1 e
+LEFT JOIN cses_analysis.cses_health_screen_unified_v1 h
+  USING (survey_wave, household_key, record_key)
+LEFT JOIN cses_analysis.cses_person_geography_v2 g
+  USING (survey_wave, household_key, record_key)
+WHERE e.survey_wave = '2023'
+ORDER BY e.household_key, e.record_key
+LIMIT 20;
+```
+
+The unified member key is **`(survey_wave, household_key, record_key)`**. Household joins
+use **`(survey_wave, household_key)`** only where the household-side relation is unique at
+that grain. Historical tables instead use `household_id` / `person_id`; consult the
+[key contracts](docs/cses-database-architecture.md#grain-and-key-contracts) before joining
+them. Do not join on ID alone, cast native-component keys or UUIDs to numbers, or assume
+that a matching ID identifies the same person across years. Job-level rows can multiply
+member records and need their own keys.
+
+Read qualified values together with their statuses, route flags and coverage. For example,
+2017 education/health qualification remains withheld, and strict health screening excludes
+2019's unresolved code conflict. Missing answers, inapplicable questions and unresolved
+codes are not interchangeable. Row counts describe member-wave or module records, not
+unique directly interviewed people or a longitudinal panel. These examples are unweighted
+sample diagnostics, not national estimates. Weighting and other study-specific adjustments
+are deferred until a concrete research request; they are not an unfinished ingestion step.
+
+For source and rule tracing, use `cses_meta` (catalog, sources and release/load history)
+and `cses_alignment` (versioned mappings, rules and dictionaries). See the
+[database topology](docs/cses-topology.md) and [questionnaire collection](data/processed/cses_questionnaires/README.md).
+Do not rerun `publish`, `apply`, migration or restore commands to read data.
+
 ## Current status
 
-The [HEALTH database release and variable brief](docs/cses-health-database-release.md) is the current
-entry point for illness/care publication: ten sources, 358,859 person-wave records, a 41-column
+The [published health screening interface](docs/cses-health-screen-interface.md), release 28
+on 2026-10-18, retains all 571,699 member-wave records in a 43-column view, with 308,955 strict
+30-day screening records across eight waves. Seven additive objects have 197 source-output
+edges. The native-input bridge restores selected branch values absent from earlier stored
+JSON without changing original answers or old interfaces. Different four-week concepts,
+2017's unverified form, 2019's code conflict, 66 missing-health records and five source orphans
+remain explicit. This does not harmonize treatment or illness types. The accepted
+[pilot](docs/cses-health-all-waves-pilot.md) and [preflight](docs/cses-health-screen-preflight.md)
+remain historical evidence, including the verified separate archive cache.
+
+The [unified fifteen-wave education interface](docs/cses-education-unified-interface.md),
+release 26 on 2026-10-18, preserves 571,699 member-wave records with eight qualified targets,
+explicit statuses, a 120-row field-wave matrix and 360 coverage rows. It is additive:
+historical interfaces remain unchanged. Strict 2017 values are withheld pending questionnaire
+evidence, and four unmatched education records stay in a separate audit. Use this new
+interface explicitly for its qualification contract; a shared schema is not blanket equivalence.
+
+Five additional waves (1996, 1997, 1999, 2023 and 2025) are now
+[published additively](docs/cses-additional-waves.md#additional-wave-database-release): seven
+qualified module tables, 45,444 households and 212,779 roster records, with 173 source datasets,
+5,427 native variables and 171 field-wave mappings cataloged. This is not blanket cross-wave
+harmonization. The historical ten-wave tables and their counts below are unchanged. The geography
+v2 interface covers all 15 waves and 571,699 member-wave records, without claiming verified village geometry.
+
+A subsequent [read-only analysis pilot](docs/cses-additional-waves.md#read-only-alignment-pilot)
+found that the original five-wave 2025 age projection selected a sparse field while the native
+calculated age is complete. The additive [2025 age interface](docs/cses-2025-age-interface.md)
+now selects that native age, and the unified education view consumes the published age/route
+context. Do not use the original sparse projection for 2025 age-specific denominators.
+The original pilot itself did not modify the database.
+
+The preserved [ten-wave HEALTH release and variable brief](docs/cses-health-database-release.md)
+remains the entry point for its historical illness-type/care contract: ten sources,
+358,859 person-wave records, a 41-column
 qualified analysis interface and graph v15. It adds three physical tables and two views without
 changing the seven core tables. Two HEALTH concepts are reviewed, neither equivalent across all ten waves.
 

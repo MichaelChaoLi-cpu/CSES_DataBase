@@ -2,8 +2,21 @@
 
 Working documentation is written in English and tracked by Git.
 
+For database users, start with the [README database usage guide](../README.md#using-the-cses-database):
+read-only connection, recommended relations, wave coverage, join keys and query examples.
+
 ## Architecture and operations
 
+- [Published health screening interface: 571,699 members, eight strict waves and 197 lineage edges](cses-health-screen-interface.md)
+- [Health screening preflight: verified archive cache, fifteen-wave audit and additive native-input bridge](cses-health-screen-preflight.md)
+- [Local fifteen-wave health screening: strict 30-day subset, separate four-week concepts and unresolved codes](cses-health-all-waves-pilot.md)
+- [Published fifteen-wave education interface: 571,699 members, eight targets, coverage and lineage](cses-education-unified-interface.md)
+- [Local fifteen-wave education prototype: 120-cell comparison matrix, roster coverage and unresolved evidence](cses-education-all-waves-pilot.md)
+- [Five-wave literacy and observed school years: combined items, separate skills and route denominators](cses-additional-literacy-years.md)
+- [Five-wave highest attainment and current study: separate codebooks, grade values and denominators](cses-additional-education-levels.md)
+- [Five-wave current school attendance: age ranges, skip-derived values and explicit denominators](cses-additional-school-attendance.md)
+- [2025 native age selection, 51,775 members and first-visit date qualifications](cses-2025-age-interface.md)
+- [Additional waves 1996, 1997, 1999, 2023 and 2025: database release, record counts, query examples and qualifications](cses-additional-waves.md)
 - [Archive-first source discovery, duplicate extraction safeguards and Git/SQL boundaries](cses-archive-source-policy.md)
 - [HEALTH database release, variable brief, analysis SQL and topology v15](cses-health-database-release.md)
 - [2021 HEALTH dictionary v2: Khmer form recovers codes 19–21; 22–73 remain unresolved](cses-health-2021-dictionary-recovery.md)
@@ -11,7 +24,7 @@ Working documentation is written in English and tracked by Git.
 - [First HEALTH variable: recent illness/injury, four form-supported waves and qualified coverage](cses-health-recent-illness.md)
 - [First HEALTH table design and read-only preflight: 358,859 records and linkage exceptions](cses-health-illness-preflight.md)
 - [HEALTH module, source counts and archive-free questionnaire access](cses-health-module.md)
-- [Extracted questionnaire originals and searchable cells by wave](../data/processed/cses_questionnaires/v1/README.md)
+- [Current questionnaire collection, official retrieval supplements and historical cached originals](../data/processed/cses_questionnaires/README.md)
 - [HEALTH native-source datasets and variable dictionaries by wave](../data/processed/cses_health/v1/README.md)
 - [Complete EC review ledger: final 19 fields checked; 39 of 39 reviewed, corrections still pending](cses-employment-remaining-review.md)
 - [Final 19 fields: 190 wave profiles, options, raw exclusions and questionnaire locators](cses-employment-remaining-field-waves.md)
