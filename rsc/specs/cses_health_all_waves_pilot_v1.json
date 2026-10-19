@@ -1,0 +1,23 @@
+{
+  "version": "cses-health-all-waves-pilot-v1",
+  "database_publication_authorized": false,
+  "historical_outputs_mutable": false,
+  "scope": "Roster-spine local screening comparison only. No treatment, diagnosis, disability or survey-weight harmonization. Preserve distinct reference periods and concepts.",
+  "waves": {
+    "1996": {"variable": null, "family": "no_all_member_recent_illness_screen_in_selected_source", "period_days": null, "form_status": "different_health_topics", "strict_30d": false},
+    "1997": {"variable": "p8c3", "family": "major_illness_injury_or_other_health_problem_4weeks", "period_days": 28, "form_status": "form_reviewed_separate_concept", "strict_30d": false, "no_followups": ["p8c4", "p8c5", "p8c6", "p8c7", "p8c8", "p8c9", "p8c10", "p8c11", "p8c12", "p8c13", "p8c14"]},
+    "1999": {"variable": "p7c3", "family": "illness_injury_or_other_healthcare_need_4weeks", "period_days": 28, "form_status": "form_reviewed_separate_concept", "strict_30d": false, "no_followups": ["p7c4", "p7c5", "p7c6", "p7c7", "p8c9", "p8c10", "p8c11", "p8c12", "p8c13", "p8c14", "p8c15"]},
+    "2004": {"variable": "q14a06", "family": "illness_injury_or_other_health_problem_4weeks", "period_days": 28, "form_status": "historical_form_reviewed_separate_concept", "strict_30d": false, "no_followups": ["q14a07"]},
+    "2007": {"variable": "q14ac06", "family": "illness_injury_or_other_health_problem_4weeks", "period_days": 28, "form_status": "recovered_2007_form_reviewed_separate_concept", "strict_30d": false, "no_followups": ["q14ac07a", "q14ac07b", "q14ac07c", "q14ac07d", "q14ac07e", "q14ac08a", "q14ac08b", "q14ac09", "q14ac10", "q14ac11", "q14ac12"]},
+    "2009": {"variable": "q13bc02", "family": "illness_or_injury_now_or_last_30days", "period_days": 30, "form_status": "historical_form_supported", "strict_30d": true, "no_followups": ["q13bc03", "q13bc04", "q13bc05", "q13bc06"]},
+    "2011-12": {"variable": "q13bc2a", "family": "illness_or_injury_now_or_last_30days", "period_days": 30, "form_status": "qualified_distributed_2011_form_no_separate_2012_confirmation", "strict_30d": false},
+    "2013": {"variable": "Q13BC2A", "family": "illness_or_injury_now_or_last_30days", "period_days": 30, "form_status": "historical_form_supported", "strict_30d": true},
+    "2014": {"variable": "q13bc2a", "family": "illness_or_injury_now_or_last_30days", "period_days": 30, "form_status": "published_report_appendix_supported", "strict_30d": true},
+    "2016": {"variable": "q13bc2a", "family": "illness_or_injury_now_or_last_30days", "period_days": 30, "form_status": "historical_form_supported", "strict_30d": true},
+    "2017": {"variable": "Q13BC2A", "family": "unverified_same_wave_health_questionnaire", "period_days": null, "form_status": "same_wave_form_not_located", "strict_30d": false},
+    "2019": {"variable": "q13bc2a", "family": "illness_or_injury_now_or_last_30days", "period_days": 30, "form_status": "form_period_verified_code2_conflicts_with_native_in_both_sources", "strict_30d": false, "disputed_codes": [2]},
+    "2021": {"variable": "q13bc2a", "family": "illness_or_injury_now_or_last_30days", "period_days": 30, "form_status": "historical_form_supported", "strict_30d": true},
+    "2023": {"variable": "q13bc2a", "family": "illness_or_injury_now_or_last_30days", "period_days": 30, "form_status": "complete_english_form_supported", "strict_30d": true},
+    "2025": {"variable": "q13bc2a", "family": "illness_or_injury_now_or_last_30days", "period_days": 30, "form_status": "matching_health_sheets_paper_scope_supported_electronic_logic_unverified", "strict_30d": true}
+  }
+}

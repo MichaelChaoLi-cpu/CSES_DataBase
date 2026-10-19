@@ -1,0 +1,11 @@
+{
+  "version": "cses-health-all-waves-pilot-v2",
+  "database_publication_authorized": false,
+  "historical_outputs_mutable": false,
+  "base_directory": "data/processing/cses/health_all_waves_pilot_v1",
+  "change": "Add separately reviewed 2012 form evidence to the 2011-12 data-wave screening contract. No source values, identifiers, generic qualifiers, 2019 or 2017 decisions change.",
+  "form_path": "data/raw/CSES 2011-12/Questionnaire/CSES2012_HH_Questionnaire.pdf",
+  "form_page": 39,
+  "visual_path": "data/processing/cses/health_all_waves_pilot_v2/evidence/2012-health-39.png",
+  "review": "Cover explicitly dated 2012. Section13B page39 has the same all-usually-resident-member universe, illness/injury now or last30days prompt, 1Yes/2No, and No skip to7 as the separately cached 2011 form. Printed screen(2)/type(2a) correspond to native2a/2b through the retained historical source review. The combined data-wave label is preserved; no separate 2012 population or records are fabricated."
+}

@@ -1,0 +1,18 @@
+{
+  "version": "cses-health-screen-interface-v1",
+  "publication_authorized": true,
+  "approval": "User explicitly approved formal database publication on 2026-10-18: 我认可，入库吧",
+  "existing_outputs_replaceable": false,
+  "pilot_report_sha256": "073b6a65596ca99c3b99d0806ef9b38712fcaa57ec7243dc582663d44ba49f26",
+  "preflight_execution_sha256": "7a4e5e8d1680c7ab6676e238157f550119c569f1c87736fcf437d3d74e0a8d99",
+  "object_rehearsal_sha256": "7167e7b0a6d64d1f1d3e02404051c6eb6db6cf854ff651c6cd68be12f7ca739e",
+  "scope": "Add the accepted two tables and five views; append release, storage, dataset-output and load metadata. Preserve existing rows, relations, permissions and all frozen pilots/preflights.",
+  "conditions": [
+    "All 571699 members retained; 66 missing-health records stay null and five source orphans stay separate.",
+    "Strict 30-day outcome retains 308955 records across eight waves; no new cross-wave equivalence claim.",
+    "2017 same-wave form scope remains unverified; all 2019 strict values remain withheld and 150 disputed code2 records remain raw.",
+    "Four-week concepts, other 1996 health topics, treatment and illness-type outcomes are not promoted into the strict screen.",
+    "Frozen SQL and native-input bridge are unchanged; complete metadata-inclusive rollback rehearsal must precede formal commit.",
+    "No existing table replacement, Git commit/push or DVC mutation."
+  ]
+}

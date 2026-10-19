@@ -4,6 +4,12 @@
 
 ## Result and scope
 
+For the newer fifteen-wave local comparison, use the
+[health screening pilot](cses-health-all-waves-pilot.md). It incorporates recovered 2007,
+separately reviewed 2012, final-report 2014, image/report 2019 and complete 2023 evidence,
+with explicit unresolved coding. The ten-wave counts and decisions below are preserved
+historical evidence and are not the current local candidate's denominators.
+
 Publication follow-up: this preserved screening projection is included in the separate
 [HEALTH database release](cses-health-database-release.md). The analysis entry point is
 `cses_analysis.cses_health_illness_v1`, using `strict_screening_eligible` for the conservative subset.
