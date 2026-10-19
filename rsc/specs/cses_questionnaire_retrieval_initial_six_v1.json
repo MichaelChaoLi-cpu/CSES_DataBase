@@ -1,0 +1,11 @@
+{
+  "batch": "initial_six_v1",
+  "resources": [
+    {"year":"1997","role":"household_listing","filename":"CSES1997_Household_Listing_ENG.pdf","url":"https://microdata.nis.gov.kh/index.php/catalog/11/download/75","pages":3,"sha256":"ee208f43afbd435092286bb6b99009dc9e2ad11a028a60bf53108ce0fe4a6616","cover_required":["1997","LISTING OF HOUSEHOLDS"]},
+    {"year":"1997","role":"village_questionnaire","filename":"CSES1997_Village_Questionnaire_ENG.pdf","url":"https://microdata.nis.gov.kh/index.php/catalog/11/download/76","pages":11,"sha256":"86d85973f0bd3971e67591a63c2e0a899ad68eae21a15b929b7d9ae9bfbd37a7","cover_required":["1997","VILLAGE QUESTIONNAIRE"]},
+    {"year":"1999","role":"household_listing","filename":"CSES1999_Household_Listing_ENG.pdf","url":"https://microdata.nis.gov.kh/index.php/catalog/12/download/79","pages":4,"sha256":"4dced8777f36ab9f619e6b350e460b8c9bccc6bf16a3173b310dff41bb4c7aba","cover_required":["1999","LISTING OF HOUSEHOLDS"]},
+    {"year":"1999","role":"village_questionnaire","filename":"CSES1999_Village_Questionnaire_ENG.pdf","url":"https://microdata.nis.gov.kh/index.php/catalog/12/download/80","pages":13,"sha256":"ac39f5e8a86d244851a4b0391573f3540658eef1c0b49f66ca65637d15c27892","cover_required":["1999","VILLAGE QUESTIONNAIRE"]},
+    {"year":"2011","role":"village_questionnaire","filename":"CSES2011_Village_Questionnaire_ENG.pdf","url":"https://microdata.nis.gov.kh/index.php/catalog/17/download/117","pages":17,"sha256":"c6d50c5b93b9e6b63c1fe2e79cacedffca402316e0cb2406d640ecb02acb95d3","cover_required":["2011","VILLAGE QUESTIONNAIRE"]},
+    {"year":"2011","role":"household_diary","filename":"CSES2011_Household_Diary_ENG.pdf","url":"https://microdata.nis.gov.kh/index.php/catalog/17/download/118","pages":3,"sha256":"110ddef8af41cbf888ce372633f5c745ef1780f70da413cbc604eb41a786724a","cover_required":["SURVEY 2011","DIARY SHEETS"]}
+  ]
+}
