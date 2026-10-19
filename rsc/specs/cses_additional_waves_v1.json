@@ -1,0 +1,92 @@
+{
+  "version": "cses-additional-waves-v1",
+  "status": "local_candidate_not_published",
+  "country": "Cambodia",
+  "notes": "Explicit native-field correspondences. Binary recodes require attached Yes/No labels. No blanket equivalence, questionnaire approval, weight substitution, or database publication.",
+  "templates": {
+    "modern_hl": {"Sex": ["q01ac03", "sex"], "Age Source Value": ["q01ac05a", "native"], "Relationship to Head Source Code": ["q01ac06", "native"], "Marital Status Source Code": ["q01ac09", "native"], "Ethnicity Source Code": ["q01ac11a", "native"]},
+    "modern_ed": {"Can Read": ["q02c02", "binary"], "Can Write": ["q02c03", "binary"], "Ever Attended School": ["q02c04", "binary"], "Years Attended School Source Value": ["q02c05", "native"], "Highest Education Level Source Code": ["q02c06", "native"], "Currently Attending School": ["q02c07", "binary"], "Current Education Level Source Code": ["q02c08", "native"]},
+    "modern_health": {"Recent Illness Source Response": ["q13bc2a", "native"], "Illness Type Source Code": ["q13bc2b", "native"], "Illness More Than One Year": ["q13bc03", "binary"], "Treatment Sought": ["q13bc06", "binary"], "First Provider Source Code": ["q13bc09a", "native"], "Hospitalized": ["q13bc09c", "binary"]},
+    "modern_ho": {"Floor Area Source Value": ["q04_02", "native"], "Rooms Used Source Value": ["q04_03", "native"], "Wall Material Source Code": ["q04_04", "native"], "Roof Material Source Code": ["q04_05", "native"], "Floor Material Source Code": ["q04_06", "native"], "Main Lighting Source Code": ["q04_07", "native"]}
+  },
+  "waves": {
+    "1996": {
+      "archive": "data/raw/Data of CSES1996.zip",
+      "sha256": "62a887da25297c7c20278b2b82511d080a923140263a76560a9b39585004b533",
+      "household_key": ["province", "district", "commune", "village", "round", "srn"],
+      "person_key": "c01",
+      "note": "Composite household key includes geography, round and sample reference. Combined literacy is not separate reading and writing. Health observations have age-specific universes.",
+      "modules": {
+        "HH": {"member": "qrt01s96_Cover.dta", "grain": "household", "fields": {}},
+        "HL": {"member": "qrt02s96_PersonFile.dta", "grain": "person", "fields": {"Sex": ["c09", "sex"], "Age Source Value": ["c08", "native"], "Relationship to Head Source Code": ["c03", "native"], "Marital Status Source Code": ["c70", "native"]}},
+        "ED": {"member": "qrt02s96_PersonFile.dta", "grain": "person", "fields": {"Can Read And Write Combined": ["c28", "binary"], "Currently Attending School": ["c26", "binary"], "Highest Education Level Source Code": ["c27", "native"]}},
+        "EC": {"member": "qrt02s96_PersonFile.dta", "grain": "person", "fields": {"Worked Any Hour Past Week": ["c32", "binary"], "Had Job Despite Not Working": ["c34", "binary"], "Main Occupation Source Code": ["c36", "native"], "Main Industry Source Code": ["c38", "native"], "Main Employment Status Source Code": ["c40", "native"], "Total Hours Past Week Source Value": ["c65", "native"]}},
+        "HO": {"member": "qrt03s96_Housing.dta", "grain": "household", "fields": {"Floor Area Source Value": ["q07", "native"], "Rooms Used Source Value": ["q06", "native"], "Wall Material Source Code": ["q03", "native"], "Roof Material Source Code": ["q02", "native"], "Floor Material Source Code": ["q04", "native"], "Dwelling Tenure Source Code": ["q08", "native"]}},
+        "HEALTH": {"member": "qrt02s96_PersonFile.dta", "grain": "person", "fields": {"Disability Screening Source Response": ["c10", "native"], "Disability Type Source Code": ["c11", "native"], "Under Five Diarrhoea Last Two Weeks": ["he04", "binary"]}},
+        "SURVEY_DATE": {"member": "qrt01s96_Cover.dta", "grain": "household", "fields": {"First Visit Year Source Value": ["year1", "native"], "First Visit Month Source Value": ["month1", "native"], "First Visit Day Source Value": ["day1", "native"]}}
+      }
+    },
+    "1997": {
+      "archive": "data/raw/Data of CSES1997.zip",
+      "sha256": "cfb40d93fe148b5d02cbcd9e7f4d6704fcdc4379443dc0b24220c62a5370c48d",
+      "household_key": ["hid"], "person_key": "pid",
+      "note": "Combined literacy and combined seeking/availability must not be split into separate indicators. Health symptom categories are not modern diagnoses.",
+      "modules": {
+        "HH": {"member": "C03_head.dta", "grain": "household", "fields": {}},
+        "HL": {"member": "C01_Person1.dta", "grain": "person", "fields": {"Sex": ["sex", "sex"], "Age Source Value": ["age", "native"], "Relationship to Head Source Code": ["real", "native"], "Marital Status Source Code": ["marst", "native"]}},
+        "ED": {"member": "C04_education.dta", "grain": "person", "fields": {"Can Read And Write Combined": ["p4c4", "binary"], "Ever Attended School": ["p4c5", "binary"], "Highest Education Level Source Code": ["p4c6", "native"], "Currently Attending School": ["p4c7", "binary"], "Current Education Level Source Code": ["p4c8", "native"]}},
+        "EC": {"member": "C05_EcomicActivity1.dta", "grain": "person", "fields": {"Worked Any Hour Past Week": ["p5c8", "binary"], "Had Job Despite Not Working": ["p5c9", "binary"], "Seeking And Available Combined": ["p5c10", "binary"]}},
+        "HO": {"member": "C09_HousingEnvirnment.dta", "grain": "household", "fields": {"Floor Area Source Value": ["p10q7", "native"], "Wall Material Source Code": ["p10q9", "native"], "Roof Material Source Code": ["p10q10", "native"], "Floor Material Source Code": ["p10q11", "native"], "Main Lighting Source Code": ["p10q12", "native"], "Drinking Water Source Code Unqualified Season": ["p10q13", "native"], "Toilet Facility Source Code": ["p10q15", "native"], "Main Cooking Fuel Source Code": ["p10q16", "native"]}},
+        "HEALTH": {"member": "C08_Health.dta", "grain": "person", "fields": {"Major Illness Injury Health Problem Source Response": ["p8c3", "native"], "Initial Symptom Source Code": ["p8c4", "native"], "Treatment Sought": ["p8c5", "binary"], "First Provider Source Code": ["p8c7", "native"], "Hospitalized": ["p8c9", "binary"]}}
+      }
+    },
+    "1999": {
+      "archive": "data/raw/Data of CSES1999.zip",
+      "sha256": "75b682dc81166091afa921d86c00dcf7294f11088e691939d953de39949e40e2",
+      "household_key": ["hid"], "person_key": "pid",
+      "note": "C01 roster chosen explicitly; combined C01_C02 variant audited separately. Age code 98 means 98 or older. Health screening includes other health-care needs.",
+      "modules": {
+        "HH": {"member": "C07_Housing.dta", "grain": "household", "fields": {}},
+        "HL": {"member": "C01_Person1.dta", "grain": "person", "age_topcode": 98, "fields": {"Sex": ["p2c4", "sex"], "Age Source Value": ["p2c9", "native"], "Relationship to Head Source Code": ["p2c3", "native"], "Marital Status Source Code": ["p2c10", "native"], "Ethnicity Source Code": ["p2c11", "native"]}},
+        "ED": {"member": "C03_education.dta", "grain": "person", "fields": {"Can Read And Write Combined": ["p4c3", "binary"], "Ever Attended School": ["p4c4", "binary"], "Highest Education Level Source Code": ["p4c5", "native"], "Currently Attending School": ["p4c6", "binary"], "Current Education Level Source Code": ["p4c7", "native"]}},
+        "EC": {"member": "C04_EcomicActivity.dta", "grain": "person", "fields": {"Worked Any Hour Past Week": ["p5c3", "binary"], "Had Job Despite Not Working": ["p5c4", "binary"], "Seeking Or Available Combined": ["p5c5", "binary"], "Main Hours Past Week Source Value": ["p5c9", "native"], "Main Employer Type Source Code": ["p5c10", "native"], "Main Occupation Source Code": ["p5c11b", "native"], "Main Industry Source Code": ["p5c12b", "native"]}},
+        "HO": {"member": "C07_Housing.dta", "grain": "household", "fields": {"Floor Area Source Value": ["p9q6", "native"], "Wall Material Source Code": ["p9q8", "native"], "Roof Material Source Code": ["p9q9", "native"], "Floor Material Source Code": ["p9q10", "native"], "Main Lighting Source Code": ["p9q11", "native"], "Drinking Water Source Code Unqualified Season": ["p9q12", "native"], "Toilet Facility Source Code": ["p9q14", "native"], "Main Cooking Fuel Source Code": ["p9q15", "native"]}},
+        "HEALTH": {"member": "C06_Health.dta", "grain": "person", "fields": {"Illness Injury Or Other Care Need Source Response": ["p7c3", "native"], "Initial Symptom Source Code": ["p7c4", "native"], "Treatment Or Preventive Care Sought": ["p7c5", "binary"], "First Provider Source Code": ["p7c7", "native"], "Hospitalized": ["p8c10", "binary"]}}
+      }
+    },
+    "2023": {
+      "archive": "data/raw/CSES2023.zip",
+      "sha256": "78e4333bd17f24cfe38bdb3cafa3aaa4264afa18f6fea74fbdc0a54ef1685750",
+      "household_key": ["hhid"], "person_key": "persid",
+      "note": "English PDF is cover only. EC duplicate person keys and HEALTH variant disagreements remain visible. Native hw23 and pw23 are retained, not substituted.",
+      "modules": {
+        "HH": {"member": "S01-17_HHOtherInfo.dta", "grain": "household", "fields": {}},
+        "HL": {"member": "S01A_HHmember.dta", "grain": "person", "template": "modern_hl", "fields": {"Household Weight Source Value": ["hw23", "native"], "Person Weight Source Value": ["pw23", "native"]}},
+        "ED": {"member": "S02_PersonEducation.dta", "grain": "person", "template": "modern_ed", "fields": {}},
+        "EC": {"member": "S15_PersonEcoCurrent.dta", "grain": "person", "fields": {"Paid Work Past Week": ["q15_c03", "binary"], "Unpaid Work Past Week": ["q15_c04", "binary"], "Main Occupation Source Code": ["q15_c05b", "native"], "Main Industry Source Code": ["q15_c06b", "native"], "Main Employer Type Source Code": ["q15_c07", "native"], "Main Employment Status Source Code": ["q15_c08", "native"], "Main Hours Past Week Source Value": ["q15_c09", "native"], "Main Days Last Month Source Value": ["q15_c10a", "native"], "Main Job Works Whole Year": ["q15_c10b", "binary"], "Main Job Abroad": ["q15_c10d", "binary"], "Total Hours Past Week Source Value": ["q15_c19", "native"], "Actively Seeking Work Last Four Weeks": ["q15_c26", "binary"]}},
+        "HO": {"member": "S04_HHhousing.dta", "grain": "household", "template": "modern_ho", "fields": {"Wet Season Drinking Water Source Code": ["q04_08", "native"], "Toilet Facility Source Code": ["q04_19a", "native"], "Main Cooking Fuel Source Code": ["q04_26", "native"], "Dwelling Tenure Source Code": ["q04_28", "native"]}},
+        "HEALTH": {"member": "S13_PersonIllness.dta", "grain": "person", "template": "modern_health", "fields": {}},
+        "SURVEY_DATE": {"member": "S01-17_HHOtherInfo.dta", "grain": "household", "fields": {"First Visit Year Source Value": ["year_1st", "native"], "First Visit Month Source Value": ["month_1st", "native"], "First Visit Day Source Value": ["day_1st", "native"], "Survey Year Source Value": ["yearsur", "native"], "Survey Month Source Value": ["monthsur", "native"]}}
+      }
+    },
+    "2025": {
+      "archive": "data/raw/CSES2025.zip",
+      "sha256": "a571ea094b373c4d961d61ec84dd838c5ed795636e2c2b0579e10c7b9f46be9f",
+      "household_key": ["interview__id"], "person_key": "hh_members__id",
+      "note": "Survey Solutions interview UUID plus member ID replaces numeric IDs. Weight label says 2025/26; release wave remains 2025, not a verified fieldwork-year claim. Revised work concepts, daily hours and mixed-period earnings are not silently mapped to weekly/monthly measures.",
+      "modules": {
+        "HH": {"member": "S00_HHcover.dta", "grain": "household", "fields": {}},
+        "HL": {"member": "S01A_HHmember.dta", "grain": "person", "template": "modern_hl", "fields": {"Sampling Weight Source Value": ["hw", "native"]}},
+        "ED": {"member": "S02_PersonEducation1.dta", "grain": "person", "template": "modern_ed", "fields": {}},
+        "EC": {"member": "S15_PersonEcoCurrent.dta", "grain": "person", "fields": {"Paid Work Past Week": ["q15_c02", "binary"], "Platform Income Activity Past Week": ["q15_c03", "binary"], "Helped Family Business Or Farm Past Week": ["s15q04", "binary"], "Had Paid Job Despite Not Working": ["s15q05", "binary"], "Job Search Last Four Weeks": ["s15q14", "binary"], "Available Last Week": ["s15q20", "binary"], "Main Occupation Source Code": ["s15q25_isco", "native"], "Main Industry Source Code": ["s15q26_isic", "native"], "Main Days Per Week Source Value": ["s15q30", "native"], "Main Hours Per Day Source Value": ["s15q31", "native"], "Main Earnings Source Value": ["s15q33", "native"], "Main Earnings Time Unit Source Code": ["s15q33_timeunit", "native"]}},
+        "HO": {"member": "S04_HHhousing.dta", "grain": "household", "template": "modern_ho", "fields": {"Drinking Water Source Code Unqualified Season": ["q04_10", "native"], "Toilet Facility Source Code": ["q04_18", "native"], "Primary Cookstove Fuel Last Twelve Months Source Code": ["q04_33", "native"], "Dwelling Tenure Source Code": ["q04_36", "native"]}},
+        "HEALTH": {"member": "S13B_PersonIllness.dta", "grain": "person", "template": "modern_health", "fields": {}},
+        "SURVEY_DATE": {"member": "S00_HHcover.dta", "grain": "household", "fields": {"First Visit Source Value": ["s01q12_visit1", "native"], "Second Visit Source Value": ["s01q12_visit2", "native"], "Current Year Source Value": ["current_year", "native"]}}
+      }
+    }
+  },
+  "variant_comparisons": [
+    {"wave": "1999", "primary": "C01_Person1.dta", "alternate": "C01_C02Person.dta", "keys": ["hid", "pid"]},
+    {"wave": "2023", "primary": "S13_PersonIllness.dta", "alternate": "S13A_PersonIllness.dta", "keys": ["hhid", "persid"]}
+  ]
+}

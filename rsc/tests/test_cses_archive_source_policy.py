@@ -1,5 +1,6 @@
 """Source aliases require exact extraction paths AND exact bytes; originals stay intact."""
 import io
+import json
 import sys
 import zipfile
 from pathlib import Path
@@ -107,3 +108,18 @@ def test_nested_context_keeps_outer_policy():
             assert inventory.discover_sources is discover_sources
         assert inventory.discover_sources is discover_sources
     assert inventory.discover_sources is LEGACY_DISCOVER
+
+
+def test_legacy_runner_excludes_only_registered_extension_containers(tmp_path):
+    raw = tmp_path / "data/raw"
+    make_zip(raw / "CSES2025.zip", {"S01A_HHmember.dta": b"new wave"})
+    put(raw / "CSES2025/S01A_HHmember.dta", b"new wave")
+    make_zip(raw / "CSES2007.zip", {"members.dta": b"baseline"})
+    put(raw / "independent.dta", b"retain independent unknown source")
+    spec = tmp_path / "rsc/specs/cses_additional_waves_v1.json"
+    spec.parent.mkdir(parents=True)
+    spec.write_text(json.dumps({"waves": {"2025": {"archive": "data/raw/CSES2025.zip"}}}))
+    full, _ = resolve_sources(tmp_path, LEGACY_DISCOVER(tmp_path))
+    assert len(full) == 3
+    retained = discover_sources(tmp_path)
+    assert {s.root_file.name for s in retained} == {"CSES2007.zip", "independent.dta"}

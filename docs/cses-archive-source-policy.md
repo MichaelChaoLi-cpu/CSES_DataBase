@@ -16,6 +16,9 @@ leaving the frozen scanner, builders and published implementation files byte-ide
 - Recognize both extract-here and extract-to-container-folder layouts.
 - Retain changed copies and unrelated sources, including identical contents at independent paths.
 - Exclude macOS metadata sidecars; never rewrite, remove or move source files.
+- When the additional-wave specification is present, exclude its five explicitly registered archive
+  and extracted-directory containers from historical execution. They have a separate candidate builder.
+  This does not filter independent unknown files or silently remove duplicate baseline sources.
 
 The adapter is opt-in. Calling the old scripts directly still invokes their frozen behavior; use
 the launcher when an original archive and its extracted files coexist. Existing release acceptance
@@ -33,6 +36,8 @@ For script arguments, put them after the script basename. The audit never runs a
 The launcher runs only the explicitly named script under `rsc/cses_db`; it does not select a write
 mode or bypass that script's approval/backup checks. A caller can inspect detailed alias metadata
 through `resolve_sources`; the audit CLI prints counts, not respondent answers.
+The audit and `resolve_sources` cover the full raw set, including newly added waves; only the
+historical launcher/discovery adapter limits execution to exclude registered extensions.
 
 The employment regression fixtures explicitly use the same `archive_source_policy()` context used
 by the launcher. Assertions and frozen outputs remain unchanged; the adapter restores the legacy

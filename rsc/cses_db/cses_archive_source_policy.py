@@ -88,7 +88,18 @@ def resolve_sources(root, sources):
 
 
 def discover_sources(root):
-    return resolve_sources(root, LEGACY_DISCOVER(root))[0]
+    # Frozen ten-wave builders must not consume newly registered extension waves.
+    # Full discovery remains available through resolve_sources / --audit. Extensions
+    # use explicit fingerprinted source specifications and separate output paths.
+    sources = resolve_sources(root, LEGACY_DISCOVER(root))[0]
+    spec_path = Path(root) / "rsc/specs/cses_additional_waves_v1.json"
+    if not spec_path.is_file():
+        return sources
+    spec = json.loads(spec_path.read_text())
+    archives = {Path(root).absolute() / c["archive"] for c in spec["waves"].values()}
+    folders = {p.with_suffix("") for p in archives}
+    return [s for s in sources if s.root_file.absolute() not in archives
+            and not any(s.root_file.absolute().is_relative_to(folder) for folder in folders)]
 
 
 @contextmanager

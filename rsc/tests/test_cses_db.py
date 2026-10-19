@@ -132,7 +132,9 @@ def test_wave_normalization() -> None:
 
 def test_expected_raw_archives_are_present() -> None:
     observed = {path.name for path in (ROOT / "data" / "raw").glob("*.zip")}
-    assert observed == EXPECTED_ARCHIVES
+    extension = json.loads((ROOT / "rsc/specs/cses_additional_waves_v1.json").read_text())
+    additional = {Path(c["archive"]).name for c in extension["waves"].values()}
+    assert observed == EXPECTED_ARCHIVES | additional
 
 
 def test_orchestrator_references_existing_scripts() -> None:
