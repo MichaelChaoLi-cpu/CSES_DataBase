@@ -1,0 +1,32 @@
+{
+  "version": "cses-education-all-waves-pilot-v1",
+  "database_publication_authorized": false,
+  "historical_outputs_mutable": false,
+  "supplemental_form_review": {
+    "2007": {
+      "path": "data/raw/CSES 2007/Questionnaire/KHM_2007_CSES_hh_questionnaire.pdf",
+      "sha256": "2aa53282b9832b3b0a80dd1a57fe82670f47a16d06fc73273b8501106fc00889",
+      "locator": "Physical PDF page 6, complete education page 1 of 4, columns 2-8; visually checked",
+      "minimum_age": 5,
+      "status": "same_year_english_form_visually_reviewed"
+    },
+    "2014": {
+      "path": "data/raw/CSES 2014/CSES_2014_Report.pdf",
+      "sha256": "320f9c8c9c8e8a9da0a42ac8ed2ab461bfccbe443e5f83c022ede9d60f59fbc4",
+      "locator": "Physical PDF page 221, printed 209, household form page 8 of 54, columns 2-8; visually checked",
+      "minimum_age": 3,
+      "status": "published_report_form_supplements_historical_draft_review"
+    },
+    "2019": {
+      "path": "data/processing/cses/materials_audit_v1/render_2019/Forms of CSES 2019-20-English​.pdf",
+      "sha256": "d6d72315ccc38da1c75aeb51276417acbf9a632ad01aebfa5b4e9631763a61ed",
+      "locator": "Rendered PDF page 16, complete education page, columns 2-8; manually checked from image, not OCR certification",
+      "minimum_age": 3,
+      "status": "2019_20_image_form_visually_reviewed",
+      "original_path": "data/raw/CSES2019/Forms of CSES 2019-20-English​.docx",
+      "original_sha256": "93386dc67182f6dc3a4a6267c9ada01d6ccdb83c442f437148dfa879ad771da1"
+    }
+  },
+  "unresolved_form_wave": "2017",
+  "policy": "Local candidate only. Preserve native answers and old published values. No blanket ISCED, degree, instrument, exact-age or longitudinal-person certification. Missing 2017 form blocks strict qualified fields but never drops its members or raw responses."
+}

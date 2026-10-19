@@ -1,0 +1,15 @@
+{
+  "version": "cses-education-all-waves-interface-v1",
+  "publication_authorized": true,
+  "approval": "User confirmed the pilot boundaries and requested execution of the next publication step on 2026-10-18.",
+  "pilot_directory": "data/processing/cses/education_all_waves_pilot_v2",
+  "pilot_report_sha256": "88bd1c5da39de5bad1140e30cb989fd293dd9ade80a91ea896ed271451beb176",
+  "existing_outputs_replaceable": false,
+  "scope": "Additive source bridge for old-wave native values, preserved orphan audit, source rules and level dictionary, unified member/coverage/matrix views. No raw answer correction, existing view redirection, 2017 form substitution or blanket cross-wave equivalence.",
+  "conditions": [
+    "2017 members and native answers retained; strict qualified fields withheld pending same-wave questionnaire evidence.",
+    "Positive recorded years block the two conflicting attendance/highest inferences identified in the accepted v2 pilot.",
+    "Four unmatched historical education records retained separately.",
+    "Exact SQL cell comparison, full backup verification, rollback rehearsal and independent source/scalar/geography acceptance required."
+  ]
+}
